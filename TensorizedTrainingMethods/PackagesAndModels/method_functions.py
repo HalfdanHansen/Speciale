@@ -62,7 +62,6 @@ def ATDC_get_grads_one_filter_3D_short(gr, de):
 
   return dL
 
-
 def ATDC_update_step_one_filter_3D(dL, alpha, de):
   pqt_steps = []
   for e,d in enumerate(dL):
@@ -72,7 +71,6 @@ def ATDC_update_step_one_filter_3D(dL, alpha, de):
       steps.append(step.reshape(1,1))
     pqt_steps.append(np.concatenate(steps))
   return pqt_steps
-  
  
 def ATDC_get_grads_one_filter_3D_short_tensor(gr, de):
 
