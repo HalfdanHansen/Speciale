@@ -5,7 +5,7 @@ from pack import *
 from sklearn.metrics import accuracy_score
 from copy import deepcopy
 from MNIST_MODELS import *
-from train_val_test import *
+from train_val_test_MNIST import *
 from method_functions import *
 
 criterion = nn.CrossEntropyLoss()
@@ -31,6 +31,7 @@ losses = []
 
 #netNormal = deepcopy(net)
 #netNormal.apply(weight_reset)
+net = deepcopy(convNet500)
 optimizerNormal = optim.Adam(net.parameters(), lr=0.001)
 
 for epoch in range(num_epochs):

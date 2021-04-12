@@ -1,10 +1,7 @@
 from pack import *
 from method_functions import *
 
-import sys
-sys.path.insert(1,'TensorizedTrainingMethods/PackagesAndModels')
-
-data = np.load('mnist.npz')
+data = np.load('TensorizedTrainingMethods/PackagesAndModels/mnist.npz')
 num_classes = 10
 nchannels, rows, cols = 1, 28, 28
 
