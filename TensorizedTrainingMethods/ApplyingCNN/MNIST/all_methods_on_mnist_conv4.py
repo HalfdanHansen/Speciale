@@ -5,9 +5,8 @@ import sys
 sys.path.insert(1,'TensorizedTrainingMethods/PackagesAndModels')
 
 from pack import *
-from MNIST_CNN_conv4 import *
-from train_val_test import * 
-from misc_functions import *
+from MNIST_MODELS import *
+from train_val_test_MNIST import *
 from method_functions import *
 
 criterion = nn.CrossEntropyLoss()

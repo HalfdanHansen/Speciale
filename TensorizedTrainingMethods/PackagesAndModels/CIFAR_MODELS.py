@@ -1,5 +1,7 @@
 from pack import *
 
+## PAPERNET ##
+
 # hyperameters of the model
 num_classes = 10
 channels = 3
@@ -16,7 +18,7 @@ stride_conv = 1
 class PaperNet(nn.Module):
 
     def __init__(self):
-        super(Net, self).__init__()
+        super(PaperNet, self).__init__()
         
         self.conv_1 = Conv2d(in_channels = channels,
                             out_channels = num_filters_conv[0],
@@ -108,6 +110,8 @@ class PaperNet(nn.Module):
 
 papernet = PaperNet()
 
+## CONVNET4
+
 # hyperameters of the model
 num_classes = 10
 channels = 3
@@ -124,7 +128,7 @@ stride_conv = 1
 class ConvNet4(nn.Module):
 
     def __init__(self):
-        super(Net, self).__init__()
+        super(ConvNet4, self).__init__()
         
         self.conv_1 = Conv2d(in_channels = channels,
                             out_channels = num_filters_conv[0],
@@ -192,6 +196,8 @@ class ConvNet4(nn.Module):
 
 convNet4 = ConvNet4()
 
+## CONVNET4FC3 ##
+
 #https://github.com/jamespengcheng/PyTorch-CNN-on-CIFAR10
 # hyperameters of the model
 num_classes = 10
@@ -209,7 +215,7 @@ stride_conv = 1
 class ConvNet4FC3(nn.Module):
 
     def __init__(self):
-        super(Net, self).__init__()
+        super(ConvNet4FC3, self).__init__()
         
         self.conv1 = nn.Conv2d(in_channels=3, out_channels=48, kernel_size=(3,3), padding=(1,1))
         self.conv2 = nn.Conv2d(in_channels=48, out_channels=96, kernel_size=(3,3), padding=(1,1))
@@ -240,6 +246,7 @@ class ConvNet4FC3(nn.Module):
 
 convNet4fc3 = ConvNet4FC3()
 
+## CONVNET500
 
 num_classes = 10
 channels = 3
@@ -256,7 +263,7 @@ stride_conv = 1
 class ConvNet500(nn.Module):
 
     def __init__(self):
-        super(Net, self).__init__()
+        super(ConvNet500, self).__init__()
         
         self.conv_1 = Conv2d(in_channels = channels,
                             out_channels = depth[0],
@@ -320,6 +327,8 @@ class ConvNet500(nn.Module):
 
 convNet500 = ConvNet500()
 
+## CONVNET5003D ##
+
 # hyperameters of the model
 num_classes = 10
 channels = x_train.shape[1]
@@ -345,7 +354,7 @@ def conv_3D_block(in_f, out_f, kernelsize, groups):
 
 class ConvNet500_3D(nn.Module):
     def __init__(self):
-        super(Net, self).__init__()
+        super(ConvNet500_3D, self).__init__()
 
         self.conv_1_3D_block = conv_3D_block(3,depth[0],3,depth[0])
         
@@ -394,84 +403,7 @@ class ConvNet500_3D(nn.Module):
 
 convNet500_3d = ConvNet500_3D()
 
-num_classes = 10
-channels = 3
-height = 32
-width = 32
-
-num_l1 = 10
-
-depth = [32,64,128,64]
-kernel_size_conv = 3
-padding_conv = 1
-stride_conv = 1
-
-class ResNet(nn.Module):
-
-    def __init__(self):
-        super(Net, self).__init__()
-        
-        self.conv_1 = Conv2d(in_channels = channels,
-                            out_channels = depth[0],
-                            kernel_size = kernel_size_conv,
-                            stride = stride_conv,
-                            padding = padding_conv,
-                            bias = False)
-
-        self.bn1 = BatchNorm2d(depth[0],affine=False, track_running_stats=False)
-
-        self.conv_2 = Conv2d(in_channels = depth[0],
-                            out_channels = depth[1],
-                            kernel_size = kernel_size_conv,
-                            stride = stride_conv,
-                            padding = padding_conv,
-                            bias = False)
-
-        self.bn2 = BatchNorm2d(depth[1],affine=False, track_running_stats=False)
-
-        self.conv_3 = Conv2d(in_channels = depth[1],
-                            out_channels = depth[2],
-                            kernel_size = kernel_size_conv,
-                            stride = stride_conv,
-                            padding = padding_conv,
-                            bias = False)
-        
-        self.bn3 = BatchNorm2d(depth[2],affine=False, track_running_stats=False)
-
-        self.conv_4 = Conv2d(in_channels = depth[2],
-                            out_channels = depth[3],
-                            kernel_size = 4,
-                            stride = 1,
-                            padding = 0,
-                            bias = False)
-        
-        self.bn4 = BatchNorm2d(depth[3],affine=False, track_running_stats=False)
-
-        self.l_1 = Linear(in_features = depth[3], 
-                          out_features = num_l1,
-                          bias = False)
-        
-        self.maxpool = MaxPool2d(kernel_size = 2,
-                                stride = 2)
-    
-    def forward(self, x): # x.size() = [batch, channel, height, width]
-					      # after application becomes:
-        x = relu(self.conv_1(x))              #[x,32,32,32]
-        x = self.bn1(x)
-        x = self.maxpool(x)                   #[x,32,16,16]
-        x = relu(self.conv_2(x))              #[x,64,16,16]
-        x = self.bn2(x)
-        x = self.maxpool(x)                   #[x,64,8,8]
-        x = relu(self.conv_3(x))              #[x,128,8,8]
-        x = self.bn3(x)
-        x = self.maxpool(x)		              #[x,128,4,4]
-        x = relu(self.conv_4(x))              #[x,64,1,1]
-        x = self.bn4(x)
-        x = x.view(-1, depth[3])
-        #x = relu(self.l_1(x))
-        return softmax(self.l_1(x), dim=1)    #[x,10,1,1]
-
-resnet = ResNet()
+## RESNET4 ##
 
 class BasicBlock_ResNet4(nn.Module):
     expansion = 1
@@ -537,3 +469,127 @@ def ResNet4():
     return ResNet4(BasicBlock_ResNet4, [2, 2, 2, 2])
 
 resNet4 = ResNet4()
+
+## CONVNET5004D
+
+# hyperameters of the model
+num_classes = 10
+channels = x_train.shape[1]
+height = x_train.shape[2]
+width = x_train.shape[3]
+
+num_l1 = 10
+
+depth = [32,64,128,64]
+kernel_size_conv = 3
+padding_conv = 1
+stride_conv = 1
+
+def conv_4D_block(in_f, out_f, kernelsize, stride, pad = 1, rank = 1):
+    return  nn.Sequential(
+            nn.Conv2d(in_channels = in_f, out_channels = rank, kernel_size=(1,1),
+                      stride=(1,1), padding=0, bias=False),
+        
+            nn.Conv2d(in_channels = rank, out_channels = rank, kernel_size=(kernelsize,1),
+                      stride=(stride,1), padding=(pad,0), bias=False, groups = rank),
+        
+            nn.Conv2d(in_channels = rank, out_channels = rank, kernel_size=(1,kernelsize),
+                      stride=(1,stride), padding=(0,pad), bias=False, groups = rank),
+        
+            nn.Conv2d(in_channels = rank, out_channels = out_f, kernel_size=(1,1),
+                      stride=(1,1), padding=(0,0), bias=False)
+        )
+
+class ConvNet500_4D(nn.Module):
+    def __init__(self, rank = 1):
+        super(ConvNet500_4D, self).__init__()
+
+        self.conv_1_4D_block = conv_4D_block(3, depth[0], 3, 1, 1, rank = rank)
+        self.bn1 = BatchNorm2d(depth[0], affine=False, track_running_stats=False)
+        
+        self.conv_2_4D_block = conv_4D_block(depth[0], depth[1], 3, 1, 1, rank = rank)
+        self.bn2 = BatchNorm2d(depth[1], affine=False, track_running_stats=False)
+
+        self.conv_3_4D_block = conv_4D_block(depth[1], depth[2], 3, 1, 1, rank = rank)
+        self.bn3 = BatchNorm2d(depth[2], affine=False, track_running_stats=False)
+
+        self.conv_4_4D_block = conv_4D_block(depth[2], depth[3], 3, 4, 0, rank = rank)
+        self.bn4 = BatchNorm2d(depth[3], affine=False, track_running_stats=False)
+        
+        self.l_1 = Linear(in_features = depth[3], 
+                          out_features = num_l1,
+                          bias = False)
+
+        self.maxpool = MaxPool2d(kernel_size = 2,
+                                stride = 2)
+    
+    def forward(self, x): # x.size() = [batch, channel, height, width]
+        x = relu(self.conv_1_4D_block(x))     #[x,32,32,32]
+        x = self.bn1(x)
+        x = self.maxpool(x)                   #[x,32,16,16]
+        x = relu(self.conv_2_4D_block(x))     #[x,64,16,16]
+        x = self.bn2(x)
+        x = self.maxpool(x)                   #[x,64,8,8]
+        x = relu(self.conv_3_4D_block(x))     #[x,128,8,8]
+        x = self.bn3(x)
+        x = self.maxpool(x)                   #[x,128,4,4]
+        x = relu(self.conv_4_4D_block(x))     #[x,64,1,1]
+        x = self.bn4(x)
+        x = x.view(-1, depth[3])              #[x,64,1,1] -> [x,10,1,1]
+        return softmax(self.l_1(x), dim=1)    #[x,10,1,1]
+
+convNet500_4D = ConvNet500_4D(1)
+
+## CONV500TUCKER2 ##
+
+def conv_Tucker2_block(in_f, out_f, kernelsize, stride, pad = 1, rank1 = 1, rank2 = 1):
+    return  nn.Sequential(
+            nn.Conv2d(in_channels = in_f, out_channels = rank1, kernel_size=(1,1),
+                      stride=(1,1), padding=0, bias=False),
+        
+            nn.Conv2d(in_channels = rank1, out_channels = rank2, kernel_size=(kernelsize,kernelsize),
+                      stride=(stride,stride), padding=(pad,pad), bias=False),
+        
+            nn.Conv2d(in_channels = rank2, out_channels = out_f, kernel_size=(1,1),
+                      stride=(1,1), padding=(0,0), bias=False)
+        )
+
+class ConvNet500_Tucker2(nn.Module):
+    def __init__(self, rank1 = 1, rank2 = 1):
+        super(ConvNet500_Tucker2, self).__init__()
+
+        self.conv_1_Tucker2_block = conv_Tucker2_block(3, depth[0], 3, 1, 1, rank1 = rank1, rank2 = rank2)
+        self.bn1 = BatchNorm2d(depth[0], affine=False, track_running_stats=False)
+        
+        self.conv_2_Tucker2_block = conv_Tucker2_block(depth[0], depth[1], 3, 1, 1, rank1 = rank1, rank2 = rank2)
+        self.bn2 = BatchNorm2d(depth[1], affine=False, track_running_stats=False)
+
+        self.conv_3_Tucker2_block = conv_Tucker2_block(depth[1], depth[2], 3, 1, 1, rank1 = rank1, rank2 = rank2)
+        self.bn3 = BatchNorm2d(depth[2], affine=False, track_running_stats=False)
+
+        self.conv_4_Tucker2_block = conv_Tucker2_block(depth[2], depth[3], 3, 4, 0, rank1 = rank1, rank2 = rank2)
+        self.bn4 = BatchNorm2d(depth[3], affine=False, track_running_stats=False)
+        
+        self.l_1 = Linear(in_features = depth[3], 
+                          out_features = num_l1,
+                          bias = False)
+
+        self.maxpool = MaxPool2d(kernel_size = 2,
+                                stride = 2)
+    
+    def forward(self, x): # x.size() = [batch, channel, height, width]
+        x = relu(self.conv_1_Tucker2_block(x))     #[x,32,32,32]
+        x = self.bn1(x)
+        x = self.maxpool(x)                        #[x,32,16,16]
+        x = relu(self.conv_2_Tucker2_block(x))     #[x,64,16,16]
+        x = self.bn2(x)
+        x = self.maxpool(x)                        #[x,64,8,8]
+        x = relu(self.conv_3_Tucker2_block(x))     #[x,128,8,8]
+        x = self.bn3(x)
+        x = self.maxpool(x)                        #[x,128,4,4]
+        x = relu(self.conv_4_Tucker2_block(x))     #[x,64,1,1]
+        x = self.bn4(x)
+        x = x.view(-1, depth[3])                   #[x,64,1,1] -> [x,10,1,1]
+        return softmax(self.l_1(x), dim=1)         #[x,10,1,1]
+
+convNet500_4D = ConvNet500_Tucker2(1,1)

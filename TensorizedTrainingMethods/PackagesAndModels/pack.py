@@ -22,3 +22,5 @@ from torch.nn import Linear, Conv2d, BatchNorm2d, MaxPool2d, Dropout2d, BatchNor
 import pandas as pd
 import time
 from sklearn.metrics import accuracy_score
+import torchvision.transforms as transforms
+import torchvision
