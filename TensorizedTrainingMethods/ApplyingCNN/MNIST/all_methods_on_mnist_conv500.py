@@ -318,7 +318,8 @@ for epoch in range(num_epochs):
     if epoch % 5 == 0:
         print("Epoch %2i : Train Loss %f , Train acc %f, Valid acc %f" % (
                 epoch+1, losses[-1], train_acc_cur, valid_acc_cur))
-        
+                
+'''
 epoch = np.arange(len(train_acc))
 plt.figure()
 plt.plot(epoch, train_acc, 'r', epoch, valid_acc, 'b')
@@ -406,4 +407,6 @@ BAF3Dtest_acc = 0.964
 BAF4Dtest_acc = 0.878
 ATDC3Dtest_acc = 0.952
 ATDC4Dtest_acc = 0.92
+
+'''
 
