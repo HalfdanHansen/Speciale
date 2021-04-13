@@ -48,14 +48,14 @@ for epoch in range(num_epochs):
     if epoch % 10 == 0:
         print("Epoch %2i : Train Loss %f , Train acc %f, Valid acc %f" % (
                 epoch+1, losses[-1], train_acc_cur, valid_acc_cur))
-
+'''
 epoch = np.arange(len(train_acc))
 plt.figure()
 plt.plot(epoch, train_acc, 'r', epoch, valid_acc, 'b')
 plt.legend(['Train Acc', 'Val Acc'])
 plt.xlabel('Epochs')
 plt.ylabel('Acc')
-
+'''
 preds, test_acc_full = evaluate_test(x_test, targets_test, netNormal)
 normalvalid_acc = valid_acc
 normaltest_acc = accuracy_score(list(targets_test), list(preds.data.numpy()))
@@ -96,14 +96,14 @@ for epoch in range(num_epochs):
     if epoch % 10 == 0:
         print("Epoch %2i : Train Loss %f , Train acc %f, Valid acc %f" % (
                 epoch+1, losses[-1], train_acc_cur, valid_acc_cur))
-        
+'''
 epoch = np.arange(len(train_acc))
 plt.figure()
 plt.plot(epoch, train_acc, 'r', epoch, valid_acc, 'b')
 plt.legend(['Train Acc', 'Val Acc'])
 plt.xlabel('Epochs')
 plt.ylabel('Acc')
-
+'''
 preds, test_acc_full = evaluate_test(x_test, targets_test, netD4DD)
 D4DDvalid_acc = valid_acc
 D4DDtest_acc = (accuracy_score(list(targets_test), list(preds.data.numpy())))
@@ -138,97 +138,18 @@ for epoch in range(num_epochs):
     if epoch % 10 == 0:
         print("Epoch %2i : Train Loss %f , Train acc %f, Valid acc %f" % (
                 epoch+1, losses[-1], train_acc_cur, valid_acc_cur))
-        
+'''
 epoch = np.arange(len(train_acc))
 plt.figure()
 plt.plot(epoch, train_acc, 'r', epoch, valid_acc, 'b')
 plt.legend(['Train Acc', 'Val Acc'])
 plt.xlabel('Epochs')
 plt.ylabel('Acc')
-
+'''
 preds, test_acc_full = evaluate_test(x_test, targets_test, net3D)
 D3DDvalid_acc = valid_acc
 D3DDtest_acc = (accuracy_score(list(targets_test), list(preds.data.numpy())))
 print("\nTest set Acc:  %f" % D3DDtest_acc)
-
-"""BAF method 4D
-
-"""
-
-train_acc, train_loss = [], []
-valid_acc, valid_loss = [], []
-test_acc, test_loss = [], []
-losses = []
-
-netBAF4D = deepcopy(convNet500)
-netBAF4D.apply(weight_reset)
-optimizerBAF4D = optim.Adam(netBAF4D.parameters(), lr=0.001)
-
-for epoch in range(num_epochs):
-    losses = train_net_BAF_4D(losses, num_batches_train, x_train, batch_size, targets_train, netBAF4D, criterion, optimizerBAF4D, convName, R)
-    train_targs, train_preds = evaluate_train(num_batches_train, x_train, batch_size, targets_train, netBAF4D)
-    val_targs, val_preds = evaluate_validation(num_batches_valid, x_valid, batch_size, targets_valid, netBAF4D)
-    train_acc_cur = accuracy_score(train_targs, train_preds)
-    valid_acc_cur = accuracy_score(val_targs, val_preds)
-    train_acc.append(train_acc_cur)
-    valid_acc.append(valid_acc_cur)
-
-    if epoch % 10 == 0:
-        print("Epoch %2i : Train Loss %f , Train acc %f, Valid acc %f" % (
-                epoch+1, losses[-1], train_acc_cur, valid_acc_cur))
-
-epoch = np.arange(len(train_acc))
-plt.figure()
-plt.plot(epoch, train_acc, 'r', epoch, valid_acc, 'b')
-plt.legend(['Train Acc', 'Val Acc'])
-plt.xlabel('Epochs')
-plt.ylabel('Acc')
-
-#Evaluate test
-preds, test_acc_full = evaluate_test(x_test, targets_test, netBAF4D)
-BAF4Dvalid_acc = valid_acc
-BAF4Dtest_acc = (accuracy_score(list(targets_test), list(preds.data.numpy())))
-print("\nTest set Acc:  %f" % BAF4Dtest_acc)
-
-"""BAF method 3D """
-
-train_acc, train_loss = [], []
-valid_acc, valid_loss = [], []
-test_acc, test_loss = [], []
-losses = []
-
-netBAF3D = deepcopy(convNet500)
-netBAF3D.apply(weight_reset)
-optimizerBAF3D = optim.Adam(netBAF3D.parameters(), lr=0.001)
-
-for epoch in range(num_epochs):
-    # Forward -> Backprob -> Update params
-    ## Train
-    losses = train_net_BAF_3D(losses, num_batches_train, x_train, batch_size, targets_train, netBAF3D, criterion, optimizerBAF3D, convName, R)
-    #Evaluate training and validation
-    train_targs, train_preds = evaluate_train(num_batches_train, x_train, batch_size, targets_train, netBAF3D)
-    val_targs, val_preds = evaluate_validation(num_batches_valid, x_valid, batch_size, targets_valid, netBAF3D)
-    train_acc_cur = accuracy_score(train_targs, train_preds)
-    valid_acc_cur = accuracy_score(val_targs, val_preds)
-    train_acc.append(train_acc_cur)
-    valid_acc.append(valid_acc_cur)
-
-    if epoch % 5 == 0:
-        print("Epoch %2i : Train Loss %f , Train acc %f, Valid acc %f" % (
-                epoch+1, losses[-1], train_acc_cur, valid_acc_cur))
-
-epoch = np.arange(len(train_acc))
-plt.figure()
-plt.plot(epoch, train_acc, 'r', epoch, valid_acc, 'b')
-plt.legend(['Train Acc', 'Val Acc'])
-plt.xlabel('Epochs')
-plt.ylabel('Acc')
-
-#Evaluate test
-preds, test_acc_full = evaluate_test(x_test, targets_test, netBAF3D)
-BAF3Dvalid_acc = valid_acc
-BAF3Dtest_acc = (accuracy_score(list(targets_test), list(preds.data.numpy())))
-print("\nTest set Acc:  %f" % BAF3Dtest_acc)
 
 """ATDC Method 3D
 
@@ -267,14 +188,14 @@ for epoch in range(num_epochs):
     if epoch % 10 == 0:
         print("Epoch %2i : Train Loss %f , Train acc %f, Valid acc %f" % (
                 epoch+1, losses[-1], train_acc_cur, valid_acc_cur))
-        
+'''
 epoch = np.arange(len(train_acc))
 plt.figure()
 plt.plot(epoch, train_acc, 'r', epoch, valid_acc, 'b')
 plt.legend(['Train Acc', 'Val Acc'])
 plt.xlabel('Epochs')
 plt.ylabel('Acc')
-
+'''
 ### Evaluate test set
 preds, test_acc_full = evaluate_test(x_test, targets_test, netATDC)
 ATDC3Dvalid_acc = valid_acc
@@ -318,7 +239,7 @@ for epoch in range(num_epochs):
     if epoch % 5 == 0:
         print("Epoch %2i : Train Loss %f , Train acc %f, Valid acc %f" % (
                 epoch+1, losses[-1], train_acc_cur, valid_acc_cur))
-                
+
 '''
 epoch = np.arange(len(train_acc))
 plt.figure()
@@ -326,13 +247,15 @@ plt.plot(epoch, train_acc, 'r', epoch, valid_acc, 'b')
 plt.legend(['Train Acc', 'Val Acc'])
 plt.xlabel('Epochs')
 plt.ylabel('Acc')
-
+'''
 ### Evaluate test set
 preds, test_acc_full = evaluate_test(x_test, targets_test, netATDC4D)
 ATDC4Dvalid_acc = valid_acc
 ATDC4Dtest_acc = (accuracy_score(list(targets_test), list(preds.data.numpy())))
 print("\nTest set Acc:  %f" % ATDC4Dtest_acc)
 
+
+'''
 """Comparing the Methods"""
 
 import matplotlib.pyplot as plt
@@ -409,4 +332,5 @@ ATDC3Dtest_acc = 0.952
 ATDC4Dtest_acc = 0.92
 
 '''
-
+save_train = pd.DataFrame()
+to_csv()
