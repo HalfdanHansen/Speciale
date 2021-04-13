@@ -18,7 +18,7 @@ convName =  ["conv_1", "conv_2", "conv_3", "conv_4"]
 R = 1
 
 batch_size = 100
-num_epochs = 1
+num_epochs = 3
 num_samples_train = x_train.shape[0]
 num_batches_train = num_samples_train // batch_size
 num_samples_valid = x_valid.shape[0]
