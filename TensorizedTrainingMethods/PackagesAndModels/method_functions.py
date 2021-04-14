@@ -1,4 +1,3 @@
-from pack import *
 from CIFAR_MODELS import *
 
 ## ATDC FUNCTIONS ##
@@ -455,7 +454,7 @@ def initialize_model_weights_from_Tucker2(convName,net,netname,rank1,rank2,kdims
 
 def ATDC_get_grads_Tucker2(gr, de, rank1, rank2):
 
-  # gr is the full gradient for a layer in dimensions: [outputchannel (H),inputchannel (S), 3 (i), 3 (j)] (hsij)
+  # gr is the full gradient for a layer in dimensions: [outputchannel (H),inputchannel (S), kdims (i), kdims (j)] (hsij)
   # de is the set of decomposed elements 
   # [u, t, c] that is in dimensions: [[outputchannel,rank2], [inputchannel,rank1], [rank1,rank2,3,3]]
 

@@ -1,4 +1,3 @@
-from pack import *
 from method_functions import *
 
 def evaluate_cifar(loader,model):
@@ -19,7 +18,7 @@ def train_net_Tucker2(losses, net, netname,trainloader, criterion, optimizer, co
   net.train()
 
   for i, data in enumerate(trainloader, 0):
-    inputs, labels = data[0].to(device), data[1].to(device)
+    inputs, labels = data[0].cuda(), data[1].cuda()
     
     optimizer.zero_grad()
     outputs = net(inputs)

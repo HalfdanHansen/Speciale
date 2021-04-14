@@ -1,15 +1,8 @@
-from sklearn.metrics import accuracy_score
-from copy import deepcopy
-
 import sys
 sys.path.insert(1,'TensorizedTrainingMethods/PackagesAndModels')
 
-from pack import *
-from CIFAR_MODELS import *
 from train_val_test_CIFAR10 import *
-from method_functions import *
 
-device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
 trainloader, testloader = load_cifar()
 alpha = 0.01
@@ -29,6 +22,7 @@ test_acc = []
 losses = []
 
 optimizer = optim.Adam(net.parameters(), lr=alpha)
+
 for epoch in range(epochs):
     running_loss = train_net_Tucker2(losses, net, "net",trainloader, criterion, optimizer, convName, utc_convs, alpha)
 
