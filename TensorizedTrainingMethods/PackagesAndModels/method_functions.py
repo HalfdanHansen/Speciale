@@ -1,4 +1,5 @@
 from pack import *
+from CIFAR_MODELS import *
 
 ## ATDC FUNCTIONS ##
 
@@ -427,3 +428,93 @@ def conv_to_PARAFAC_last_conv_layer(layer, rank):
     
     new_layers = [first_layer, second_layer, third_layer, fourth_layer]
     return nn.Sequential(*new_layers)
+
+
+### TUCKER2 METHOD FUNCTIONS ###
+
+def initialize_model_weights_from_Tucker2(convName,netname,rank1,rank2):
+
+  # convName are the names of the layers. In strings
+  # netname is the name og the network. In string
+
+  # Make weights from initialization of random weights centered around 0, with std of 0.33.
+
+  utc_convs = []
+  for c in convName:
+    convData = eval(netname+"."+c+".weight.data")
+    layer =  ([torch.mul(torch.randn(convData.shape[0],rank2),0.333).cuda(),     #u
+              torch.mul(torch.randn(convData.shape[1],rank1),0.333).cuda(),      #t
+              torch.mul(torch.randn(rank1,rank2,3,3),0.333).cuda()])             #c
+    utc_convs.append(layer)
+
+  for k1,utc in enumerate(utc_convs):
+    convData = eval(netname+"."+convName[k1]+".weight.data")
+    convData = torch.einsum('hq,sw,wqij->hsij',utc[0],utc[1],utc[2])
+
+  return utc_convs
+
+
+def ATDC_get_grads_Tucker2(gr, de, rank1, rank2):
+
+  # gr is the full gradient for a layer in dimensions: [outputchannel (H),inputchannel (S), 3 (i), 3 (j)] (hsij)
+  # de is the set of decomposed elements 
+  # [u, t, c] that is in dimensions: [[outputchannel,rank2], [inputchannel,rank1], [rank1,rank2,3,3]]
+
+  dLdu = torch.zeros_like(de[0])
+  dLdt = torch.zeros_like(de[1])
+  dLdc = torch.zeros_like(de[2])
+
+  # each einsum shaves a dimension off of gr in order of the permutation
+  for r2 in range(rank2):
+    temp = torch.zeros_like(de[0][:,r2])
+    for r1 in range(rank1):
+      temp += torch.einsum('ij,hij->h',de[2][r1,r2,:,:],torch.einsum('s,hsij->hij',de[1][:,r1].reshape(len(de[1][:,r1])),gr))
+    dLdu[:,r2] = temp
+
+  for r1 in range(rank1):
+    temp = torch.zeros_like(de[0][:,r1])
+    for r2 in range(rank2):
+      temp += torch.einsum('ij,sij->s',de[2][r1,r2,:,:],torch.einsum('h,hsij->sij',de[0][:,r2].reshape(len(de[0][:,r2])),gr))
+    dLdt[:,r1] = temp
+
+  for r1 in range(rank1):
+    for r2 in range(rank2):
+      dldc[r1,r2,:,:] = torch.einsum('s,sij->ij',de[1][:,r1].reshape(len(de[1][:,r1])),torch.einsum('h,hsij->sij',de[0][:,r2].reshape(len(de[0][:,r2])),gr)
+  return [dLdu,dLdt]
+
+def ATDC_update_step_Tucker2(dL, alpha, de):
+  return [torch.sub(de[0],dL[0], alpha=alpha),
+          torch.sub(de[1],dL[1], alpha=alpha),
+          torch.sub(de[2],dL[2], alpha=alpha),
+          torch.sub(de[3],dL[3], alpha=alpha)]
+
+def ATDC_update_step_adam_Tucker2(dL, alpha, de, v, m, beta1, beta2, eps=1e-8):
+  '''
+  initially
+  alpha = 0.001
+  beta1 = 0.9      reduced each epoch
+  beta2 = 0.999    reduced each epoch
+  v,m = zeroes as pqtu 
+  '''
+  minusbeta1 = 1-beta1
+  minusbeta2 = 1-beta2
+  
+  for i,derivatives in enumerate(dL):
+    m[i] = torch.add(torch.mul(m[i],beta1), derivatives, alpha=minusbeta1)
+    v[i] =  torch.add(torch.mul(v[i],beta2), torch.mul(derivatives,derivatives), alpha=minusbeta2)
+    alpha_new = alpha * np.sqrt(minusbeta2) / (minusbeta1)
+    de[i]= torch.sub(de[i], torch.div(m[i], torch.add(torch.sqrt(v[i]), eps)), alpha = alpha_new)
+  return (m,v,de)
+
+def adam_step_tucker2(grad, alpha, data, v, m, beta1, beta2, eps=1e-8):
+
+  minusbeta1 = 1-beta1
+  minusbeta2 = 1-beta2
+
+  m = torch.add(torch.mul(m,beta1), grad, alpha=minusbeta1)
+  v =  torch.add(torch.mul(v,beta2), torch.mul(grad,grad), alpha=minusbeta2)
+  alpha_new = alpha * np.sqrt(minusbeta2) / (minusbeta1)
+  data = torch.sub(data, torch.div(m, torch.add(torch.sqrt(v), eps)), alpha = alpha_new)
+
+  return (m,v,data)
+
