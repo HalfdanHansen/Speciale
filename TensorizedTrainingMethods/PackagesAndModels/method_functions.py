@@ -470,14 +470,14 @@ def ATDC_get_grads_Tucker2(gr, de, rank1, rank2):
     dLdu[:,r2] = temp
 
   for r1 in range(rank1):
-    temp = torch.zeros_like(de[0][:,r1])
+    temp = torch.zeros_like(de[1][:,r1])
     for r2 in range(rank2):
       temp += torch.einsum('ij,sij->s',de[2][r1,r2,:,:],torch.einsum('h,hsij->sij',de[0][:,r2].reshape(len(de[0][:,r2])),gr))
     dLdt[:,r1] = temp
 
   for r1 in range(rank1):
     for r2 in range(rank2):
-      dldc[r1,r2,:,:] = torch.einsum('s,sij->ij',de[1][:,r1].reshape(len(de[1][:,r1])),torch.einsum('h,hsij->sij',de[0][:,r2].reshape(len(de[0][:,r2])),gr))
+      dLdc[r1,r2,:,:] = torch.einsum('s,sij->ij',de[1][:,r1].reshape(len(de[1][:,r1])),torch.einsum('h,hsij->sij',de[0][:,r2].reshape(len(de[0][:,r2])),gr))
 
   return [dLdu,dLdt,dLdc]
 

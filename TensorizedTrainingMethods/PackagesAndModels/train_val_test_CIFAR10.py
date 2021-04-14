@@ -13,7 +13,7 @@ def evaluate_cifar(loader,model):
         correct += (predicted == labels).sum().detach() #item()
   return (correct / total)
 
-def train_net_Tucker2(losses, net, netname,trainloader, criterion, optimizer, convName, utc_convs, alpha):
+def train_net_Tucker2(losses, net, netname,trainloader, criterion, optimizer, convName, utc_convs, alpha, rank1, rank2):
   running_loss = 0
   net.train()
 
@@ -33,7 +33,7 @@ def train_net_Tucker2(losses, net, netname,trainloader, criterion, optimizer, co
       convData = eval(netname+"."+convName[k1]+".weight.data")
 
       utc_convs[k1] = ATDC_update_step_Tucker2(
-                      ATDC_get_grads_Tucker2(convGrad, utc), alpha, utc)
+                      ATDC_get_grads_Tucker2(convGrad, utc, rank1, rank2), alpha, utc)
       convData[:] = torch.einsum('hq,sw,wqij->hsij',utc[0],utc[1],utc[2])
 
     #normal step for linear layer
