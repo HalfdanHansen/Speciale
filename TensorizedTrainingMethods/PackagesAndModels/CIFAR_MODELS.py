@@ -592,4 +592,4 @@ class ConvNet500_Tucker2(nn.Module):
         x = x.view(-1, depth[3])                   #[x,64,1,1] -> [x,10,1,1]
         return softmax(self.l_1(x), dim=1)         #[x,10,1,1]
 
-convNet500_4D = ConvNet500_Tucker2(1,1)
+convNet500_Tucker211 = ConvNet500_Tucker2(1,1)
