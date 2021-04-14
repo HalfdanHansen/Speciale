@@ -432,7 +432,7 @@ def conv_to_PARAFAC_last_conv_layer(layer, rank):
 
 ### TUCKER2 METHOD FUNCTIONS ###
 
-def initialize_model_weights_from_Tucker2(convName,netname,rank1,rank2):
+def initialize_model_weights_from_Tucker2(convName,net,netname,rank1,rank2,kdims):
 
   # convName are the names of the layers. In strings
   # netname is the name og the network. In string
@@ -440,19 +440,18 @@ def initialize_model_weights_from_Tucker2(convName,netname,rank1,rank2):
   # Make weights from initialization of random weights centered around 0, with std of 0.33.
 
   utc_convs = []
-  for c in convName:
+  for k1,c in enumerate(convName):
     convData = eval(netname+"."+c+".weight.data")
     layer =  ([torch.mul(torch.randn(convData.shape[0],rank2),0.333).cuda(),     #u
               torch.mul(torch.randn(convData.shape[1],rank1),0.333).cuda(),      #t
-              torch.mul(torch.randn(rank1,rank2,3,3),0.333).cuda()])             #c
+              torch.mul(torch.randn(rank1,rank2,kdims[k1],kdims[k1]),0.333).cuda()])             #c
     utc_convs.append(layer)
 
   for k1,utc in enumerate(utc_convs):
     convData = eval(netname+"."+convName[k1]+".weight.data")
-    convData = torch.einsum('hq,sw,wqij->hsij',utc[0],utc[1],utc[2])
+    convData[:] = torch.einsum('hq,sw,wqij->hsij',utc[0],utc[1],utc[2])
 
   return utc_convs
-
 
 def ATDC_get_grads_Tucker2(gr, de, rank1, rank2):
 
@@ -479,14 +478,14 @@ def ATDC_get_grads_Tucker2(gr, de, rank1, rank2):
 
   for r1 in range(rank1):
     for r2 in range(rank2):
-      dldc[r1,r2,:,:] = torch.einsum('s,sij->ij',de[1][:,r1].reshape(len(de[1][:,r1])),torch.einsum('h,hsij->sij',de[0][:,r2].reshape(len(de[0][:,r2])),gr)
-  return [dLdu,dLdt]
+      dldc[r1,r2,:,:] = torch.einsum('s,sij->ij',de[1][:,r1].reshape(len(de[1][:,r1])),torch.einsum('h,hsij->sij',de[0][:,r2].reshape(len(de[0][:,r2])),gr))
+
+  return [dLdu,dLdt,dLdc]
 
 def ATDC_update_step_Tucker2(dL, alpha, de):
   return [torch.sub(de[0],dL[0], alpha=alpha),
           torch.sub(de[1],dL[1], alpha=alpha),
-          torch.sub(de[2],dL[2], alpha=alpha),
-          torch.sub(de[3],dL[3], alpha=alpha)]
+          torch.sub(de[2],dL[2], alpha=alpha)]
 
 def ATDC_update_step_adam_Tucker2(dL, alpha, de, v, m, beta1, beta2, eps=1e-8):
   '''
