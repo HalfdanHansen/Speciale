@@ -329,11 +329,6 @@ convNet500 = ConvNet500()
 
 ## CONVNET5003D ##
 
-# hyperameters of the model
-num_classes = 10
-channels = x_train.shape[1]
-height = x_train.shape[2]
-width = x_train.shape[3]
 
 num_l1 = 10
 
@@ -465,18 +460,12 @@ class ResNet4(nn.Module):
         out = self.linear(out)
         return out
 
-def ResNet4():
-    return ResNet4(BasicBlock_ResNet4, [2, 2, 2, 2])
-
-resNet4 = ResNet4()
+resNet4 = ResNet4(BasicBlock_ResNet4, [2, 2, 2, 2])
 
 ## CONVNET5004D
 
 # hyperameters of the model
-num_classes = 10
-channels = x_train.shape[1]
-height = x_train.shape[2]
-width = x_train.shape[3]
+
 
 num_l1 = 10
 
@@ -567,7 +556,7 @@ class ConvNet500_Tucker2(nn.Module):
         self.conv_3_Tucker2_block = conv_Tucker2_block(depth[1], depth[2], 3, 1, 1, rank1 = rank1, rank2 = rank2)
         self.bn3 = BatchNorm2d(depth[2], affine=False, track_running_stats=False)
 
-        self.conv_4_Tucker2_block = conv_Tucker2_block(depth[2], depth[3], 3, 4, 0, rank1 = rank1, rank2 = rank2)
+        self.conv_4_Tucker2_block = conv_Tucker2_block(depth[2], depth[3], 4, 1, 0, rank1 = rank1, rank2 = rank2)
         self.bn4 = BatchNorm2d(depth[3], affine=False, track_running_stats=False)
         
         self.l_1 = Linear(in_features = depth[3], 
