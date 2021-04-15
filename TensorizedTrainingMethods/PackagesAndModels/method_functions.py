@@ -1,8 +1,4 @@
-<<<<<<< Updated upstream
-from CIFAR_MODELS import *
-=======
 from pack import *
->>>>>>> Stashed changes
 
 ## ATDC FUNCTIONS ##
 
