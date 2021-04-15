@@ -1,8 +1,12 @@
 from sklearn.metrics import accuracy_score
 from copy import deepcopy
+from icecream import ic
 
-import sys
-sys.path.insert(1,'TensorizedTrainingMethods/PackagesAndModels')
+import os 
+print(os.getcwd())
+from pathlib import Path
+os.chdir(str(Path(os.getcwd()).parents[1]))
+os.chdir(os.getcwd()+'\\PackagesAndModels')
 
 from pack import *
 from MNIST_MODELS import *
@@ -277,6 +281,9 @@ test_list.append(ATDC4Dtest_acc)
 save_train = pd.DataFrame(train_list)
 save_valid = pd.DataFrame(valid_list)
 save_test = pd.DataFrame(test_list)
+
+os.chdir(str(Path(os.getcwd()).parents[0]))
+os.chdir(os.getcwd()+'\\ApplyingCNN\\MNIST\\Output')
 
 pd.concat([save_train,save_valid,save_test], axis = 0).to_csv('MNIST_5methods.csv',index=False,header=False)
 
