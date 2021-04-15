@@ -1,12 +1,12 @@
 from sklearn.metrics import accuracy_score
 from copy import deepcopy
-from icecream import ic
+#from icecream import ic
 
 import os 
 print(os.getcwd())
 from pathlib import Path
 os.chdir(str(Path(os.getcwd()).parents[1]))
-os.chdir(os.getcwd()+'\\PackagesAndModels')
+os.chdir(os.getcwd()+'/PackagesAndModels')
 
 from pack import *
 from MNIST_MODELS import *
