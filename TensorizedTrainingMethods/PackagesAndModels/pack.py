@@ -24,3 +24,4 @@ import time
 from sklearn.metrics import accuracy_score
 import torchvision.transforms as transforms
 import torchvision
+from copy import deepcopy
