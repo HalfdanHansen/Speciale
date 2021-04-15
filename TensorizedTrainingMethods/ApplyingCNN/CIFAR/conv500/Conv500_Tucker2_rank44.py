@@ -1,5 +1,6 @@
 import sys
-sys.path.insert(1,'TensorizedTrainingMethods/PackagesAndModels')
+import os
+os.chdir('C:/Users/Halfdan/Desktop/specialemappe/GitHub/Speciale')
 
 from train_val_test_CIFAR10 import *
 
