@@ -516,3 +516,46 @@ def adam_step_tucker2(grad, alpha, data, v, m, beta1, beta2, eps=1e-8):
 
   return (m,v,data)
 
+def initialize_model_weights_from_PARAFAC_rank(convName,net,netname,rank,kdims):
+
+  # convName are the names of the layers. In strings
+  # netname is the name og the network. In string
+
+  # Make weights from initialization of random weights centered around 0, with std of 0.33.
+
+  utc_convs = []
+  for k1,c in enumerate(convName):
+    convData = eval(netname+"."+c+".weight.data")
+    layer =  ([torch.mul(torch.randn(convData.shape[0],rank2),0.333).cuda(),     #u
+              torch.mul(torch.randn(convData.shape[1],rank1),0.333).cuda(),      #t
+              torch.mul(torch.randn(rank1,rank2,kdims[k1],kdims[k1]),0.333).cuda()])             #c
+    utc_convs.append(layer)
+
+  for k1,utc in enumerate(utc_convs):
+    convData = eval(netname+"."+convName[k1]+".weight.data")
+    convData[:] = torch.einsum('hq,sw,wqij->hsij',utc[0],utc[1],utc[2])
+
+  return utc_convs
+
+def ATDC_get_grads_one_filter_4D_rank(gr, de):
+
+  # gr is the full gradient for a layer
+  # de is the set of decomposed elements [u,t,p,q] that is [outputchannel,inputchannel, 3, 3]
+
+  # each step has the number of elements of the decomposed elements, and each
+  # decomposed element step depends on a triple sum (see eq 19-21 in ATDC paper)
+
+  # each einsum shaves a dimension off of gr in order of the permutation
+  dLdu = torch.einsum('i,ij->j',de[1].reshape(len(de[1])),torch.einsum('i,ijk->jk',de[2].reshape(len(de[2])),torch.einsum('i,ijkl->jkl',de[3].reshape(len(de[3])),gr.permute(3,2,1,0))))
+  dLdt = torch.einsum('i,ij->j',de[0].reshape(len(de[0])),torch.einsum('i,ijk->jk',de[2].reshape(len(de[2])),torch.einsum('i,ijkl->jkl',de[3].reshape(len(de[3])),gr.permute(3,2,0,1))))
+  dLdp = torch.einsum('i,ij->j',de[0].reshape(len(de[0])),torch.einsum('i,ijk->jk',de[1].reshape(len(de[1])),torch.einsum('i,ijkl->jkl',de[3].reshape(len(de[3])),gr.permute(3,1,0,2))))
+  dLdq = torch.einsum('i,ij->j',de[0].reshape(len(de[0])),torch.einsum('i,ijk->jk',de[1].reshape(len(de[1])),torch.einsum('i,ijkl->jkl',de[2].reshape(len(de[2])),gr.permute(2,1,0,3))))
+
+  return [dLdu, dLdt, dLdp, dLdq]
+
+def ATDC_update_step_one_filter_4D_rank(dL, alpha, de):
+  return [torch.sub(de[0],dL[0], alpha=alpha),
+          torch.sub(de[1],dL[1], alpha=alpha),
+          torch.sub(de[2],dL[2], alpha=alpha),
+          torch.sub(de[3],dL[3], alpha=alpha)]
+
