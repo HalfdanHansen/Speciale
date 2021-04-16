@@ -19,7 +19,7 @@ if __name__ == '__main__':
     from train_val_test_CIFAR10 import *
     
     trainloader, testloader = load_cifar()
-    
+    device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
     alpha = 0.001
     
     criterion = nn.CrossEntropyLoss()
@@ -33,7 +33,7 @@ if __name__ == '__main__':
     
     for M in range(NumModels):
         for repeats in range(10):
-            net = ConvNet500_4D(M+1)
+            net = ConvNet500_Tucker2(M+1,M+1)
             net.cuda()
     
             train_acc = []
@@ -61,7 +61,7 @@ if __name__ == '__main__':
               test_acc.append(evaluate_cifar(testloader, net).cpu().item())
               losses.append(running_loss)
               
-              if epoch > 1 and losses[-1]/losses[-2] > 0.975:
+              if epoch > 1 and losses[-1]/losses[-2] > 0.9975:
                 results_train.append(train_acc)
                 results_test.append(test_acc)
                 results_loss.append(losses)
@@ -70,7 +70,7 @@ if __name__ == '__main__':
     save_train = pd.DataFrame(results_train)
     save_test = pd.DataFrame(results_test)
     save_loss = pd.DataFrame(results_loss)
-    pd.concat([save_train,save_test,save_loss],axis = 0).to_csv('1504_CIFAR10_D4DD_PARAFAC_conv500_rank.csv',index=False,header=False)
+    pd.concat([save_train,save_test,save_loss],axis = 0).to_csv('1604_CIFAR10_PARAFAC4D_conv500_rank.csv',index=False,header=False)
     
     
     
