@@ -1,11 +1,19 @@
 if __name__ == '__main__':
     import os 
     print(os.getcwd())
+    import sys 
+    
+    #import re
     from pathlib import Path
     os.chdir(str(Path(os.getcwd()).parents[2]))
     os.chdir(os.getcwd()+'/PackagesAndModels')
-    
+    print(os.getcwd())
     from pack import *
+    
+    #import importlib
+    #fol = re.sub("/", ".", d)[1:-1]
+    #importlib.import_module(fol+".pack")
+    
     from method_functions import *
     from CIFAR_MODELS import *
     from train_val_test_CIFAR10 import *
