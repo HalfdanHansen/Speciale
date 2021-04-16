@@ -502,12 +502,12 @@ class ConvNet500_4D(nn.Module):
         self.conv_3_4D_block = conv_4D_block(depth[1], depth[2], 3, 1, 1, rank = rank)
         self.bn3 = BatchNorm2d(depth[2], affine=False, track_running_stats=False)
 
-        self.conv_4_4D_block = conv_4D_block(depth[2], depth[3], 3, 4, 0, rank = rank)
+        self.conv_4_4D_block = conv_4D_block(depth[2], depth[3], 4, 1, 0, rank = rank)
         self.bn4 = BatchNorm2d(depth[3], affine=False, track_running_stats=False)
         
         self.l_1 = Linear(in_features = depth[3], 
                           out_features = num_l1,
-                          bias = False)
+                          bias = True)
 
         self.maxpool = MaxPool2d(kernel_size = 2,
                                 stride = 2)
