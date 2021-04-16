@@ -1,4 +1,4 @@
-from pack import *
+from .pack import *
 
 ## ATDC FUNCTIONS ##
 
@@ -271,8 +271,6 @@ def BAF_3D(filter, rank):
     #Outer product of decompositions
     DF += np.einsum('i,j,k->ijk',decomp[1][0][:,i],decomp[1][1][:,i],decomp[1][2][:,i])
   return DF, decomp
-
-from pack import *
 
 def apply_decomp(inputchannel, outputchannel, spatial, padding, dimx, dimy, FD, batch, RANK):
   FilterList = []

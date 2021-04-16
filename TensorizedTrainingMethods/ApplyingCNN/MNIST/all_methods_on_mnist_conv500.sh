@@ -28,7 +28,6 @@
 # Load the cuda module
 module load cuda/10.2
 module load python3/3.8.2
-cd Documents/
 python3 all_methods_on_mnist_conv500.py
 
 
