@@ -303,7 +303,7 @@ class ConvNet500(nn.Module):
 
         self.l_1 = Linear(in_features = depth[3], 
                           out_features = num_l1,
-                          bias = False)
+                          bias = True)
         
         self.maxpool = MaxPool2d(kernel_size = 2,
                                 stride = 2)
