@@ -24,6 +24,8 @@ if __name__ == '__main__':
     criterion = nn.CrossEntropyLoss()
     optimizer = optim.Adam(net.parameters(), lr=alpha)
     
+    NumModels = 5
+    
     for M in range(NumModels):
         for repeats in range(10):
             net.apply(weight_reset)
