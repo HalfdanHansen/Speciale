@@ -345,6 +345,8 @@ def conv_to_PARAFAC_firsttry(layer, rank):
     new_layers = [first_layer, second_layer, third_layer, fourth_layer]
     return nn.Sequential(*new_layers)
     
+
+
 def apply_decomp_3D_test(inputchannel, outputchannel, spatial, padding, dimx, dimy, pqt, batch):
   
   # Takes a 3D decomposed layer of filters and applies each of them and concatenates them.

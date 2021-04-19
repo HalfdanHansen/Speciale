@@ -1,14 +1,15 @@
 from pack import *
 from method_functions import *
+from sys import getsizeof
 
 data = np.load('mnist.npz')
 num_classes = 10
 nchannels, rows, cols = 1, 28, 28
 
 x_train = data['X_train'][:10000].astype('float32')
+
 x_train = x_train.reshape((-1, nchannels, rows, cols))
 targets_train = data['y_train'][:10000].astype('int32')
-
 x_valid = data['X_valid'][:1000].astype('float32')
 x_valid = x_valid.reshape((-1, nchannels, rows, cols))
 targets_valid = data['y_valid'][:1000].astype('int32')

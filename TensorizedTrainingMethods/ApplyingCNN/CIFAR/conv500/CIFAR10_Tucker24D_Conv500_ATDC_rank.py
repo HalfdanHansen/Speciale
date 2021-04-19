@@ -16,6 +16,10 @@ if __name__ == '__main__':
     epochs = 50
     numModels = 5
     
+    results_train = []
+    results_test = []
+    results_loss = []
+    
     convName = ['conv_1','conv_2','conv_3','conv_4']
     
     net = convNet500
@@ -23,6 +27,8 @@ if __name__ == '__main__':
     
     criterion = nn.CrossEntropyLoss()
     optimizer = optim.Adam(net.parameters(), lr=alpha)
+    
+    NumModels = 5
     
     for M in range(NumModels):
         for repeats in range(10):
@@ -35,7 +41,7 @@ if __name__ == '__main__':
             utc_convs = initialize_model_weights_from_Tucker2(convName,net,"net",M+1,M+1,[3,3,3,4])
   
             for epoch in range(epochs):
-                running_loss = train_net_Tucker2_ATDC(losses, net, "net",trainloader, criterion, optimizer, convName, utc_convs, alpha, rank1, rank2)
+                running_loss = train_net_Tucker2_ATDC(losses, net, "net", trainloader, criterion, optimizer, convName, utc_convs, alpha, M+1, M+1)
     
                 net.eval()
                 train_acc.append(evaluate_cifar(trainloader, net).cpu().item())

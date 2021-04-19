@@ -16,6 +16,10 @@ if __name__ == '__main__':
     epochs = 50
     numModels = 5
     
+    results_train = []
+    results_test = []
+    results_loss = []
+    
     convName = ['conv_1','conv_2','conv_3','conv_4']
     
     net = convNet500

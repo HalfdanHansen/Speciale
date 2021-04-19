@@ -70,7 +70,7 @@ if __name__ == '__main__':
     save_train = pd.DataFrame(results_train)
     save_test = pd.DataFrame(results_test)
     save_loss = pd.DataFrame(results_loss)
-    pd.concat([save_train,save_test,save_loss],axis = 0).to_csv('1604_CIFAR10_PARAFAC4D_conv500_rank.csv',index=False,header=False)
+    pd.concat([save_train,save_test,save_loss],axis = 0).to_csv('1604_CIFAR10_Tucker24D_conv500_rank.csv',index=False,header=False)
     
     
     
