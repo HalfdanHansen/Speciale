@@ -2,6 +2,7 @@ from sklearn.metrics import accuracy_score
 from copy import deepcopy
 #from icecream import ic
 
+<<<<<<< HEAD
 import os 
 print(os.getcwd())
 from pathlib import Path
@@ -13,6 +14,18 @@ from MNIST_MODELS import *
 from train_val_test_MNIST import *
 from method_functions import *
 from sys import getsizeof
+=======
+#import os 
+#print(os.getcwd())
+#from pathlib import Path
+#os.chdir(str(Path(os.getcwd()).parents[1]))
+#os.chdir(os.getcwd()+'/PackagesAndModels')
+
+from PackagesAndModels.pack import *
+from PackagesAndModels.MNIST_MODELS import *
+from PackagesAndModels.train_val_test_MNIST import *
+from PackagesAndModels.method_functions import *
+>>>>>>> refs/remotes/origin/main
 
 train_list = []
 test_list = []

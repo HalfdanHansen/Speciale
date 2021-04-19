@@ -2,12 +2,12 @@ if __name__ == '__main__':
     import os 
     print(os.getcwd())
     from pathlib import Path
-    os.chdir(str(Path(os.getcwd()).parents[2]))
-    os.chdir(os.getcwd()+'/PackagesAndModels')
-    from train_val_test_CIFAR10 import *
-    from method_functions import *
-    from CIFAR_MODELS import *
-    from pack import *
+    #os.chdir(str(Path(os.getcwd()).parents[2]))
+    #os.chdir(os.getcwd()+'/PackagesAndModels')
+    from PackagesAndModels.train_val_test_CIFAR10 import *
+    from PackagesAndModels.method_functions import *
+    from PackagesAndModels.CIFAR_MODELS import *
+    from PackagesAndModels.pack import *
 
     trainloader, testloader = load_cifar()
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")

@@ -28,7 +28,6 @@
 # Load the cuda module
 module load cuda/10.2
 module load python3/3.8.2
-cd Documents/
 python3 CIFAR10_D4DD_PARAFAC_conv500_rank.py
 
 

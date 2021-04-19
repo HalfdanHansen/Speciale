@@ -4,11 +4,12 @@ if __name__ == '__main__':
     import sys 
     
     #import re
-    from pathlib import Path
-    os.chdir(str(Path(os.getcwd()).parents[2]))
-    os.chdir(os.getcwd()+'/PackagesAndModels')
-    print(os.getcwd())
-    from pack import *
+    
+    #from pathlib import Path
+    #os.chdir(str(Path(os.getcwd()).parents[2]))
+    #os.chdir(os.getcwd()+'/PackagesAndModels')
+    #print(os.getcwd())
+    from PackagesAndModels.pack import *
     
     #import importlib
     #fol = re.sub("/", ".", d)[1:-1]

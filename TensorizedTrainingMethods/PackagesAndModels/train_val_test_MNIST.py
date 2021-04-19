@@ -1,13 +1,25 @@
+<<<<<<< HEAD
 from pack import *
 from method_functions import *
 from sys import getsizeof
+=======
+from .pack import *
+from .method_functions import *
+>>>>>>> refs/remotes/origin/main
 
-data = np.load('mnist.npz')
+from pathlib import Path 
+import os
+p = Path(os.path.abspath(__file__)).parent/"mnist.npz"
+data = np.load(p)
 num_classes = 10
 nchannels, rows, cols = 1, 28, 28
 
+<<<<<<< HEAD
 x_train = data['X_train'][:10000].astype('float32')
 
+=======
+x_train = data['X_train'][:10000].astype('float32') #astype(np.float32, copy = False)
+>>>>>>> refs/remotes/origin/main
 x_train = x_train.reshape((-1, nchannels, rows, cols))
 targets_train = data['y_train'][:10000].astype('int32')
 x_valid = data['X_valid'][:1000].astype('float32')
