@@ -3,9 +3,9 @@
 ### -- specify queue -- 
 #BSUB -q gpuv100
 ### -- set the job Name -- 
-#BSUB -J MNISTconv500
+#BSUB -J Full3D
 ### -- ask for number of cores (default: 1) -- 
-#BSUB -n 2
+#BSUB -n 1 
 ### -- Select the resources: 1 gpu in exclusive process mode --
 #BSUB -gpu "num=1:mode=exclusive_process"
 ### -- set walltime limit: hh:mm --  maximum 24 hours for GPU-queues right now
@@ -22,12 +22,13 @@
 #BSUB -N 
 ### -- Specify the output and error file. %J is the job-id -- 
 ### -- -o and -e mean append, -oo and -eo mean overwrite -- 
-#BSUB -o Output/1404_Output_all_methods_on_mnist_conv500.out 
-#BSUB -e Output/1404_Error_all_methods_on_mnist_conv500.err 
+#BSUB -o Output/1204/Output_nopassnet_full_and_3D.out 
+#BSUB -e Output/1204/Error_nopassnet_full_and_3D.err 
 
 # Load the cuda module
 module load cuda/10.2
 module load python3/3.8.2
-python3 all_methods_on_mnist_conv500.py
+cd Documents/
+python3 0704_nopassnet_full_and_3D.py
 
 

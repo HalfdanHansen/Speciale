@@ -25,3 +25,7 @@ from sklearn.metrics import accuracy_score
 import torchvision.transforms as transforms
 import torchvision
 from copy import deepcopy
+
+def weight_reset(m):
+    if isinstance(m, nn.Conv2d) or isinstance(m, nn.Linear):
+        m.reset_parameters()

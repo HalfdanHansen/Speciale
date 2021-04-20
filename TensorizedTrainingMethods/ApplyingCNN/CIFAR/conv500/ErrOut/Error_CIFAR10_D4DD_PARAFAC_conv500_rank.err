@@ -1,0 +1,27 @@
+Loaded module: cuda/10.2
+Loaded dependency [gcc/8.4.0]: binutils/2.34
+Loaded dependency [python3/3.8.2]: gcc/8.4.0
+Loaded module: python3/3.8.2
+/zhome/d8/b/107547/.lsbatch/1618488530.9526281.shell: line 31: cd: Documents/: No such file or directory
+Traceback (most recent call last):
+  File "CIFAR10_D4DD_PARAFAC_conv500_rank.py", line 8, in <module>
+    from pack import *
+ModuleNotFoundError: No module named 'pack'
+Loaded module: cuda/10.2
+Loaded dependency [gcc/8.4.0]: binutils/2.34
+Loaded dependency [python3/3.8.2]: gcc/8.4.0
+Loaded module: python3/3.8.2
+/zhome/d8/b/107547/.lsbatch/1618488924.9526291.shell: line 31: cd: Documents/: No such file or directory
+Traceback (most recent call last):
+  File "CIFAR10_D4DD_PARAFAC_conv500_rank.py", line 9, in <module>
+    from pack import *
+ModuleNotFoundError: No module named 'pack'
+Loaded module: cuda/10.2
+Loaded dependency [gcc/8.4.0]: binutils/2.34
+Loaded dependency [python3/3.8.2]: gcc/8.4.0
+Loaded module: python3/3.8.2
+/zhome/d8/b/107547/.lsbatch/1618555042.9527912.shell: line 31: cd: Documents/: No such file or directory
+Traceback (most recent call last):
+  File "CIFAR10_D4DD_PARAFAC_conv500_rank.py", line 9, in <module>
+    from pack import *
+ModuleNotFoundError: No module named 'pack'
