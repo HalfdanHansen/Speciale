@@ -1,4 +1,4 @@
-.pyc
-.tar
-.gz
-.npz
+*.pyc
+*.tar
+*.gz
+*.npz
