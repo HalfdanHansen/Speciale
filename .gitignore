@@ -3,3 +3,4 @@
 *.gz
 *.npz
 data/**
+__pycache__/**
