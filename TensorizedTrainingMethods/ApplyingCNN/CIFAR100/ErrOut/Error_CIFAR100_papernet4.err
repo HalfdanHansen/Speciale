@@ -1,0 +1,10 @@
+Loaded module: cuda/10.2
+Loaded dependency [gcc/8.4.0]: binutils/2.34
+Loaded dependency [python3/3.8.2]: gcc/8.4.0
+Loaded module: python3/3.8.2
+Traceback (most recent call last):
+  File "CIFAR100_papernet4.py", line 5, in <module>
+    from PackagesAndModels.pack import *
+  File "/zhome/ab/6/109248/Desktop/Speciale/Speciale/TensorizedTrainingMethods/ApplyingCNN/CIFAR100/PackagesAndModels/pack.py", line 3, in <module>
+    import torch
+ModuleNotFoundError: No module named 'torch'

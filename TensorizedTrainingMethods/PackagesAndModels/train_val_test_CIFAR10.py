@@ -1,4 +1,4 @@
-from method_functions import *
+from .method_functions import *
 
 def evaluate_cifar(loader,model):
   device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
