@@ -30,6 +30,7 @@ def conv_3D_block(in_f, out_f, kernelsize = 3, stride = 1, pad = 1, rank = 1):
                       stride=1, padding=(1,0), bias=False, groups = out_f),
             nn.Conv2d(in_channels = out_f, out_channels = out_f, kernel_size=(1,kernelsize),
                       stride=1, padding=(0,1), bias=False, groups = out_f)
+            )
 
 def conv_4D_block(in_f, out_f, kernelsize = 3, stride = 1, pad = 1, rank = 1):
     return  nn.Sequential(
@@ -58,7 +59,7 @@ def conv_Tucker2_block(in_f, out_f, kernelsize = 3, stride = 1, pad = 1, rank = 
                       stride=(1,1), padding=(0,0), bias=False)
         )
 
-class PaperNet(nn.Module):
+class PaperNet4(nn.Module):
 
     def __init__(self, func, kernelsize, stride, pad, rank):
         super(PaperNet4, self).__init__()
@@ -158,4 +159,4 @@ paperNet43D = PaperNet4(conv_3D_block, 3, 1, 1, 1)
 
 paperNet44D = PaperNet4(conv_4D_block, 3, 1, 1, 1)
 
-paperNetTucker2 = PaperNet4(conv_4D_block, 3, 1, 1, [1,1])
+paperNetTucker2 = PaperNet4(conv_Tucker2_block, 3, 1, 1, [1,1])
