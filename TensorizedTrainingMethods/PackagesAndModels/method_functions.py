@@ -523,7 +523,7 @@ def adam_step_tucker2(grad, alpha, data, v, m, beta1, beta2, eps=1e-8):
 
 ### PARAFAC RANK R METHODS ###
 
-def initialize_model_weights_from_PARAFAC_rank(convName,net,netname,rank):
+def initialize_model_weights_from_PARAFAC_rank(convName, net, netname, rank):
 
   # convName are the names of the layers. In strings
   # netname is the name og the network. In string
@@ -548,6 +548,31 @@ def initialize_model_weights_from_PARAFAC_rank(convName,net,netname,rank):
     convData[:] = temp
     '''
     convData[:] = torch.einsum('hsijr->hsij',torch.einsum('hr,sr,ir,jr->hsijr',pqtu[0],pqtu[1],pqtu[2],pqtu[3]))
+
+  return pqtu_convs
+
+def initialize_model_weights_from_PARAFAC3D_rank(convName, net, netname, rank): # måske ikke god
+  
+  # convName are the names of the layers. In strings
+  # netname is the name og the network. In string
+  # Make weights from initialization of random weights centered around 0, with std of 0.33.
+
+  pqt_convs = []
+
+  for k1,c in enumerate(convName):
+    convData = eval(netname+"."+c+".weight.data")
+    layer = []
+    for k2,cc in enumerate(convData):
+      layer.append(([torch.mul(torch.randn(cc.shape[0],rank),0.333).cuda(),
+               torch.mul(torch.randn(cc.shape[1],rank),0.333).cuda(),
+               torch.mul(torch.randn(cc.shape[2],rank),0.333).cuda()]))
+    pqt_convs.append(layer)
+
+
+  for k1,pqt_conv in enumerate(pqt_convs):
+    convData = eval(netname+"."+convName[k1]+".weight.data")
+    for k2,pqt_filter in enumerate(pqt_conv):
+      convData[k2] = torch.einsum('sijr->sij',torch.einsum('sr,ir,jr->sijr',pqt_filter[0],pqt_filter[1],pqt_filter[2]))
 
   return pqtu_convs
 

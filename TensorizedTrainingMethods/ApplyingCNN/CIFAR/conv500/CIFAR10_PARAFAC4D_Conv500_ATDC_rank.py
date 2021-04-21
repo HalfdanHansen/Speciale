@@ -21,6 +21,7 @@ if __name__ == '__main__':
     results_loss = []
     
     convName = ['conv_1','conv_2','conv_3','conv_4']
+    lName = ['l_1']
     
     net = convNet500
     net.cuda()
@@ -41,7 +42,7 @@ if __name__ == '__main__':
             pqtu_convs = initialize_model_weights_from_PARAFAC_rank(convName,net,"net",M+1)
   
             for epoch in range(epochs):
-                running_loss = train_net_PARAFAC4D_ATDC(losses, net, "net", trainloader, criterion, optimizer, convName, pqtu_convs, alpha, M+1)
+                running_loss = train_net_PARAFAC4D_ATDC(losses, net, "net", trainloader, criterion, optimizer, convName, pqtu_convs, alpha, M+1,lName)
         
                 net.eval()
                 train_acc.append(evaluate_cifar(trainloader, net).cpu().item())

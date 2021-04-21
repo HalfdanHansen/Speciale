@@ -32,7 +32,7 @@ if __name__ == '__main__':
     
     convName = ['conv_1','conv_2','conv_3','conv_4','conv_5','conv_6','conv_7','conv_8','conv_9','conv_10','conv_11']
     
-    net = paperNet43D
+    net = paperNet4Tucker2
     net.to(device)
     
     criterion = nn.CrossEntropyLoss()
@@ -65,4 +65,4 @@ if __name__ == '__main__':
     save_train = pd.DataFrame(train_acc)
     save_test = pd.DataFrame(test_acc)
     save_loss = pd.DataFrame(losses)
-    pd.concat([save_train,save_test,save_loss],axis = 0).to_csv('2004_CIFAR100_papernet43D.csv',index=False,header=False)
+    pd.concat([save_train,save_test,save_loss],axis = 0).to_csv('2004_CIFAR100_papernet4Tucker2.csv',index=False,header=False)

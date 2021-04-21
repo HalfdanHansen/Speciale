@@ -13,7 +13,7 @@ def evaluate_cifar(loader,model):
         correct += (predicted == labels).sum().detach() #item()
   return (correct / total)
 
-def train_net_Tucker2_ATDC(losses, net, netname,trainloader, criterion, optimizer, convName, utc_convs, alpha, rank1, rank2):
+def train_net_Tucker2_ATDC(losses, net, netname,trainloader, criterion, optimizer, convName, utc_convs, alpha, rank1, rank2, lName):
   running_loss = 0
   net.train()
 
@@ -37,9 +37,10 @@ def train_net_Tucker2_ATDC(losses, net, netname,trainloader, criterion, optimize
       convData[:] = torch.einsum('hq,sw,wqij->hsij',utc[0],utc[1],utc[2])
 
     #normal step for linear layer
-    net.l_1.weight.data[:] = torch.sub(net.l_1.weight.data,net.l_1.weight.grad, alpha = alpha)
-    net.l_1.bias.data[:] = torch.sub(net.l_1.bias.data,net.l_1.bias.grad,alpha = alpha)
-
+    for name in lName:
+      eval('net.'+name+'.weight.data[:] = torch.sub(net.'+name+'.weight.data,net.'+name+'.weight.grad, alpha = alpha)')
+      eval('net.'+name+'.bias.data[:] = torch.sub(net.'+name+'.bias.data,net.'+name+'.bias.grad,alpha = alpha)')
+      
     running_loss += loss.item()
 
   return running_loss
@@ -66,7 +67,7 @@ def load_cifar():
 
 
 
-def train_net_PARAFAC4D_ATDC(losses, net, netname, trainloader, criterion, optimizer, convName, pqtu_convs, alpha, rank):
+def train_net_PARAFAC4D_ATDC(losses, net, netname, trainloader, criterion, optimizer, convName, pqtu_convs, alpha, rank, lName):
   running_loss = 0
   net.train()
 
@@ -93,9 +94,13 @@ def train_net_PARAFAC4D_ATDC(losses, net, netname, trainloader, criterion, optim
       convData[:] = torch.einsum('hsijr->hsij',torch.einsum('hr,sr,ir,jr->hsijr',pqtu[0],pqtu[1],pqtu[2],pqtu[3]))
 
     #normal step for linear layer
-    net.l_1.weight.data[:] = torch.sub(net.l_1.weight.data,net.l_1.weight.grad, alpha = alpha)
-    net.l_1.bias.data[:] = torch.sub(net.l_1.bias.data,net.l_1.bias.grad,alpha = alpha)
-
+    for name in lName:
+      eval('net.'+name+'.weight.data[:] = torch.sub(net.'+name+'.weight.data,net.'+name+'.weight.grad, alpha = alpha)')
+      eval('net.'+name+'.bias.data[:] = torch.sub(net.'+name+'.bias.data,net.'+name+'.bias.grad,alpha = alpha)')
+      
     running_loss += loss.item()
 
   return running_loss
+
+
+  ## make train net parafac3d ATDC
