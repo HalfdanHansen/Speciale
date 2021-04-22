@@ -46,6 +46,7 @@ if __name__ == '__main__':
     utc_convs = initialize_model_weights_from_Tucker2(convName, net, "net",1,1,[3,3,3,3,3,3,3,3,3,3,3])
 
     for epoch in range(epochs):
+
         running_loss = train_net_Tucker2_ATDC(losses, net, "net", trainloader, criterion, optimizer, convName, utc_convs, alpha, 1, 1, lName)
 
         net.eval()
