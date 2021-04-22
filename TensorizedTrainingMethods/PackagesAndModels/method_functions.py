@@ -563,9 +563,9 @@ def initialize_model_weights_from_PARAFAC3D_rank(convName, net, netname, rank): 
     convData = eval(netname+"."+c+".weight.data")
     layer = []
     for k2,cc in enumerate(convData):
-      layer.append(([torch.mul(torch.randn(cc.shape[0],rank),0.333).cuda(),
-               torch.mul(torch.randn(cc.shape[1],rank),0.333).cuda(),
-               torch.mul(torch.randn(cc.shape[2],rank),0.333).cuda()]))
+      layer.append([  torch.mul(torch.randn(cc.shape[0],rank),0.333).cuda(),
+                      torch.mul(torch.randn(cc.shape[1],rank),0.333).cuda(),
+                      torch.mul(torch.randn(cc.shape[2],rank),0.333).cuda()])
     pqt_convs.append(layer)
 
 

@@ -117,15 +117,17 @@ def train_net_PARAFAC3D_ATDC(losses, net, netname, trainloader, criterion, optim
     #optimizer.step()
 
     #ATDC step for convolutional layers
-    for k1,pqt_conv in enumerate(pqt_convs):
+    for k1,pqt in enumerate(pqt_convs):
+
       convGrad = eval(netname+"."+convName[k1]+".weight.grad")
       convData = eval(netname+"."+convName[k1]+".weight.data")
+      for k2,pqt_filter in enumerate(pqt):
+        pqt_convs[k1][k2] = ATDC_get_grads_one_filter_3D_short_tensor(
+                            ATDC_update_step_one_filter_3D_tensor(convGrad, pqt_filter), alpha, pqt_filter)
 
-      for k2,pqt_filter in enumerate(pqt_conv)
-      pqtu_convs[k1] = ATDC_update_step_one_filter_3D_PARAFAC_rank(
-                       ATDC_get_grads_one_filter_3D_PARAFAC_rank(convGrad, pqt, rank), alpha, pqt)
-      
-      convData[k2] = torch.einsum('sijr->sij',torch.einsum('sr,ir,jr->sijr',pqt_filter[0],pqt_filter[1],pqt_filter[2]))
+        convData[k2] = torch.einsum('s,i,j->sij',pqt_filter[0],pqt_filter[1],pqt_filter[2])
+
+      #Magi # its seems like you need a if '__name__' == __main__ guard! #einsum -> winsum
 
     #normal step for linear layer
     for name in lName:
