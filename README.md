@@ -6,4 +6,4 @@ Can a full network help a decomposed network train faster?
 
 let's find out!
 
-Lonnie forhelved
+Lonnie forhelved jup jup

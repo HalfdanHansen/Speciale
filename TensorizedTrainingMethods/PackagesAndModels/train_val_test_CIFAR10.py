@@ -1,4 +1,4 @@
-from method_functions import *
+from .method_functions import *
 
 def evaluate_cifar(loader,model):
   device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
@@ -13,7 +13,7 @@ def evaluate_cifar(loader,model):
         correct += (predicted == labels).sum().detach() #item()
   return (correct / total)
 
-def train_net_Tucker2_ATDC(losses, net, netname,trainloader, criterion, optimizer, convName, utc_convs, alpha, rank1, rank2):
+def train_net_Tucker2_ATDC(losses, net, netname,trainloader, criterion, optimizer, convName, utc_convs, alpha, rank1, rank2, lName):
   running_loss = 0
   net.train()
 
@@ -37,9 +37,10 @@ def train_net_Tucker2_ATDC(losses, net, netname,trainloader, criterion, optimize
       convData[:] = torch.einsum('hq,sw,wqij->hsij',utc[0],utc[1],utc[2])
 
     #normal step for linear layer
-    net.l_1.weight.data[:] = torch.sub(net.l_1.weight.data,net.l_1.weight.grad, alpha = alpha)
-    net.l_1.bias.data[:] = torch.sub(net.l_1.bias.data,net.l_1.bias.grad,alpha = alpha)
-
+    for name in lName:
+      eval('net.'+name+'.weight.data[:] = torch.sub(net.'+name+'.weight.data,net.'+name+'.weight.grad, alpha = alpha)')
+      eval('net.'+name+'.bias.data[:] = torch.sub(net.'+name+'.bias.data,net.'+name+'.bias.grad,alpha = alpha)')
+      
     running_loss += loss.item()
 
   return running_loss
@@ -65,8 +66,7 @@ def load_cifar():
   return (trainloader,testloader)
 
 
-
-def train_net_PARAFAC4D_ATDC(losses, net, netname,trainloader, criterion, optimizer, convName, utc_convs, alpha, rank1, rank2):
+def train_net_PARAFAC4D_ATDC(losses, net, netname, trainloader, criterion, optimizer, convName, pqtu_convs, alpha, rank, lName):
   running_loss = 0
   net.train()
 
@@ -93,9 +93,46 @@ def train_net_PARAFAC4D_ATDC(losses, net, netname,trainloader, criterion, optimi
       convData[:] = torch.einsum('hsijr->hsij',torch.einsum('hr,sr,ir,jr->hsijr',pqtu[0],pqtu[1],pqtu[2],pqtu[3]))
 
     #normal step for linear layer
-    net.l_1.weight.data[:] = torch.sub(net.l_1.weight.data,net.l_1.weight.grad, alpha = alpha)
-    net.l_1.bias.data[:] = torch.sub(net.l_1.bias.data,net.l_1.bias.grad,alpha = alpha)
+    for name in lName:
+      eval('net.'+name+'.weight.data[:] = torch.sub(net.'+name+'.weight.data,net.'+name+'.weight.grad, alpha = alpha)')
+      eval('net.'+name+'.bias.data[:] = torch.sub(net.'+name+'.bias.data,net.'+name+'.bias.grad,alpha = alpha)')
+      
+    running_loss += loss.item()
 
+  return running_loss
+
+
+def train_net_PARAFAC3D_ATDC(losses, net, netname, trainloader, criterion, optimizer, convName, pqt_convs, alpha, rank, lName):
+  running_loss = 0
+  net.train()
+
+  for i, data in enumerate(trainloader, 0):
+    inputs, labels = data[0].cuda(), data[1].cuda()
+    
+    optimizer.zero_grad()
+    outputs = net(inputs)
+    loss = criterion(outputs, labels)
+    loss.backward()
+    #optimizer.step()
+
+    #ATDC step for convolutional layers
+    for k1,pqt in enumerate(pqt_convs):
+
+      convGrad = eval(netname+"."+convName[k1]+".weight.grad")
+      convData = eval(netname+"."+convName[k1]+".weight.data")
+      for k2,pqt_filter in enumerate(pqt):
+        pqt_convs[k1][k2] = ATDC_get_grads_one_filter_3D_short_tensor(
+                            ATDC_update_step_one_filter_3D_tensor(convGrad, pqt_filter), alpha, pqt_filter)
+
+        convData[k2] = torch.einsum('s,i,j->sij',pqt_filter[0],pqt_filter[1],pqt_filter[2])
+
+      #Magi # its seems like you need a if '__name__' == __main__ guard! #einsum -> winsum
+
+    #normal step for linear layer
+    for name in lName:
+      eval('net.'+name+'.weight.data[:] = torch.sub(net.'+name+'.weight.data,net.'+name+'.weight.grad, alpha = alpha)')
+      eval('net.'+name+'.bias.data[:] = torch.sub(net.'+name+'.bias.data,net.'+name+'.bias.grad,alpha = alpha)')
+      
     running_loss += loss.item()
 
   return running_loss

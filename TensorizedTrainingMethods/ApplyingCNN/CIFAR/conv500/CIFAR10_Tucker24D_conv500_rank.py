@@ -1,22 +1,22 @@
 if __name__ == '__main__':
     import os 
-    print(os.getcwd())
-    import sys 
+    #print(os.getcwd())
+    #import sys 
     
     #import re
     from pathlib import Path
-    os.chdir(str(Path(os.getcwd()).parents[2]))
-    os.chdir(os.getcwd()+'/PackagesAndModels')
-    print(os.getcwd())
-    from pack import *
+    #os.chdir(str(Path(os.getcwd()).parents[2]))
+    #os.chdir(os.getcwd()+'/PackagesAndModels')
+    #print(os.getcwd())
+    from PackagesAndModels.pack import *
     
     #import importlib
     #fol = re.sub("/", ".", d)[1:-1]
     #importlib.import_module(fol+".pack")
     
-    from method_functions import *
-    from CIFAR_MODELS import *
-    from train_val_test_CIFAR10 import *
+    from PackagesAndModels.method_functions import *
+    from PackagesAndModels.CIFAR_MODELS import *
+    from PackagesAndModels.train_val_test_CIFAR10 import *
     
     trainloader, testloader = load_cifar()
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
@@ -29,11 +29,11 @@ if __name__ == '__main__':
     results_loss = []
     epochs = 50
     
-    NumModels = 5
+    ranks = 5
     
-    for M in range(NumModels):
+    for rank in range(ranks):
         for repeats in range(10):
-            net = ConvNet500_Tucker2(M+1,M+1)
+            net = ConvNet500_Tucker2(rank+1,rank+1)
             net.cuda()
     
             train_acc = []
@@ -70,7 +70,7 @@ if __name__ == '__main__':
     save_train = pd.DataFrame(results_train)
     save_test = pd.DataFrame(results_test)
     save_loss = pd.DataFrame(results_loss)
-    pd.concat([save_train,save_test,save_loss],axis = 0).to_csv('1604_CIFAR10_PARAFAC4D_conv500_rank.csv',index=False,header=False)
+    pd.concat([save_train,save_test,save_loss],axis = 0).to_csv('1604_CIFAR10_Tucker24D_conv500_rank.csv',index=False,header=False)
     
     
     

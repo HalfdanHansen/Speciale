@@ -11,7 +11,6 @@ nchannels, rows, cols = 1, 28, 28
 x_train = data['X_train'][:10000].astype('float32') #astype(np.float32, copy = False)
 x_train = x_train.reshape((-1, nchannels, rows, cols))
 targets_train = data['y_train'][:10000].astype('int32')
-
 x_valid = data['X_valid'][:1000].astype('float32')
 x_valid = x_valid.reshape((-1, nchannels, rows, cols))
 targets_valid = data['y_valid'][:1000].astype('int32')
