@@ -24,6 +24,10 @@ if __name__ == '__main__':
     results_test = []
     results_loss = []
     
+    results_train = []
+    results_test = []
+    results_loss = []
+    
     convName = ['conv_1','conv_2','conv_3','conv_4']
     lName = ['l_1']
     
