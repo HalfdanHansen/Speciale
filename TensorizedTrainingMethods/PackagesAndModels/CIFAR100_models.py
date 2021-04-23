@@ -15,7 +15,7 @@ stride_conv = 1
 # Defining the different types of layers
 
 def normal_convlayer(in_f, out_f, kernelsize = 3, stride = 1, pad = 1, rank = 1):
-    return Conv2d(  in_channels = in_f,
+    return nn.Conv2d(  in_channels = in_f,
                     out_channels = out_f,
                     kernel_size = kernel_size_conv,
                     stride = stride_conv,
