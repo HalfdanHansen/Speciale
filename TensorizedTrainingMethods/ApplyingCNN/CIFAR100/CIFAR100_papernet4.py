@@ -13,7 +13,7 @@ if __name__ == '__main__':
         transforms.Normalize((0.5071, 0.4867, 0.4408), (0.2675, 0.2565, 0.2761)),
         ])
 
-    batchsize = 100
+    batchsize = 10
 
     trainset = torchvision.datasets.CIFAR100(root='./data', train=True,
                                             download=True, transform=transform)
@@ -28,11 +28,11 @@ if __name__ == '__main__':
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
     
     alpha = 0.01
-    epochs = 50
+    epochs = 5
     
     convName = ['conv_1','conv_2','conv_3','conv_4','conv_5','conv_6','conv_7','conv_8','conv_9','conv_10','conv_11']
     
-    net = paperNet4
+    net = deepcopy(paperNet4)
     net.to(device)
     
     criterion = nn.CrossEntropyLoss()
@@ -49,12 +49,12 @@ if __name__ == '__main__':
       for i, data in enumerate(trainloader, 0):
 
         inputs, labels = data[0].to(device), data[1].to(device)
-
-        optimizer.zero_grad()
+        
         outputs = net(inputs)
         loss = criterion(outputs, labels)
         loss.backward()
         optimizer.step()
+        optimizer.zero_grad()
         running_loss += loss.item()
 
       net.eval()
@@ -65,4 +65,4 @@ if __name__ == '__main__':
     save_train = pd.DataFrame(train_acc)
     save_test = pd.DataFrame(test_acc)
     save_loss = pd.DataFrame(losses)
-    pd.concat([save_train,save_test,save_loss],axis = 0).to_csv('2004_CIFAR100_papernet4.csv',index=False,header=False)
+    pd.concat([save_train,save_test,save_loss],axis = 0).to_csv('2304_CIFAR100_papernet4.csv',index=False,header=False)
