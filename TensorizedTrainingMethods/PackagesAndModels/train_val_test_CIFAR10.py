@@ -66,10 +66,6 @@ def load_cifar():
   return (trainloader,testloader)
 
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 4dd9181e1141e88f923d8a6e11feb45670bbb81d
 def train_net_PARAFAC4D_ATDC(losses, net, netname, trainloader, criterion, optimizer, convName, pqtu_convs, alpha, rank, lName):
   running_loss = 0
   net.train()

@@ -1,0 +1,34 @@
+Loaded module: cuda/10.2
+Loaded dependency [gcc/8.4.0]: binutils/2.34
+Loaded dependency [python3/3.8.2]: gcc/8.4.0
+Loaded module: python3/3.8.2
+Loaded module: cuda/10.2
+Loaded dependency [gcc/8.4.0]: binutils/2.34
+Loaded dependency [python3/3.8.2]: gcc/8.4.0
+Loaded module: python3/3.8.2
+Loaded module: cuda/10.2
+Loaded dependency [gcc/8.4.0]: binutils/2.34
+Loaded dependency [python3/3.8.2]: gcc/8.4.0
+Loaded module: python3/3.8.2
+Traceback (most recent call last):
+  File "CIFAR100_papernet4.py", line 54, in <module>
+    outputs = net(inputs)
+  File "/zhome/d8/b/107547/.local/lib/python3.8/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/zhome/d8/b/107547/Documents/Git/Speciale/TensorizedTrainingMethods/ApplyingCNN/CIFAR100/PackagesAndModels/CIFAR100_models.py", line 153, in forward
+    x = self.bnl_1(x)
+  File "/zhome/d8/b/107547/.local/lib/python3.8/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/zhome/d8/b/107547/.local/lib/python3.8/site-packages/torch/nn/modules/batchnorm.py", line 100, in forward
+    self._check_input_dim(input)
+  File "/zhome/d8/b/107547/.local/lib/python3.8/site-packages/torch/nn/modules/batchnorm.py", line 285, in _check_input_dim
+    raise ValueError('expected 4D input (got {}D input)'
+ValueError: expected 4D input (got 2D input)
+Loaded module: cuda/10.2
+Loaded dependency [gcc/8.4.0]: binutils/2.34
+Loaded dependency [python3/3.8.2]: gcc/8.4.0
+Loaded module: python3/3.8.2
+Loaded module: cuda/10.2
+Loaded dependency [gcc/8.4.0]: binutils/2.34
+Loaded dependency [python3/3.8.2]: gcc/8.4.0
+Loaded module: python3/3.8.2
