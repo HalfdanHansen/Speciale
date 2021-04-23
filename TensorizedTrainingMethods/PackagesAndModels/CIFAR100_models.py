@@ -15,7 +15,7 @@ stride_conv = 1
 # Defining the different types of layers
 
 def normal_convlayer(in_f, out_f, kernelsize = 3, stride = 1, pad = 1, rank = 1):
-    return nn.Conv2d(  in_channels = in_f,
+    return Conv2d(  in_channels = in_f,
                     out_channels = out_f,
                     kernel_size = kernel_size_conv,
                     stride = stride_conv,
@@ -87,9 +87,6 @@ class PaperNet4(nn.Module):
         self.bn9 = BatchNorm2d(num_filters_conv[8],affine=False, track_running_stats=False)
         self.bn10 = BatchNorm2d(num_filters_conv[9],affine=False, track_running_stats=False)
         self.bn11 = BatchNorm2d(num_filters_conv[10],affine=False, track_running_stats=False)
-        self.bnl_1 = BatchNorm1d(num_perceptrons_fc[0],affine=False, track_running_stats=False)
-        self.bnl_2 = BatchNorm1d(num_perceptrons_fc[1],affine=False, track_running_stats=False)
-        self.bnl_3 = BatchNorm1d(num_perceptrons_fc[2],affine=False, track_running_stats=False)
 
         self.l_1 = Linear(in_features = num_perceptrons_fc[0], out_features = num_perceptrons_fc[1], bias = True)
         self.l_2 = Linear(in_features = num_perceptrons_fc[1], out_features = num_perceptrons_fc[2], bias = True)
@@ -104,59 +101,56 @@ class PaperNet4(nn.Module):
     def forward(self, x):                     # x.size() = [batch, channel, height, width]
                     					      # after application becomes:
         x = relu(self.conv_1(x))              #[x,64,32,32]
-        x = self.dropout2(x)
         x = self.bn1(x)
+        x = self.dropout2(x)
 
         x = relu(self.conv_2(x))              #[x,64,32,32]
-        x = self.maxpool(x)                   #[x,64,16,16]
         x = self.bn2(x)
+        x = self.maxpool(x)                   #[x,64,16,16]
         
         x = relu(self.conv_3(x))              #[x,144,16,16]
-        x = self.dropout1(x)
         x = self.bn3(x)
+        x = self.dropout1(x)
 
         x = relu(self.conv_4(x))              #[x,144,16,16]
-        x = self.maxpool(x)                   #[x,144,8,8]
         x = self.bn4(x)
+        x = self.maxpool(x)                   #[x,144,8,8]
 
         x = relu(self.conv_5(x))              #[x,256,8,8]
-        x = self.dropout1(x)
         x = self.bn5(x)
+        x = self.dropout1(x)
 
         x = relu(self.conv_6(x))              #[x,256,8,8]
-        x = self.dropout1(x)
         x = self.bn6(x)
+        x = self.dropout1(x)
 
         x = relu(self.conv_7(x))              #[x,256,8,8]
-        x = self.maxpool(x)                   #[x,256,4,4]
         x = self.bn7(x)
+        x = self.maxpool(x)                   #[x,256,4,4]
 
         x = relu(self.conv_8(x))              #[x,484,4,4]
-        x = self.dropout1(x)
         x = self.bn8(x)
+        x = self.dropout1(x)
 
         x = relu(self.conv_9(x))              #[x,484,4,4]
-        x = self.dropout1(x)
         x = self.bn9(x)
+        x = self.dropout1(x)
 
         x = relu(self.conv_10(x))              #[x,484,4,4]
-        x = self.maxpool(x)                   #[x,484,2,2]
         x = self.bn10(x)
+        x = self.maxpool(x)                   #[x,484,2,2]
 
         x = relu(self.conv_11(x))              #[x,484,2,2]
-        x = self.dropout1(x)
         x = self.bn11(x)
+        x = self.dropout1(x)
 
         x = x.view(-1, num_perceptrons_fc[0]) #[x,484*4,1,1]
         x = relu(self.l_1(x))               #[x,2048,1,1]
         x = self.dropout2(x)
-        x = self.bnl_1(x)
         x = relu(self.l_2(x))               #[x,1024,1,1]
         x = self.dropout2(x)
-        x = self.bnl_2(x)
         x = relu(self.l_3(x))               #[x,512,1,1]
         x = self.dropout2(x)
-        x = self.bnl_3(x)
         return softmax(self.l_4(x), dim=1)    #[x,100,1,1]
 
 paperNet4 = PaperNet4(normal_convlayer, 3, 1, 1, 1)
