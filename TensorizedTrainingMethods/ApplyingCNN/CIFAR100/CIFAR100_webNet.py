@@ -4,7 +4,7 @@ if __name__ == '__main__':
     from copy import deepcopy
     from PackagesAndModels.pack import *
     from PackagesAndModels.method_functions import *
-    from PackagesAndModels.CIFAR100_models import *
+    from webNet import *
     from PackagesAndModels.train_val_test_CIFAR10 import *
 
     transform = transforms.Compose([
@@ -13,7 +13,7 @@ if __name__ == '__main__':
         transforms.Normalize((0.5071, 0.4867, 0.4408), (0.2675, 0.2565, 0.2761)),
         ])
 
-    batchsize = 100
+    batchsize = 10
 
     trainset = torchvision.datasets.CIFAR100(root='./data', train=True,
                                             download=True, transform=transform)
@@ -30,9 +30,9 @@ if __name__ == '__main__':
     alpha = 0.001
     epochs = 5
     
-    convName = ['conv_1','conv_2','conv_3','conv_4','conv_5','conv_6','conv_7','conv_8','conv_9','conv_10','conv_11']
+    #convName = ['conv_1','conv_2','conv_3','conv_4','conv_5','conv_6','conv_7','conv_8','conv_9','conv_10','conv_11']
     
-    net = deepcopy(paperNet4)
+    net = deepcopy(resnet152)
     net.to(device)
     
     criterion = nn.CrossEntropyLoss()
@@ -65,4 +65,4 @@ if __name__ == '__main__':
     save_train = pd.DataFrame(train_acc)
     save_test = pd.DataFrame(test_acc)
     save_loss = pd.DataFrame(losses)
-    pd.concat([save_train,save_test,save_loss],axis = 0).to_csv('2304_CIFAR100_papernet4.csv',index=False,header=False)
+    pd.concat([save_train,save_test,save_loss],axis = 0).to_csv('2304_CIFAR100_webNet.csv',index=False,header=False)
