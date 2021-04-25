@@ -7,19 +7,19 @@ import sys
 
 #import re
 
-#from pathlib import Path
-#os.chdir(str(Path(os.getcwd()).parents[2]))
-#os.chdir(os.getcwd()+'/PackagesAndModels')
-#print(os.getcwd())
-from PackagesAndModels.pack import *
+from pathlib import Path
+os.chdir(str(Path(os.getcwd()).parents[1]))
+os.chdir(os.getcwd()+'\PackagesAndModels')
+print(os.getcwd())
+from pack import *
 
 #import importlib
 #fol = re.sub("/", ".", d)[1:-1]
 #importlib.import_module(fol+".pack")
 
-from PackagesAndModels.method_functions import *
-from PackagesAndModels.MNIST_MODELS import *
-from PackagesAndModels.train_val_test_MNIST import *
+from method_functions import *
+from MNIST_MODELS import *
+from train_val_test_MNIST import *
 
 criterion = nn.CrossEntropyLoss()
 
@@ -197,17 +197,6 @@ test_list.append(BAF3Dtest_acc)
 
 """ATDC Method 3D"""
 
-
-pqt_convs = []
-
-for c in convName:
-  convData = eval("net."+c+".weight.data")
-  de_layer = []
-  for cc in convData:
-    temp = tl.decomposition.parafac(tl.tensor(cc), rank = 1)
-    de_layer.append(temp[1])
-  pqt_convs.append(de_layer)
-
 train_acc, train_loss = [], []
 valid_acc, valid_loss = [], []
 test_acc, test_loss = [], []
@@ -216,6 +205,16 @@ losses = []
 netATDC = deepcopy(convNet4)
 netATDC.apply(weight_reset)
 optimizerATDC = optim.Adam(netATDC.parameters(), lr=0.001)
+
+pqt_convs = []
+
+for c in convName:
+  convData = eval("netATDC."+c+".weight.data")
+  de_layer = []
+  for cc in convData:
+    temp = tl.decomposition.parafac(tl.tensor(cc), rank = 1)
+    de_layer.append(temp[1])
+  pqt_convs.append(de_layer)
 
 alpha = 0.1
 
@@ -244,11 +243,6 @@ test_list.append(ATDC3Dtest_acc)
 
 pqtu_convs = []
 
-for c in convName:
-  convData = eval("net."+c+".weight.data")
-  temp = tl.decomposition.parafac(tl.tensor(convData), rank = 1)
-  pqtu_convs.append(temp)
-
 train_acc, train_loss = [], []
 valid_acc, valid_loss = [], []
 test_acc, test_loss = [], []
@@ -257,6 +251,11 @@ losses = []
 netATDC4D = deepcopy(convNet4)
 netATDC4D.apply(weight_reset)
 optimizerATDC4D = optim.Adam(netATDC4D.parameters(), lr=0.001)
+
+for c in convName:
+  convData = eval("netATDC4D."+c+".weight.data")
+  temp = tl.decomposition.parafac(tl.tensor(convData), rank = 1)
+  pqtu_convs.append(temp)
 
 alpha = 0.1
 for epoch in range(num_epochs):
