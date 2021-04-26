@@ -39,5 +39,5 @@ ax2.set_xlabel('Number of Parameters')
 ax2.set_ylim([0.5,1])
 plt.suptitle('Training Results For Methods', fontsize=14)
 
-plt.savefig('Plot_all_methods_on_mnist_conv4.eps')
+plt.savefig('Plot_all_methods_on_mnist_conv4.png')
 plt.show()
