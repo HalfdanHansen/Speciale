@@ -14,7 +14,7 @@ stride_conv = 1
 
 # Defining the different types of layers
 
-def normal_convlayer(in_f, out_f, kernelsize = 3, stride = 1, pad = 1, rank = 1, regfunc = "m"):
+def normal_convlayer(in_f, out_f, kernelsize = 3, stride = 1, pad = 1, rank = 1, regfunc = None):
     layer = [nn.Conv2d(in_channels = in_f,
                out_channels = out_f,
                kernel_size = kernel_size_conv,
@@ -103,18 +103,18 @@ def conv_Tucker2_block(in_f, out_f, kernelsize = 3, stride = 1, pad = 1, rank = 
 class PaperNet4(nn.Module):
 
     def __init__(self, func, kernelsize, stride, pad, rank):
-        super(PaperNet4, self).__init__()
+        super().__init__()
         
         self.conv_1 = func(channels,num_filters_conv[0], regfunc = "d2")
-        self.conv_2 = func(num_filters_conv[0], num_filters_conv[1], kernelsize=kernelsize, stride=stride, pad=pad, rank=rank)
+        self.conv_2 = func(num_filters_conv[0], num_filters_conv[1], kernelsize=kernelsize, stride=stride, pad=pad, rank=rank, regfunc = "m")
         self.conv_3 = func(num_filters_conv[1], num_filters_conv[2], kernelsize=kernelsize, stride=stride, pad=pad, rank=rank, regfunc = "d1")
-        self.conv_4 = func(num_filters_conv[2], num_filters_conv[3], kernelsize=kernelsize, stride=stride, pad=pad, rank=rank)
+        self.conv_4 = func(num_filters_conv[2], num_filters_conv[3], kernelsize=kernelsize, stride=stride, pad=pad, rank=rank, regfunc = "m")
         self.conv_5 = func(num_filters_conv[3], num_filters_conv[4], kernelsize=kernelsize, stride=stride, pad=pad, rank=rank, regfunc = "d1")
         self.conv_6 = func(num_filters_conv[4], num_filters_conv[5], kernelsize=kernelsize, stride=stride, pad=pad, rank=rank, regfunc = "d1")
-        self.conv_7 = func(num_filters_conv[5], num_filters_conv[6], kernelsize=kernelsize, stride=stride, pad=pad, rank=rank)
+        self.conv_7 = func(num_filters_conv[5], num_filters_conv[6], kernelsize=kernelsize, stride=stride, pad=pad, rank=rank, regfunc = "m")
         self.conv_8 = func(num_filters_conv[6], num_filters_conv[7], kernelsize=kernelsize, stride=stride, pad=pad, rank=rank, regfunc = "d1")
         self.conv_9 = func(num_filters_conv[7], num_filters_conv[8], kernelsize=kernelsize, stride=stride, pad=pad, rank=rank, regfunc = "d1")
-        self.conv_10 = func(num_filters_conv[8], num_filters_conv[9], kernelsize=kernelsize, stride=stride, pad=pad, rank=rank)
+        self.conv_10 = func(num_filters_conv[8], num_filters_conv[9], kernelsize=kernelsize, stride=stride, pad=pad, rank=rank, regfunc = "m")
         self.conv_11 = func(num_filters_conv[9], num_filters_conv[10], kernelsize=kernelsize, stride=stride, pad=pad, rank=rank, regfunc = "d1")
 
         #self.bn1 = BatchNorm2d(num_filters_conv[0], eps = 1e-05, momentum = 0.1, affine = True, track_running_stats = True)
@@ -137,8 +137,7 @@ class PaperNet4(nn.Module):
         self.l_3 = Linear(in_features = num_perceptrons_fc[2], out_features = num_perceptrons_fc[3], bias = True)
         self.l_4 = Linear(in_features = num_perceptrons_fc[3], out_features = num_perceptrons_fc[4], bias = True)
         
-        self.dropout1 = Dropout(0.4)
-        self.dropout2 = Dropout(0.5)
+        self.dropout = Dropout(0.5)
     
     def forward(self, x):                     # x.size() = [batch, channel, height, width]
                     					      # after application becomes:
@@ -158,15 +157,15 @@ class PaperNet4(nn.Module):
         x = self.l_1(x)               #[x,2048,1,1]
         x = self.bnl_1(x)
         x = relu(x) 
-        x = self.dropout2(x)
+        x = self.dropout(x)
         x = self.l_2(x)               #[x,1024,1,1]
         x = self.bnl_2(x)
         x = relu(x)
-        x = self.dropout2(x)
+        x = self.dropout(x)
         x = self.l_3(x)              #[x,512,1,1]
         x = self.bnl_3(x)
         x = relu(x)  
-        x = self.dropout2(x)
+        x = self.dropout(x)
         return softmax(self.l_4(x), dim=1)    #[x,100,1,1]
 
 paperNet4 = PaperNet4(normal_convlayer, 3, 1, 1, 1)

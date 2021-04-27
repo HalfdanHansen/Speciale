@@ -18,14 +18,14 @@ def conv_block(in_channels, out_channels, pool=False):
 
 def conv_3D_block(in_channels, out_channels, pool=False):
     layers = [nn.Sequential(
-            nn.Conv2d(in_channels = in_f, out_channels = out_f, kernel_size=1,
+            nn.Conv2d(in_channels = in_channels, out_channels = out_channels, kernel_size=1,
                       padding=0, bias=False, groups = 1),
-            nn.Conv2d(in_channels = out_f, out_channels = out_f, kernel_size=(3,1),
-                      padding=(1,0), bias=False, groups = out_f),
-            nn.Conv2d(in_channels = out_f, out_channels = out_f, kernel_size=(1,3),
-                      padding=(0,1), bias=False, groups = out_f)
+            nn.Conv2d(in_channels = out_channels, out_channels = out_channels, kernel_size=(3,1),
+                      padding=(1,0), bias=False, groups = out_channels),
+            nn.Conv2d(in_channels = out_channels, out_channels = out_channels, kernel_size=(1,3),
+                      padding=(0,1), bias=False, groups = out_channels)
             ),
-               nn.BatchNorm2d(out_f), 
+               nn.BatchNorm2d(out_channels), 
                nn.ReLU(inplace=True)]
     if pool: layers.append(nn.MaxPool2d(2))
     return nn.Sequential(*layers)

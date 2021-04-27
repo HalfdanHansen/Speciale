@@ -28,10 +28,16 @@ if __name__ == '__main__':
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
     
     alpha = 0.01
-    epochs = 50
+    epochs = 5
     
-    convName = ['conv_1','conv_2','conv_3','conv_4','conv_5','conv_6','conv_7','conv_8','conv_9','conv_10','conv_11']
+    convName_init = ['conv_1','conv_2','conv_3','conv_4','conv_5','conv_6','conv_7','conv_8','conv_9','conv_10','conv_11']
     lName = ['l_1','l_2','l_3']
+    
+    convName = []
+    for c in convName_init:
+        convName.append(c+"[0][0]")
+        convName.append(c+"[0][1]")
+        convName.append(c+"[0][2]")
     
     net = paperNet4
     net.to(device)
@@ -56,4 +62,4 @@ if __name__ == '__main__':
     save_train = pd.DataFrame(train_acc)
     save_test = pd.DataFrame(test_acc)
     save_loss = pd.DataFrame(losses)
-    pd.concat([save_train,save_test,save_loss],axis = 0).to_csv('2004_CIFAR100_papernet43DATDC.csv',index=False,header=False)
+    pd.concat([save_train,save_test,save_loss],axis = 0).to_csv('2704_CIFAR100_papernet43DATDC.csv',index=False,header=False)

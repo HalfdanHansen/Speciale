@@ -1,0 +1,26 @@
+Loaded module: cuda/10.2
+Loaded dependency [gcc/8.4.0]: binutils/2.34
+Loaded dependency [python3/3.8.2]: gcc/8.4.0
+Loaded module: python3/3.8.2
+Traceback (most recent call last):
+  File "CIFAR100_papernet44DATDC.py", line 46, in <module>
+    pqtu_convs = initialize_model_weights_from_PARAFAC_rank(convName, net, "net", 1)
+  File "/zhome/d8/b/107547/Documents/Git/Speciale/TensorizedTrainingMethods/ApplyingCNN/CIFAR100/PackagesAndModels/method_functions.py", line 534, in initialize_model_weights_from_PARAFAC_rank
+    convData = eval(netname+"."+c+".weight.data")
+  File "<string>", line 1, in <module>
+  File "/zhome/d8/b/107547/.local/lib/python3.8/site-packages/torch/nn/modules/module.py", line 947, in __getattr__
+    raise AttributeError("'{}' object has no attribute '{}'".format(
+AttributeError: 'Sequential' object has no attribute 'weight'
+Loaded module: cuda/10.2
+Loaded dependency [gcc/8.4.0]: binutils/2.34
+Loaded dependency [python3/3.8.2]: gcc/8.4.0
+Loaded module: python3/3.8.2
+Traceback (most recent call last):
+  File "CIFAR100_papernet44DATDC.py", line 46, in <module>
+    pqtu_convs = initialize_model_weights_from_PARAFAC_rank(convName, net, "net", 1)
+  File "/zhome/d8/b/107547/Documents/Git/Speciale/TensorizedTrainingMethods/ApplyingCNN/CIFAR100/PackagesAndModels/method_functions.py", line 534, in initialize_model_weights_from_PARAFAC_rank
+    convData = eval(netname+"."+c+".weight.data")
+  File "<string>", line 1, in <module>
+  File "/zhome/d8/b/107547/.local/lib/python3.8/site-packages/torch/nn/modules/module.py", line 947, in __getattr__
+    raise AttributeError("'{}' object has no attribute '{}'".format(
+AttributeError: 'Sequential' object has no attribute 'weight'
