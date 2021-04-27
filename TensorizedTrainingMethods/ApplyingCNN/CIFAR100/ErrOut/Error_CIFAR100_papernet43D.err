@@ -1,0 +1,18 @@
+Loaded module: cuda/10.2
+Loaded dependency [gcc/8.4.0]: binutils/2.34
+Loaded dependency [python3/3.8.2]: gcc/8.4.0
+Loaded module: python3/3.8.2
+Traceback (most recent call last):
+  File "CIFAR100_papernet43D.py", line 7, in <module>
+    from PackagesAndModels.CIFAR100_models import *
+  File "/zhome/d8/b/107547/Documents/Git/Speciale/TensorizedTrainingMethods/ApplyingCNN/CIFAR100/PackagesAndModels/CIFAR100_models.py", line 178, in <module>
+    paperNet4Tucker2 = PaperNet4(conv_Tucker2_block, 3, 1, 1, [1,1])
+  File "/zhome/d8/b/107547/Documents/Git/Speciale/TensorizedTrainingMethods/ApplyingCNN/CIFAR100/PackagesAndModels/CIFAR100_models.py", line 108, in __init__
+    self.conv_1 = func(channels,num_filters_conv[0], regfunc = "d2")
+  File "/zhome/d8/b/107547/Documents/Git/Speciale/TensorizedTrainingMethods/ApplyingCNN/CIFAR100/PackagesAndModels/CIFAR100_models.py", line 81, in conv_Tucker2_block
+    layer = [n.Sequential(
+NameError: name 'n' is not defined
+Loaded module: cuda/10.2
+Loaded dependency [gcc/8.4.0]: binutils/2.34
+Loaded dependency [python3/3.8.2]: gcc/8.4.0
+Loaded module: python3/3.8.2

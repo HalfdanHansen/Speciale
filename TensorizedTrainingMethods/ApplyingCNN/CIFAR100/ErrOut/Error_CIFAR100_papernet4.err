@@ -6,32 +6,18 @@ Loaded module: cuda/10.2
 Loaded dependency [gcc/8.4.0]: binutils/2.34
 Loaded dependency [python3/3.8.2]: gcc/8.4.0
 Loaded module: python3/3.8.2
-Loaded module: cuda/10.2
-Loaded dependency [gcc/8.4.0]: binutils/2.34
-Loaded dependency [python3/3.8.2]: gcc/8.4.0
-Loaded module: python3/3.8.2
 Traceback (most recent call last):
   File "CIFAR100_papernet4.py", line 54, in <module>
-    outputs = net(inputs)
+    loss = criterion(outputs, labels)
   File "/zhome/d8/b/107547/.local/lib/python3.8/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
     result = self.forward(*input, **kwargs)
-  File "/zhome/d8/b/107547/Documents/Git/Speciale/TensorizedTrainingMethods/ApplyingCNN/CIFAR100/PackagesAndModels/CIFAR100_models.py", line 153, in forward
-    x = self.bnl_1(x)
-  File "/zhome/d8/b/107547/.local/lib/python3.8/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
-    result = self.forward(*input, **kwargs)
-  File "/zhome/d8/b/107547/.local/lib/python3.8/site-packages/torch/nn/modules/batchnorm.py", line 100, in forward
-    self._check_input_dim(input)
-  File "/zhome/d8/b/107547/.local/lib/python3.8/site-packages/torch/nn/modules/batchnorm.py", line 285, in _check_input_dim
-    raise ValueError('expected 4D input (got {}D input)'
-ValueError: expected 4D input (got 2D input)
-Loaded module: cuda/10.2
-Loaded dependency [gcc/8.4.0]: binutils/2.34
-Loaded dependency [python3/3.8.2]: gcc/8.4.0
-Loaded module: python3/3.8.2
-Loaded module: cuda/10.2
-Loaded dependency [gcc/8.4.0]: binutils/2.34
-Loaded dependency [python3/3.8.2]: gcc/8.4.0
-Loaded module: python3/3.8.2
+  File "/zhome/d8/b/107547/.local/lib/python3.8/site-packages/torch/nn/modules/loss.py", line 1047, in forward
+    return F.cross_entropy(input, target, weight=self.weight,
+  File "/zhome/d8/b/107547/.local/lib/python3.8/site-packages/torch/nn/functional.py", line 2690, in cross_entropy
+    return nll_loss(log_softmax(input, 1), target, weight, None, ignore_index, None, reduction)
+  File "/zhome/d8/b/107547/.local/lib/python3.8/site-packages/torch/nn/functional.py", line 2381, in nll_loss
+    raise ValueError(
+ValueError: Expected input batch_size (25) to match target batch_size (100).
 Loaded module: cuda/10.2
 Loaded dependency [gcc/8.4.0]: binutils/2.34
 Loaded dependency [python3/3.8.2]: gcc/8.4.0
@@ -41,34 +27,12 @@ Loaded dependency [gcc/8.4.0]: binutils/2.34
 Loaded dependency [python3/3.8.2]: gcc/8.4.0
 Loaded module: python3/3.8.2
 Traceback (most recent call last):
-  File "CIFAR100_papernet4.py", line 53, in <module>
-    outputs = net(inputs)
-  File "/zhome/d8/b/107547/.local/lib/python3.8/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
-    result = self.forward(*input, **kwargs)
-  File "/zhome/d8/b/107547/Documents/Git/Speciale/TensorizedTrainingMethods/ApplyingCNN/CIFAR100/PackagesAndModels/CIFAR100_models.py", line 153, in forward
-    x = self.bnl_1(x)
-  File "/zhome/d8/b/107547/.local/lib/python3.8/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
-    result = self.forward(*input, **kwargs)
-  File "/zhome/d8/b/107547/.local/lib/python3.8/site-packages/torch/nn/modules/batchnorm.py", line 135, in forward
-    return F.batch_norm(
-  File "/zhome/d8/b/107547/.local/lib/python3.8/site-packages/torch/nn/functional.py", line 2146, in batch_norm
-    return torch.batch_norm(
-RuntimeError: running_mean should contain 2048 elements not 1936
+  File "CIFAR100_papernet4.py", line 7, in <module>
+    from PackagesAndModels.CIFAR100_models import *
+  File "/zhome/d8/b/107547/Documents/Git/Speciale/TensorizedTrainingMethods/ApplyingCNN/CIFAR100/PackagesAndModels/CIFAR100_models.py", line 1, in <module>
+    from pack import *
+ModuleNotFoundError: No module named 'pack'
 Loaded module: cuda/10.2
 Loaded dependency [gcc/8.4.0]: binutils/2.34
 Loaded dependency [python3/3.8.2]: gcc/8.4.0
 Loaded module: python3/3.8.2
-Traceback (most recent call last):
-  File "CIFAR100_papernet4.py", line 53, in <module>
-    outputs = net(inputs)
-  File "/zhome/d8/b/107547/.local/lib/python3.8/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
-    result = self.forward(*input, **kwargs)
-  File "/zhome/d8/b/107547/Documents/Git/Speciale/TensorizedTrainingMethods/ApplyingCNN/CIFAR100/PackagesAndModels/CIFAR100_models.py", line 153, in forward
-    x = self.bnl_1(x)
-  File "/zhome/d8/b/107547/.local/lib/python3.8/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
-    result = self.forward(*input, **kwargs)
-  File "/zhome/d8/b/107547/.local/lib/python3.8/site-packages/torch/nn/modules/batchnorm.py", line 135, in forward
-    return F.batch_norm(
-  File "/zhome/d8/b/107547/.local/lib/python3.8/site-packages/torch/nn/functional.py", line 2146, in batch_norm
-    return torch.batch_norm(
-RuntimeError: running_mean should contain 2048 elements not 1936

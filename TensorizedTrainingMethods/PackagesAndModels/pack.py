@@ -18,7 +18,7 @@ from sklearn.decomposition import FactorAnalysis, PCA
 import tensorly as tl
 from tensorly import unfold as tl_unfold
 from tensorly.decomposition import parafac
-from torch.nn import Linear, Conv2d, BatchNorm2d, MaxPool2d, Dropout2d, BatchNorm1d
+from torch.nn import Linear, Conv2d, BatchNorm2d, MaxPool2d, Dropout2d, BatchNorm1d, Dropout
 import pandas as pd
 import time
 from sklearn.metrics import accuracy_score
