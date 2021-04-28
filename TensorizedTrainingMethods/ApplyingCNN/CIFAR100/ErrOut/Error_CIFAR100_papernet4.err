@@ -6,3 +6,43 @@ Loaded module: cuda/10.2
 Loaded dependency [gcc/8.4.0]: binutils/2.34
 Loaded dependency [python3/3.8.2]: gcc/8.4.0
 Loaded module: python3/3.8.2
+Loaded module: cuda/10.2
+Loaded dependency [gcc/8.4.0]: binutils/2.34
+Loaded dependency [python3/3.8.2]: gcc/8.4.0
+Loaded module: python3/3.8.2
+Loaded module: cuda/10.2
+Loaded dependency [gcc/8.4.0]: binutils/2.34
+Loaded dependency [python3/3.8.2]: gcc/8.4.0
+Loaded module: python3/3.8.2
+Traceback (most recent call last):
+  File "CIFAR100_papernet4.py", line 53, in <module>
+    outputs = net(inputs)
+  File "/zhome/d8/b/107547/.local/lib/python3.8/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/zhome/d8/b/107547/Documents/Git/Speciale/TensorizedTrainingMethods/ApplyingCNN/CIFAR100/PackagesAndModels/CIFAR100_models.py", line 146, in forward
+    x = self.l_1(x)               #[x,2048,1,1]
+  File "/zhome/d8/b/107547/.local/lib/python3.8/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/zhome/d8/b/107547/.local/lib/python3.8/site-packages/torch/nn/modules/linear.py", line 94, in forward
+    return F.linear(input, self.weight, self.bias)
+  File "/zhome/d8/b/107547/.local/lib/python3.8/site-packages/torch/nn/functional.py", line 1753, in linear
+    return torch._C._nn.linear(input, weight, bias)
+TypeError: linear(): argument 'input' (position 1) must be Tensor, not Flatten
+Loaded module: cuda/10.2
+Loaded dependency [gcc/8.4.0]: binutils/2.34
+Loaded dependency [python3/3.8.2]: gcc/8.4.0
+Loaded module: python3/3.8.2
+Traceback (most recent call last):
+  File "CIFAR100_papernet4.py", line 53, in <module>
+    outputs = net(inputs)
+  File "/zhome/d8/b/107547/.local/lib/python3.8/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/zhome/d8/b/107547/Documents/Git/Speciale/TensorizedTrainingMethods/ApplyingCNN/CIFAR100/PackagesAndModels/CIFAR100_models.py", line 146, in forward
+    x = self.l_1(x)               #[x,2048,1,1]
+  File "/zhome/d8/b/107547/.local/lib/python3.8/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/zhome/d8/b/107547/.local/lib/python3.8/site-packages/torch/nn/modules/linear.py", line 94, in forward
+    return F.linear(input, self.weight, self.bias)
+  File "/zhome/d8/b/107547/.local/lib/python3.8/site-packages/torch/nn/functional.py", line 1753, in linear
+    return torch._C._nn.linear(input, weight, bias)
+TypeError: linear(): argument 'input' (position 1) must be Tensor, not Flatten

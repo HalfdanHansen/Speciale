@@ -117,17 +117,6 @@ class PaperNet4(nn.Module):
         self.conv_10 = func(num_filters_conv[8], num_filters_conv[9], kernelsize=kernelsize, stride=stride, pad=pad, rank=rank, regfunc = "m")
         self.conv_11 = func(num_filters_conv[9], num_filters_conv[10], kernelsize=kernelsize, stride=stride, pad=pad, rank=rank, regfunc = "d1")
 
-        #self.bn1 = BatchNorm2d(num_filters_conv[0], eps = 1e-05, momentum = 0.1, affine = True, track_running_stats = True)
-        #self.bn2 = BatchNorm2d(num_filters_conv[1], eps = 1e-05, momentum = 0.1, affine = True, track_running_stats = True)
-        #self.bn3 = BatchNorm2d(num_filters_conv[2], eps = 1e-05, momentum = 0.1, affine = True, track_running_stats = True)
-        #self.bn4 = BatchNorm2d(num_filters_conv[3], eps = 1e-05, momentum = 0.1, affine = True, track_running_stats = True)
-        #self.bn5 = BatchNorm2d(num_filters_conv[4], eps = 1e-05, momentum = 0.1, affine = True, track_running_stats = True)
-        #self.bn6 = BatchNorm2d(num_filters_conv[5], eps = 1e-05, momentum = 0.1, affine = True, track_running_stats = True)
-        #self.bn7 = BatchNorm2d(num_filters_conv[6], eps = 1e-05, momentum = 0.1, affine = True, track_running_stats = True)
-        #self.bn8 = BatchNorm2d(num_filters_conv[7], eps = 1e-05, momentum = 0.1, affine = True, track_running_stats = True)
-        #self.bn9 = BatchNorm2d(num_filters_conv[8], eps = 1e-05, momentum = 0.1, affine = True, track_running_stats = True)
-        #self.bn10 = BatchNorm2d(num_filters_conv[9], eps = 1e-05, momentum = 0.1, affine = True, track_running_stats = True)
-        #self.bn11 = BatchNorm2d(num_filters_conv[10], eps = 1e-05, momentum = 0.1, affine = True, track_running_stats = True)
         self.bnl_1 = BatchNorm1d(num_perceptrons_fc[1])
         self.bnl_2 = BatchNorm1d(num_perceptrons_fc[2])
         self.bnl_3 = BatchNorm1d(num_perceptrons_fc[3])
@@ -153,10 +142,10 @@ class PaperNet4(nn.Module):
         x = self.conv_10(x)             #[x,484,4,4]
         x = self.conv_11(x)              #[x,484,2,2]
 
-        x = x.view(-1, num_perceptrons_fc[0]) #[x,484*4,1,1]
+        x = x.view(-1, num_perceptrons_fc[0]) #[x,484*4,1,1] #nn.Flatten()
         x = self.l_1(x)               #[x,2048,1,1]
         x = self.bnl_1(x)
-        x = relu(x) 
+        x = relu(x)
         x = self.dropout(x)
         x = self.l_2(x)               #[x,1024,1,1]
         x = self.bnl_2(x)
@@ -170,8 +159,8 @@ class PaperNet4(nn.Module):
 
 paperNet4 = PaperNet4(normal_convlayer, 3, 1, 1, 1)
 
-paperNet43D = PaperNet4(conv_3D_block, 3, 1, 1, 1)
+#paperNet43D = PaperNet4(conv_3D_block, 3, 1, 1, 1)
 
-paperNet44D = PaperNet4(conv_4D_block, 3, 1, 1, 1)
+#paperNet44D = PaperNet4(conv_4D_block, 3, 1, 1, 1)
 
-paperNet4Tucker2 = PaperNet4(conv_Tucker2_block, 3, 1, 1, [1,1])
+#paperNet4Tucker2 = PaperNet4(conv_Tucker2_block, 3, 1, 1, [1,1])

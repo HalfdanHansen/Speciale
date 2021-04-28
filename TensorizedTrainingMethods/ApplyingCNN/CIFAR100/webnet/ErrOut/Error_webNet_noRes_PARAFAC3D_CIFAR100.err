@@ -1,0 +1,64 @@
+Loaded module: cuda/10.2
+Loaded dependency [gcc/8.4.0]: binutils/2.34
+Loaded dependency [python3/3.8.2]: gcc/8.4.0
+Loaded module: python3/3.8.2
+Traceback (most recent call last):
+  File "webNet_noRes_PARAFAC3D_CIFAR100.py", line 5, in <module>
+    from PackagesAndModels.pack import *
+ModuleNotFoundError: No module named 'PackagesAndModels'
+Loaded module: cuda/10.2
+Loaded dependency [gcc/8.4.0]: binutils/2.34
+Loaded dependency [python3/3.8.2]: gcc/8.4.0
+Loaded module: python3/3.8.2
+Traceback (most recent call last):
+  File "webNet_noRes_PARAFAC3D_CIFAR100.py", line 7, in <module>
+    from webNet_withoutres import *
+  File "/zhome/d8/b/107547/Documents/Git/Speciale/TensorizedTrainingMethods/ApplyingCNN/CIFAR100/webnet/webNet_withoutres.py", line 102, in <module>
+    webNet_noRes4D = WebNet_noRes(conv_4D_block, 3, 100)
+  File "/zhome/d8/b/107547/Documents/Git/Speciale/TensorizedTrainingMethods/ApplyingCNN/CIFAR100/webnet/webNet_withoutres.py", line 68, in __init__
+    self.conv1 = block(in_channels, 64)
+  File "/zhome/d8/b/107547/Documents/Git/Speciale/TensorizedTrainingMethods/ApplyingCNN/CIFAR100/webnet/webNet_withoutres.py", line 36, in conv_4D_block
+    nn.Conv2d(in_channels = in_f, out_channels = rank, kernel_size=(1,1), 
+NameError: name 'in_f' is not defined
+Loaded module: cuda/10.2
+Loaded dependency [gcc/8.4.0]: binutils/2.34
+Loaded dependency [python3/3.8.2]: gcc/8.4.0
+Loaded module: python3/3.8.2
+Traceback (most recent call last):
+  File "webNet_noRes_PARAFAC3D_CIFAR100.py", line 7, in <module>
+    from webNet_withoutres import *
+  File "/zhome/d8/b/107547/Documents/Git/Speciale/TensorizedTrainingMethods/ApplyingCNN/CIFAR100/webnet/webNet_withoutres.py", line 102, in <module>
+    webNet_noRes4D = WebNet_noRes(conv_4D_block, 3, 100)
+  File "/zhome/d8/b/107547/Documents/Git/Speciale/TensorizedTrainingMethods/ApplyingCNN/CIFAR100/webnet/webNet_withoutres.py", line 68, in __init__
+    self.conv1 = block(in_channels, 64)
+  File "/zhome/d8/b/107547/Documents/Git/Speciale/TensorizedTrainingMethods/ApplyingCNN/CIFAR100/webnet/webNet_withoutres.py", line 42, in conv_4D_block
+    nn.Conv2d(in_channels = rank, out_channels = out_f, kernel_size=(1,1),
+NameError: name 'out_f' is not defined
+Loaded module: cuda/10.2
+Loaded dependency [gcc/8.4.0]: binutils/2.34
+Loaded dependency [python3/3.8.2]: gcc/8.4.0
+Loaded module: python3/3.8.2
+Loaded module: cuda/10.2
+Loaded dependency [gcc/8.4.0]: binutils/2.34
+Loaded dependency [python3/3.8.2]: gcc/8.4.0
+Loaded module: python3/3.8.2
+Loaded module: cuda/10.2
+Loaded dependency [gcc/8.4.0]: binutils/2.34
+Loaded dependency [python3/3.8.2]: gcc/8.4.0
+Loaded module: python3/3.8.2
+Traceback (most recent call last):
+  File "webNet_noRes_PARAFAC3D_CIFAR100.py", line 7, in <module>
+    from webNet_withoutres import *
+  File "/zhome/d8/b/107547/Documents/Git/Speciale/TensorizedTrainingMethods/ApplyingCNN/CIFAR100/webnet/webNet_withoutres.py", line 98, in <module>
+    webNet_noRes3D = WebNet_noRes(conv_3D_block, 3, 100)
+  File "/zhome/d8/b/107547/Documents/Git/Speciale/TensorizedTrainingMethods/ApplyingCNN/CIFAR100/webnet/webNet_withoutres.py", line 68, in __init__
+    self.conv3 = block(128, 128, drop=True)
+TypeError: conv_3D_block() got an unexpected keyword argument 'drop'
+Loaded module: cuda/10.2
+Loaded dependency [gcc/8.4.0]: binutils/2.34
+Loaded dependency [python3/3.8.2]: gcc/8.4.0
+Loaded module: python3/3.8.2
+Loaded module: cuda/10.2
+Loaded dependency [gcc/8.4.0]: binutils/2.34
+Loaded dependency [python3/3.8.2]: gcc/8.4.0
+Loaded module: python3/3.8.2
