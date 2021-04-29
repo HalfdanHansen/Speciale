@@ -27,8 +27,8 @@ if __name__ == '__main__':
     
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
     
-    alpha = 0.001
-    epochs = 50
+    alpha = 0.1
+    epochs = 5
     
     convName = ['conv1[0]','conv2[0]','conv3[0]','conv4[0]','conv5[0]','conv6[0]','conv7[0]','conv8[0]','conv9[0]','conv10[0]','conv11[0]']
     lName = ["classifier[2]"]

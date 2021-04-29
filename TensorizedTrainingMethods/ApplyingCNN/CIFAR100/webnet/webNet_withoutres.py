@@ -33,7 +33,7 @@ def conv_3D_block(in_channels, out_channels, pool=False, drop1=False, drop2=Fals
     return nn.Sequential(*layers)
 
 def conv_4D_block(in_channels, out_channels, pool=False, drop1=False, drop2=False):
-    rank =1
+    rank = 10
     layers = [
               nn.Conv2d(in_channels = in_channels, out_channels = rank, kernel_size=(1,1), 
                         padding=0, bias=False),
