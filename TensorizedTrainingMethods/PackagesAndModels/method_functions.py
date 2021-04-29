@@ -551,7 +551,7 @@ def initialize_model_weights_from_PARAFAC_rank(convName, net, netname, rank):
 
   return pqtu_convs
 
-def initialize_model_weights_from_PARAFAC3D_rank(convName, net, netname, rank): # måske ikke god
+def initialize_model_weights_from_PARAFAC3D_rank(convName, net, netname): # måske ikke god
   
   # convName are the names of the layers. In strings
   # netname is the name og the network. In string
@@ -563,18 +563,18 @@ def initialize_model_weights_from_PARAFAC3D_rank(convName, net, netname, rank): 
     convData = eval(netname+"."+c+".weight.data")
     layer = []
     for k2,cc in enumerate(convData):
-      layer.append([  torch.mul(torch.randn(cc.shape[0],rank),0.333).cuda(),
-                      torch.mul(torch.randn(cc.shape[1],rank),0.333).cuda(),
-                      torch.mul(torch.randn(cc.shape[2],rank),0.333).cuda()])
+      layer.append([  torch.mul(torch.randn(cc.shape[0]),0.333).cuda(),
+                      torch.mul(torch.randn(cc.shape[1]),0.333).cuda(),
+                      torch.mul(torch.randn(cc.shape[2]),0.333).cuda()])
     pqt_convs.append(layer)
 
 
   for k1,pqt_conv in enumerate(pqt_convs):
     convData = eval(netname+"."+convName[k1]+".weight.data")
     for k2,pqt_filter in enumerate(pqt_conv):
-      convData[k2] = torch.einsum('sijr->sij',torch.einsum('sr,ir,jr->sijr',pqt_filter[0],pqt_filter[1],pqt_filter[2]))
+      convData[k2] = torch.einsum('s,i,j->sij',pqt_filter[0],pqt_filter[1],pqt_filter[2])
 
-  return pqtu_convs
+  return pqt_convs
 
 def ATDC_get_grads_one_filter_4D_PARAFAC_rank(gr, de, rank):
 

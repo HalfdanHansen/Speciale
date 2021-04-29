@@ -30,7 +30,7 @@ if __name__ == '__main__':
     alpha = 0.001
     epochs = 50
     
-    #convName = ['conv_1','conv_2','conv_3','conv_4','conv_5','conv_6','conv_7','conv_8','conv_9','conv_10','conv_11']
+    convName = ['conv_1','conv_2','conv_3','conv_4','conv_5','conv_6','conv_7','conv_8','conv_9','conv_10','conv_11']
     
     net = deepcopy(webNet_noRes4D)
     net.to(device)

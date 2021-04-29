@@ -10,7 +10,7 @@ from PackagesAndModels.pack import *
 
 def conv_block(in_channels, out_channels, pool=False, drop1=False, drop2=False):
     layers = [nn.Conv2d(in_channels, out_channels, kernel_size=3, padding=1, bias = False), 
-              nn.BatchNorm2d(out_channels), 
+              nn.BatchNorm2d(out_channels, affine=False, track_running_stats=False), 
               nn.ReLU(inplace=True)]
     if pool: layers.append(nn.MaxPool2d(2))
     elif drop1: layers.append(nn.Dropout2d(0.4))
@@ -25,7 +25,7 @@ def conv_3D_block(in_channels, out_channels, pool=False, drop1=False, drop2=Fals
                       padding=(1,0), bias=False, groups = out_channels),
                 nn.Conv2d(in_channels = out_channels, out_channels = out_channels, kernel_size=(1,3),
                       padding=(0,1), bias=False, groups = out_channels),
-               nn.BatchNorm2d(out_channels), 
+               nn.BatchNorm2d(out_channels, affine=False, track_running_stats=False), 
                nn.ReLU(inplace=True)]
     if pool: layers.append(nn.MaxPool2d(2))
     elif drop1: layers.append(nn.Dropout2d(0.4))
@@ -43,7 +43,7 @@ def conv_4D_block(in_channels, out_channels, pool=False, drop1=False, drop2=Fals
                         padding=(0,1), bias=False, groups = rank),
               nn.Conv2d(in_channels = rank, out_channels = out_channels, kernel_size=(1,1),
                         padding=(0,0), bias=False),
-              nn.BatchNorm2d(out_channels),
+              nn.BatchNorm2d(out_channels, affine=False, track_running_stats=False),
               nn.ReLU(inplace=True)]
     if pool: layers.append(nn.MaxPool2d(2))
     elif drop1: layers.append(nn.Dropout2d(0.4))

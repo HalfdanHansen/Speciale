@@ -1,0 +1,14 @@
+Shortcut på thinlinc: 
+
+ln –s /../../PackagesAndModels . 
+
+Agent: 
+
+eval “$(ssh-agent –s)” 
+
+ssh-add ~/Desktop/key 
+
+Run sh file (not super): 
+
+cat FILENAME 
+bash FILENAME 

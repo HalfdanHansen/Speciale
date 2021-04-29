@@ -1,0 +1,104 @@
+Loaded module: cuda/10.2
+Loaded dependency [gcc/8.4.0]: binutils/2.34
+Loaded dependency [python3/3.8.2]: gcc/8.4.0
+Loaded module: python3/3.8.2
+Traceback (most recent call last):
+  File "webNet_noRes_ATCD3D_CIFAR100.py", line 46, in <module>
+    pqtu_convs = initialize_model_weights_from_PARAFAC3D_rank(convName, net, "net", 1)
+  File "/zhome/d8/b/107547/Documents/Git/Speciale/TensorizedTrainingMethods/ApplyingCNN/CIFAR100/webnet/PackagesAndModels/method_functions.py", line 577, in initialize_model_weights_from_PARAFAC3D_rank
+    return pqtu_convs
+NameError: name 'pqtu_convs' is not defined
+Loaded module: cuda/10.2
+Loaded dependency [gcc/8.4.0]: binutils/2.34
+Loaded dependency [python3/3.8.2]: gcc/8.4.0
+Loaded module: python3/3.8.2
+Traceback (most recent call last):
+  File "webNet_noRes_ATCD3D_CIFAR100.py", line 49, in <module>
+    running_loss = train_net_PARAFAC3D_ATDC(losses, net, "net", trainloader, criterion, optimizer, convName, pqtu_convs, alpha, 1, lName)
+  File "/zhome/d8/b/107547/Documents/Git/Speciale/TensorizedTrainingMethods/ApplyingCNN/CIFAR100/webnet/PackagesAndModels/train_val_test_CIFAR10.py", line 131, in train_net_PARAFAC3D_ATDC
+    ATDC_update_step_one_filter_3D_tensor(convGrad, pqt_filter), alpha, pqt_filter)
+TypeError: ATDC_update_step_one_filter_3D_tensor() missing 1 required positional argument: 'data'
+Loaded module: cuda/10.2
+Loaded dependency [gcc/8.4.0]: binutils/2.34
+Loaded dependency [python3/3.8.2]: gcc/8.4.0
+Loaded module: python3/3.8.2
+Traceback (most recent call last):
+  File "webNet_noRes_ATCD3D_CIFAR100.py", line 49, in <module>
+    running_loss = train_net_PARAFAC3D_ATDC(losses, net, "net", trainloader, criterion, optimizer, convName, pqt_convs, alpha, 1, lName)
+  File "/zhome/d8/b/107547/Documents/Git/Speciale/TensorizedTrainingMethods/ApplyingCNN/CIFAR100/webnet/PackagesAndModels/train_val_test_CIFAR10.py", line 131, in train_net_PARAFAC3D_ATDC
+    ATDC_get_grads_one_filter_3D_short_tensor(convGrad, pqt_filter), alpha, pqt_filter)
+  File "/zhome/d8/b/107547/Documents/Git/Speciale/TensorizedTrainingMethods/ApplyingCNN/CIFAR100/webnet/PackagesAndModels/method_functions.py", line 83, in ATDC_get_grads_one_filter_3D_short_tensor
+    dLdt = torch.einsum('i,ij->j',de[1].reshape(len(de[1])),torch.einsum('i,ijk->jk',de[2].reshape(len(de[2])),gr.permute(2,1,0)))
+RuntimeError: number of dims don't match in permute
+Loaded module: cuda/10.2
+Loaded dependency [gcc/8.4.0]: binutils/2.34
+Loaded dependency [python3/3.8.2]: gcc/8.4.0
+Loaded module: python3/3.8.2
+Traceback (most recent call last):
+  File "webNet_noRes_ATCD3D_CIFAR100.py", line 50, in <module>
+    running_loss = train_net_PARAFAC3D_ATDC(losses, net, "net", trainloader, criterion, optimizer, convName, pqt_convs, alpha, 1, lName, bName)
+  File "/zhome/d8/b/107547/Documents/Git/Speciale/TensorizedTrainingMethods/ApplyingCNN/CIFAR100/webnet/PackagesAndModels/train_val_test_CIFAR10.py", line 139, in train_net_PARAFAC3D_ATDC
+    convData[k2] = torch.einsum('s,i,j->sij',pqt_filter[0],pqt_filter[1],pqt_filter[2])
+  File "/zhome/d8/b/107547/.local/lib/python3.8/site-packages/torch/functional.py", line 408, in einsum
+    return _VF.einsum(equation, operands)  # type: ignore
+RuntimeError: einsum() the number of subscripts in the equation (1) does not match the number of dimensions (2) for operand 0 and no ellipsis was given
+Loaded module: cuda/10.2
+Loaded dependency [gcc/8.4.0]: binutils/2.34
+Loaded dependency [python3/3.8.2]: gcc/8.4.0
+Loaded module: python3/3.8.2
+Traceback (most recent call last):
+  File "webNet_noRes_ATCD3D_CIFAR100.py", line 50, in <module>
+    running_loss = train_net_PARAFAC3D_ATDC(losses, net, "net", trainloader, criterion, optimizer, convName, pqt_convs, alpha, 1, lName, bName)
+  File "/zhome/d8/b/107547/Documents/Git/Speciale/TensorizedTrainingMethods/ApplyingCNN/CIFAR100/webnet/PackagesAndModels/train_val_test_CIFAR10.py", line 139, in train_net_PARAFAC3D_ATDC
+    convData[k2] = torch.einsum('s,i,j->sij',pqt_filter[0],pqt_filter[1],pqt_filter[2])
+  File "/zhome/d8/b/107547/.local/lib/python3.8/site-packages/torch/functional.py", line 408, in einsum
+    return _VF.einsum(equation, operands)  # type: ignore
+RuntimeError: einsum() the number of subscripts in the equation (1) does not match the number of dimensions (2) for operand 0 and no ellipsis was given
+Loaded module: cuda/10.2
+Loaded dependency [gcc/8.4.0]: binutils/2.34
+Loaded dependency [python3/3.8.2]: gcc/8.4.0
+Loaded module: python3/3.8.2
+Traceback (most recent call last):
+  File "webNet_noRes_ATCD3D_CIFAR100.py", line 50, in <module>
+    running_loss = train_net_PARAFAC3D_ATDC(losses, net, "net", trainloader, criterion, optimizer, convName, pqt_convs, alpha, 1, lName, bName)
+  File "/zhome/d8/b/107547/Documents/Git/Speciale/TensorizedTrainingMethods/ApplyingCNN/CIFAR100/webnet/PackagesAndModels/train_val_test_CIFAR10.py", line 134, in train_net_PARAFAC3D_ATDC
+    print(ConvGrad)
+NameError: name 'ConvGrad' is not defined
+Loaded module: cuda/10.2
+Loaded dependency [gcc/8.4.0]: binutils/2.34
+Loaded dependency [python3/3.8.2]: gcc/8.4.0
+Loaded module: python3/3.8.2
+Traceback (most recent call last):
+  File "webNet_noRes_ATCD3D_CIFAR100.py", line 50, in <module>
+    running_loss = train_net_PARAFAC3D_ATDC(losses, net, "net", trainloader, criterion, optimizer, convName, pqt_convs, alpha, 1, lName, bName)
+  File "/zhome/d8/b/107547/Documents/Git/Speciale/TensorizedTrainingMethods/ApplyingCNN/CIFAR100/webnet/PackagesAndModels/train_val_test_CIFAR10.py", line 138, in train_net_PARAFAC3D_ATDC
+    ATDC_get_grads_one_filter_3D_short_tensor(convGrad, pqt_filter), alpha, pqt_filter)
+  File "/zhome/d8/b/107547/Documents/Git/Speciale/TensorizedTrainingMethods/ApplyingCNN/CIFAR100/webnet/PackagesAndModels/method_functions.py", line 83, in ATDC_get_grads_one_filter_3D_short_tensor
+    dLdt = torch.einsum('i,ij->j',de[1].reshape(len(de[1])),torch.einsum('i,ijk->jk',de[2].reshape(len(de[2])),gr.permute(2,1,0)))
+RuntimeError: number of dims don't match in permute
+Loaded module: cuda/10.2
+Loaded dependency [gcc/8.4.0]: binutils/2.34
+Loaded dependency [python3/3.8.2]: gcc/8.4.0
+Loaded module: python3/3.8.2
+Traceback (most recent call last):
+  File "webNet_noRes_ATCD3D_CIFAR100.py", line 50, in <module>
+    running_loss = train_net_PARAFAC3D_ATDC(losses, net, "net", trainloader, criterion, optimizer, convName, pqt_convs, alpha, 1, lName, bName)
+  File "/zhome/d8/b/107547/Documents/Git/Speciale/TensorizedTrainingMethods/ApplyingCNN/CIFAR100/webnet/PackagesAndModels/train_val_test_CIFAR10.py", line 135, in train_net_PARAFAC3D_ATDC
+    print(pqt_filter.shape)
+AttributeError: 'list' object has no attribute 'shape'
+Loaded module: cuda/10.2
+Loaded dependency [gcc/8.4.0]: binutils/2.34
+Loaded dependency [python3/3.8.2]: gcc/8.4.0
+Loaded module: python3/3.8.2
+Traceback (most recent call last):
+  File "webNet_noRes_ATCD3D_CIFAR100.py", line 47, in <module>
+    pqt_convs = initialize_model_weights_from_PARAFAC3D_rank(convName, net, "net", 1)
+TypeError: initialize_model_weights_from_PARAFAC3D_rank() takes 3 positional arguments but 4 were given
+Loaded module: cuda/10.2
+Loaded dependency [gcc/8.4.0]: binutils/2.34
+Loaded dependency [python3/3.8.2]: gcc/8.4.0
+Loaded module: python3/3.8.2
+Loaded module: cuda/10.2
+Loaded dependency [gcc/8.4.0]: binutils/2.34
+Loaded dependency [python3/3.8.2]: gcc/8.4.0
+Loaded module: python3/3.8.2
