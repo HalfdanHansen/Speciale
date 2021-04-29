@@ -1,7 +1,9 @@
-if __name__ == '__main__':    
+if __name__ == '__main__':
+
     import os
     import sys
     from copy import deepcopy
+    
     from PackagesAndModels.pack import *
     from PackagesAndModels.method_functions import *
     from webNet_withoutres import *
