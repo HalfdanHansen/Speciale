@@ -40,7 +40,7 @@ if __name__ == '__main__':
     depths = 10
     
     for i in range(depths):
-        net = WebNet_noRes(conv_block, 3, 100, 1+i*3)
+        net = WebNet_noRes(conv_3D_block, 3, 100, 1+i*3)
         net.to(device)
         
         criterion = nn.CrossEntropyLoss()
@@ -76,4 +76,4 @@ if __name__ == '__main__':
     save_train = pd.DataFrame(depthtrain)
     save_test = pd.DataFrame(depthtest)
     save_loss = pd.DataFrame(depthloss)
-    pd.concat([save_train,save_test,save_loss],axis = 0).to_csv('3004_webNet_deeper_littleres.csv',index=False,header=False)
+    pd.concat([save_train,save_test,save_loss],axis = 0).to_csv('3004_webNet_deeper3d_littleres.csv',index=False,header=False)

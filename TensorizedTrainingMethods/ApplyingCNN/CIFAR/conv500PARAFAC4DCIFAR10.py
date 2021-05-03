@@ -32,7 +32,7 @@ if __name__ == '__main__':
     convName = ['conv_1','conv_2','conv_3','conv_4']
     lName = ['l_1']
     
-    net = ConvNet500_4D
+    net = convNet500_4D
     net.cuda()
     
     criterion = nn.CrossEntropyLoss()
