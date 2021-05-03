@@ -6,6 +6,7 @@ if __name__ == '__main__':
     from PackagesAndModels.method_functions import *
     from webNet_withoutres import *
     from PackagesAndModels.train_val_test_CIFAR10 import *
+    import icecream
 
     transform = transforms.Compose([
         transforms.RandomHorizontalFlip(),
@@ -28,7 +29,7 @@ if __name__ == '__main__':
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
     
     alpha = 0.01
-    epochs = 5
+    epochs = 2
     
     convName = ['conv1[0]','conv2[0]','conv3[0]','conv4[0]','conv5[0]','conv6[0]','conv7[0]','conv8[0]','conv9[0]','conv10[0]','conv11[0]']
     lName = ["classifier[2]"]
@@ -42,12 +43,29 @@ if __name__ == '__main__':
     train_acc = []
     test_acc = []
     losses = []
+<<<<<<< HEAD
     
     rank = 10
     pqtu_convs = initialize_model_weights_from_PARAFAC_rank(convName, net, "net", rank)
 
     for epoch in range(epochs):
         running_loss = train_net_PARAFAC4D_ATDC(losses, net, "net", trainloader, criterion, optimizer, convName, pqtu_convs, alpha, rank, lName, bName)
+=======
+
+    #pqtu_convs = initialize_model_weights_from_PARAFAC_rank(convName, net, "net", 10)
+
+    pqtu_convs = []   
+
+    for c in convName:
+        convData = eval("net."+c+".weight.data")
+        ic(conData)
+        ic(tl.tensor(conData))
+        temp = tl.decomposition.parafac(convData, rank = 10)
+        pqtu_convs.append(temp)
+
+    for epoch in range(epochs):
+        running_loss = train_net_PARAFAC4D_ATDC(losses, net, "net", trainloader, criterion, optimizer, convName, pqtu_convs, alpha, 10, lName)
+>>>>>>> 23da4ca8f1479e2159c22c29b19c4904bec3433e
 
         net.eval()
         train_acc.append(evaluate_cifar(trainloader, net).cpu().item())
@@ -57,4 +75,4 @@ if __name__ == '__main__':
     save_train = pd.DataFrame(train_acc)
     save_test = pd.DataFrame(test_acc)
     save_loss = pd.DataFrame(losses)
-    pd.concat([save_train,save_test,save_loss],axis = 0).to_csv('2804_webNet_noRes_ATDC4D_CIFAR100_withDO0405.csv',index=False,header=False)
+    pd.concat([save_train,save_test,save_loss],axis = 0).to_csv('3004_webNet_noRes_ATDC4D_CIFAR100_rank10_uniforminit.csv',index=False,header=False)

@@ -1,0 +1,62 @@
+Loaded module: cuda/10.2
+Loaded dependency [gcc/8.4.0]: binutils/2.34
+Loaded dependency [python3/3.8.2]: gcc/8.4.0
+Loaded module: python3/3.8.2
+Traceback (most recent call last):
+  File "conv500PARAFAC4DCIFAR10.py", line 36, in <module>
+    net.to(device)
+  File "/zhome/d8/b/107547/.local/lib/python3.8/site-packages/torch/nn/modules/module.py", line 673, in to
+    return self._apply(convert)
+AttributeError: 'torch.device' object has no attribute '_apply'
+Loaded module: cuda/10.2
+Loaded dependency [gcc/8.4.0]: binutils/2.34
+Loaded dependency [python3/3.8.2]: gcc/8.4.0
+Loaded module: python3/3.8.2
+Traceback (most recent call last):
+  File "conv500PARAFAC4DCIFAR10.py", line 36, in <module>
+    net.cuda()
+TypeError: cuda() missing 1 required positional argument: 'self'
+Loaded module: cuda/10.2
+Loaded dependency [gcc/8.4.0]: binutils/2.34
+Loaded dependency [python3/3.8.2]: gcc/8.4.0
+Loaded module: python3/3.8.2
+Traceback (most recent call last):
+  File "conv500PARAFAC4DCIFAR10.py", line 36, in <module>
+    net.cuda()
+TypeError: cuda() missing 1 required positional argument: 'self'
+Loaded module: cuda/10.2
+Loaded dependency [gcc/8.4.0]: binutils/2.34
+Loaded dependency [python3/3.8.2]: gcc/8.4.0
+Loaded module: python3/3.8.2
+Traceback (most recent call last):
+  File "conv500PARAFAC4DCIFAR10.py", line 36, in <module>
+    net.cuda()
+TypeError: cuda() missing 1 required positional argument: 'self'
+Loaded module: cuda/10.2
+Loaded dependency [gcc/8.4.0]: binutils/2.34
+Loaded dependency [python3/3.8.2]: gcc/8.4.0
+Loaded module: python3/3.8.2
+Traceback (most recent call last):
+  File "conv500PARAFAC4DCIFAR10.py", line 36, in <module>
+    net.to(device)
+  File "/zhome/d8/b/107547/.local/lib/python3.8/site-packages/torch/nn/modules/module.py", line 673, in to
+    return self._apply(convert)
+AttributeError: 'torch.device' object has no attribute '_apply'
+Loaded module: cuda/10.2
+Loaded dependency [gcc/8.4.0]: binutils/2.34
+Loaded dependency [python3/3.8.2]: gcc/8.4.0
+Loaded module: python3/3.8.2
+Traceback (most recent call last):
+  File "conv500PARAFAC4DCIFAR10.py", line 35, in <module>
+    self.net = ConvNet500_4D
+NameError: name 'self' is not defined
+Loaded module: cuda/10.2
+Loaded dependency [gcc/8.4.0]: binutils/2.34
+Loaded dependency [python3/3.8.2]: gcc/8.4.0
+Loaded module: python3/3.8.2
+Traceback (most recent call last):
+  File "conv500PARAFAC4DCIFAR10.py", line 15, in <module>
+    from PackagesAndModels.CIFAR_MODELS import *
+  File "/zhome/d8/b/107547/Documents/Git/Speciale/TensorizedTrainingMethods/ApplyingCNN/CIFAR/PackagesAndModels/CIFAR_MODELS.py", line 530, in <module>
+    convNet500_4D = self.ConvNet500_4D(1)
+NameError: name 'self' is not defined

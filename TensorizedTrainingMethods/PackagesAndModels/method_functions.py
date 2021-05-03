@@ -532,10 +532,14 @@ def initialize_model_weights_from_PARAFAC_rank(convName, net, netname, rank):
   pqtu_convs = []
   for k1,c in enumerate(convName):
     convData = eval(netname+"."+c+".weight.data")
-    layer =  ([torch.mul(torch.randn(convData.shape[0],rank),0.333).cuda(),
-               torch.mul(torch.randn(convData.shape[1],rank),0.333).cuda(),
-               torch.mul(torch.randn(convData.shape[2],rank),0.333).cuda(),
-               torch.mul(torch.randn(convData.shape[3],rank),0.333).cuda()])
+    layer =  ([torch.rand(convData.shape[0], rank).cuda(),
+               torch.rand(convData.shape[1], rank).cuda(),
+               torch.rand(convData.shape[2], rank).cuda(),
+               torch.rand(convData.shape[3], rank).cuda()])
+    #layer =  ([torch.mul(torch.randn(convData.shape[0],rank),0.333).cuda(),
+    #           torch.mul(torch.randn(convData.shape[1],rank),0.333).cuda(),
+    #           torch.mul(torch.randn(convData.shape[2],rank),0.333).cuda(),
+    #           torch.mul(torch.randn(convData.shape[3],rank),0.333).cuda()])
 
     pqtu_convs.append(layer)
 
@@ -563,9 +567,12 @@ def initialize_model_weights_from_PARAFAC3D_rank(convName, net, netname): # mås
     convData = eval(netname+"."+c+".weight.data")
     layer = []
     for k2,cc in enumerate(convData):
-      layer.append([  torch.mul(torch.randn(cc.shape[0]),0.333).cuda(),
-                      torch.mul(torch.randn(cc.shape[1]),0.333).cuda(),
-                      torch.mul(torch.randn(cc.shape[2]),0.333).cuda()])
+        layer.append([torch.rand(cc.shape[0]).cuda(),
+                      torch.rand(cc.shape[1]).cuda(),
+                      torch.rand(cc.shape[2]).cuda()])
+      #layer.append([  torch.mul(torch.randn(cc.shape[0]),0.333).cuda(),
+      #                torch.mul(torch.randn(cc.shape[1]),0.333).cuda(),
+      #                torch.mul(torch.randn(cc.shape[2]),0.333).cuda()])
     pqt_convs.append(layer)
 
 
