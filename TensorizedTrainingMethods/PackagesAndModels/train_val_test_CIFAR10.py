@@ -1,4 +1,5 @@
 from .method_functions import *
+from icecream import ic
 
 def evaluate_cifar(loader,model):
   device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
@@ -66,13 +67,12 @@ def load_cifar():
   return (trainloader,testloader)
 
 
-def train_net_PARAFAC4D_ATDC(losses, net, netname, trainloader, criterion, optimizer, convName, pqtu_convs, alpha, rank, lName, bName):
+def train_net_PARAFAC4D_ATDC(losses, net, netname, trainloader, criterion, optimizer, convName, pqtu_convs, alpha, rank, lName):
   running_loss = 0
   net.train()
 
   for i, data in enumerate(trainloader, 0):
     inputs, labels = data[0].cuda(), data[1].cuda()
-    
     optimizer.zero_grad()
     outputs = net(inputs)
     loss = criterion(outputs, labels)
@@ -84,14 +84,15 @@ def train_net_PARAFAC4D_ATDC(losses, net, netname, trainloader, criterion, optim
 
       convGrad = eval(netname+"."+convName[k1]+".weight.grad")
       convData = eval(netname+"."+convName[k1]+".weight.data")
-
+      #if k1 == 1:
+      #    ic(pqtu_convs[k1])
       pqtu_convs[k1] = ATDC_update_step_one_filter_4D_PARAFAC_rank(
-                       ATDC_get_grads_one_filter_4D_PARAFAC_rank(convGrad, pqtu, rank), alpha, pqtu)
-      
+                       ATDC_get_grads_one_filter_4D_PARAFAC_rank(convGrad, pqtu, rank), alpha, pqtu)  
+
       #Magi # its seems like you need a if '__name__' == __main__ guard! #einsum -> winsum
       
       convData[:] = torch.einsum('hsijr->hsij',torch.einsum('hr,sr,ir,jr->hsijr',pqtu[0],pqtu[1],pqtu[2],pqtu[3]))
-
+    
     #normal step for linear layer
     for name in lName:
         a = eval('net.'+name+'.weight.data[:]')
@@ -101,26 +102,18 @@ def train_net_PARAFAC4D_ATDC(losses, net, netname, trainloader, criterion, optim
         d = eval('torch.sub(net.'+name+'.bias.data,net.'+name+'.bias.grad,alpha = alpha)')
         c[:] = d
       #eval('net.'+name+'.weight.data[:] = torch.sub(net.'+name+'.weight.data,net.'+name+'.weight.grad, alpha = alpha)')
-      #eval('net.'+name+'.bias.data[:] = torch.sub(net.'+name+'.bias.data,net.'+name+'.bias.grad,alpha = alpha)')
-    #for name in bName:
-    #    a = eval('net.'+name+'.weight.data[:]')
-    #    b = eval('torch.sub(net.'+name+'.weight.data,net.'+name+'.weight.grad, alpha = alpha)')
-    #    a[:] = b
-    #    c = eval('net.'+name+'.bias.data[:]')
-    #    d = eval('torch.sub(net.'+name+'.bias.data,net.'+name+'.bias.grad,alpha = alpha)')
-    #    c[:] = d  
+      #eval('net.'+name+'.bias.data[:] = torch.sub(net.'+name+'.bias.data,net.'+name+'.bias.grad,alpha = alpha)') 
     running_loss += loss.item()
 
   return running_loss
 
 
-def train_net_PARAFAC3D_ATDC(losses, net, netname, trainloader, criterion, optimizer, convName, pqt_convs, alpha, rank, lName, bName):
+def train_net_PARAFAC3D_ATDC(losses, net, netname, trainloader, criterion, optimizer, convName, pqt_convs, alpha, rank, lName):
   running_loss = 0
   net.train()
 
   for i, data in enumerate(trainloader, 0):
     inputs, labels = data[0].cuda(), data[1].cuda()
-    print(i)
     optimizer.zero_grad()
     outputs = net(inputs)
     loss = criterion(outputs, labels)
@@ -149,13 +142,6 @@ def train_net_PARAFAC3D_ATDC(losses, net, netname, trainloader, criterion, optim
         c[:] = d
       #eval('net.'+name+'.weight.data[:] = torch.sub(net.'+name+'.weight.data,net.'+name+'.weight.grad, alpha = alpha)')
       #eval('net.'+name+'.bias.data[:] = torch.sub(net.'+name+'.bias.data,net.'+name+'.bias.grad,alpha = alpha)')
-    #for name in bName:
-    #    a = eval('net.'+name+'.weight.data[:]')
-    #    b = eval('torch.sub(net.'+name+'.weight.data,net.'+name+'.weight.grad, alpha = alpha)')
-    #    a[:] = b
-    #    c = eval('net.'+name+'.bias.data[:]')
-    #    d = eval('torch.sub(net.'+name+'.bias.data,net.'+name+'.bias.grad,alpha = alpha)')
-    #    c[:] = d  
     running_loss += loss.item()
 
   return running_loss

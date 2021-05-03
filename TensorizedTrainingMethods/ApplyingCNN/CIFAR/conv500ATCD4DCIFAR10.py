@@ -1,10 +1,18 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Fri Apr 30 12:50:50 2021
+
+@author: s152576
+"""
+
 if __name__ == '__main__':    
     import os
     import sys
     from copy import deepcopy
     from PackagesAndModels.pack import *
     from PackagesAndModels.method_functions import *
-    from webNet_withoutres import *
+    from PackagesAndModels.CIFAR_MODELS import *
     from PackagesAndModels.train_val_test_CIFAR10 import *
     import icecream
 
@@ -16,26 +24,17 @@ if __name__ == '__main__':
 
     batchsize = 100
 
-    trainset = torchvision.datasets.CIFAR100(root='./data', train=True,
-                                            download=True, transform=transform)
-    trainloader = torch.utils.data.DataLoader(trainset, batch_size=batchsize,
-                                                shuffle=True, num_workers = 2, pin_memory=True)
-
-    testset = torchvision.datasets.CIFAR100(root='./data', train=False,
-                                            download=True, transform=transform)
-    testloader = torch.utils.data.DataLoader(testset, batch_size=batchsize,
-                                            shuffle=False, num_workers =  2, pin_memory=True)
-    
+    trainloader, testloader = load_cifar()
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
     
     alpha = 0.01
-    epochs = 2
+    epochs = 50
     
-    convName = ['conv1[0]','conv2[0]','conv3[0]','conv4[0]','conv5[0]','conv6[0]','conv7[0]','conv8[0]','conv9[0]','conv10[0]','conv11[0]']
-    lName = ["classifier[2]"]
+    convName = ['conv_1','conv_2','conv_3','conv_4']
+    lName = ['l_1']
     
-    net = deepcopy(webNet_noRes)
-    net.to(device)
+    net = convNet500
+    net.cuda()
     
     criterion = nn.CrossEntropyLoss()
     optimizer = optim.Adam(net.parameters(), lr=alpha)
@@ -48,12 +47,7 @@ if __name__ == '__main__':
 
     pqtu_convs = []   
 
-    for c in convName:
-        convData = eval("net."+c+".weight.data")
-        ic(conData)
-        ic(tl.tensor(conData))
-        temp = tl.decomposition.parafac(convData, rank = 10)
-        pqtu_convs.append(temp)
+    pqtu_convs = initialize_model_weights_from_PARAFAC_rank(convName,net,"net",10)
 
     for epoch in range(epochs):
         running_loss = train_net_PARAFAC4D_ATDC(losses, net, "net", trainloader, criterion, optimizer, convName, pqtu_convs, alpha, 10, lName)
@@ -66,4 +60,4 @@ if __name__ == '__main__':
     save_train = pd.DataFrame(train_acc)
     save_test = pd.DataFrame(test_acc)
     save_loss = pd.DataFrame(losses)
-    pd.concat([save_train,save_test,save_loss],axis = 0).to_csv('3004_webNet_noRes_ATDC4D_CIFAR100_rank10_uniforminit.csv',index=False,header=False)
+    pd.concat([save_train,save_test,save_loss],axis = 0).to_csv('3004_conv500_ATDC4D_CIFAR10.csv',index=False,header=False)
