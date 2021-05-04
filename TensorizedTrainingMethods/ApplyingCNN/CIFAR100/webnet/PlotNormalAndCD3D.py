@@ -16,6 +16,7 @@ from matplotlib import cm
 from matplotlib.ticker import LinearLocator
 import numpy as np
 
+%matplotlib inline
 fig, ax = plt.subplots(subplot_kw={"projection": "3d"})
 
 # Make data.
@@ -25,16 +26,16 @@ X, Y = np.meshgrid(X, Y)
 Z = datanormal.iloc[0:10,:]
 
 # Plot the surface.
-surf = ax.plot_surface(X, Y, Z, cmap='Blues',
+surf = ax.plot_surface(X, Y, Z, cmap='Reds',
                        linewidth=1, antialiased=True)
 
 Z = data3d.iloc[0:10,:]
 
 # Plot the surface.
-surf = ax.plot_surface(X, Y, Z, cmap='Reds',
-                       linewidth=1, antialiased=True)
+surf = ax.plot_surface(X, Y, Z, cmap='Blues',
+                       linewidth=1, antialiased=False)
 
-ax.set_zlim(0, 1)
+ax.set_zlim(0, .7)
 ax.zaxis.set_major_locator(LinearLocator(10))
 
 ax.zaxis.set_major_formatter('{x:.1f}')
