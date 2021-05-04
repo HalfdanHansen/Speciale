@@ -158,3 +158,15 @@ Traceback (most recent call last):
   File "webNet_noRes_ATCD4D_CIFAR100.py", line 53, in <module>
     ic(conData)
 NameError: name 'conData' is not defined
+Loaded module: cuda/10.2
+Loaded dependency [gcc/8.4.0]: binutils/2.34
+Loaded dependency [python3/3.8.2]: gcc/8.4.0
+Loaded module: python3/3.8.2
+Traceback (most recent call last):
+  File "webNet_noRes_ATCD4D_CIFAR100.py", line 53, in <module>
+    ic(conData)
+NameError: name 'conData' is not defined
+Loaded module: cuda/10.2
+Loaded dependency [gcc/8.4.0]: binutils/2.34
+Loaded dependency [python3/3.8.2]: gcc/8.4.0
+Loaded module: python3/3.8.2

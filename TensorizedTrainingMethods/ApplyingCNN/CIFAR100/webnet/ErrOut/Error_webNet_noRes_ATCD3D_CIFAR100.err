@@ -2,7 +2,3 @@ Loaded module: cuda/10.2
 Loaded dependency [gcc/8.4.0]: binutils/2.34
 Loaded dependency [python3/3.8.2]: gcc/8.4.0
 Loaded module: python3/3.8.2
-Loaded module: cuda/10.2
-Loaded dependency [gcc/8.4.0]: binutils/2.34
-Loaded dependency [python3/3.8.2]: gcc/8.4.0
-Loaded module: python3/3.8.2

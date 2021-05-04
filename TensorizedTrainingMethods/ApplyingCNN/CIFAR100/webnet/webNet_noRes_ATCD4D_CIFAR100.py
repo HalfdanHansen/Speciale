@@ -28,14 +28,14 @@ if __name__ == '__main__':
     
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
     
-    alpha = 0.01
-    epochs = 2
+    alpha = 0.1
+    epochs = 50
     
     convName = ['conv1[0]','conv2[0]','conv3[0]','conv4[0]','conv5[0]','conv6[0]','conv7[0]','conv8[0]','conv9[0]','conv10[0]','conv11[0]']
     lName = ["classifier[2]"]
     
     net = deepcopy(webNet_noRes)
-    net.to(device)
+    net.cuda()
     
     criterion = nn.CrossEntropyLoss()
     optimizer = optim.Adam(net.parameters(), lr=alpha)
@@ -44,19 +44,10 @@ if __name__ == '__main__':
     test_acc = []
     losses = []
 
-    #pqtu_convs = initialize_model_weights_from_PARAFAC_rank(convName, net, "net", 10)
-
-    pqtu_convs = []   
-
-    for c in convName:
-        convData = eval("net."+c+".weight.data")
-        ic(conData)
-        ic(tl.tensor(conData))
-        temp = tl.decomposition.parafac(convData, rank = 10)
-        pqtu_convs.append(temp)
+    pqtu_convs = initialize_model_weights_from_PARAFAC_rank(convName, net, "net", 1)
 
     for epoch in range(epochs):
-        running_loss = train_net_PARAFAC4D_ATDC(losses, net, "net", trainloader, criterion, optimizer, convName, pqtu_convs, alpha, 10, lName)
+        running_loss = train_net_PARAFAC4D_ATDC(losses, net, "net", trainloader, criterion, optimizer, convName, pqtu_convs, alpha, 1, lName)
 
         net.eval()
         train_acc.append(evaluate_cifar(trainloader, net).cpu().item())
@@ -66,4 +57,4 @@ if __name__ == '__main__':
     save_train = pd.DataFrame(train_acc)
     save_test = pd.DataFrame(test_acc)
     save_loss = pd.DataFrame(losses)
-    pd.concat([save_train,save_test,save_loss],axis = 0).to_csv('3004_webNet_noRes_ATDC4D_CIFAR100_rank10_uniforminit.csv',index=False,header=False)
+    pd.concat([save_train,save_test,save_loss],axis = 0).to_csv('0305_webNet_noRes_ATCD4D_CIFAR100.csv',index=False,header=False)

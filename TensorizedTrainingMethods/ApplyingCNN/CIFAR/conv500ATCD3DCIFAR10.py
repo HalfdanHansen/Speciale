@@ -6,7 +6,7 @@ if __name__ == '__main__':
     
     from PackagesAndModels.pack import *
     from PackagesAndModels.method_functions import *
-    from webNet_withoutres import *
+    from PackagesAndModels.CIFAR_MODELS import *
     from PackagesAndModels.train_val_test_CIFAR10 import *
 
     transform = transforms.Compose([
@@ -17,25 +17,16 @@ if __name__ == '__main__':
 
     batchsize = 100
 
-    trainset = torchvision.datasets.CIFAR100(root='./data', train=True,
-                                            download=True, transform=transform)
-    trainloader = torch.utils.data.DataLoader(trainset, batch_size=batchsize,
-                                                shuffle=True, num_workers = 2, pin_memory=True)
-
-    testset = torchvision.datasets.CIFAR100(root='./data', train=False,
-                                            download=True, transform=transform)
-    testloader = torch.utils.data.DataLoader(testset, batch_size=batchsize,
-                                            shuffle=False, num_workers =  2, pin_memory=True)
-    
+    trainloader, testloader = load_cifar()
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
     
     alpha = 0.1
-    epochs = 50
+    epochs = 5
     
-    convName = ['conv1[0]','conv2[0]','conv3[0]','conv4[0]','conv5[0]','conv6[0]','conv7[0]','conv8[0]','conv9[0]','conv10[0]','conv11[0]']
-    lName = ["classifier[2]"]
+    convName = ['conv_1','conv_2','conv_3','conv_4']
+    lName = ['l_1']
     
-    net = deepcopy(webNet_noRes)
+    net = convNet500
     net.cuda()
     
     criterion = nn.CrossEntropyLoss()
@@ -58,4 +49,4 @@ if __name__ == '__main__':
     save_train = pd.DataFrame(train_acc)
     save_test = pd.DataFrame(test_acc)
     save_loss = pd.DataFrame(losses)
-    pd.concat([save_train,save_test,save_loss],axis = 0).to_csv('0305_webNet_noRes_ATCD3D_CIFAR100.csv',index=False,header=False)
+    pd.concat([save_train,save_test,save_loss],axis = 0).to_csv('0305_conv500ATCD3DCIFAR10.csv',index=False,header=False)
