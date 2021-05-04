@@ -43,11 +43,13 @@ if __name__ == '__main__':
     train_acc = []
     test_acc = []
     losses = []
-
-    pqtu_convs = initialize_model_weights_from_PARAFAC_rank(convName, net, "net", 1)
+    
+    rank = 1
+    pqtu_convs = initialize_model_weights_from_PARAFAC_rank(convName, net, "net", rank)
 
     for epoch in range(epochs):
         running_loss = train_net_PARAFAC4D_ATDC(losses, net, "net", trainloader, criterion, optimizer, convName, pqtu_convs, alpha, 1, lName)
+
 
         net.eval()
         train_acc.append(evaluate_cifar(trainloader, net).cpu().item())
