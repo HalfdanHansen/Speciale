@@ -1,15 +1,7 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Mon May  3 09:25:53 2021
-
-@author: s154179
-"""
-
 import pandas as pd
 
-datanormal = pd.read_csv('/zhome/ab/6/109248/Desktop/Speciale/Speciale/TensorizedTrainingMethods/ApplyingCNN/CIFAR100/webnet/3004_webNet_deeper.csv', index_col = False, header = None)
-data3d = pd.read_csv('/zhome/ab/6/109248/Desktop/Speciale/Speciale/TensorizedTrainingMethods/ApplyingCNN/CIFAR100/webnet/3004_webNet_deeper3d.csv', index_col = False, header = None)
+datanormal = pd.read_csv('3004_webNet_deeper.csv', index_col = False, header = None)
+data3d = pd.read_csv('3004_webNet_deeper3d.csv', index_col = False, header = None)
 
 import matplotlib.pyplot as plt
 from matplotlib import cm
@@ -38,6 +30,5 @@ ax.set_zlim(0, 1)
 ax.zaxis.set_major_locator(LinearLocator(10))
 
 ax.zaxis.set_major_formatter('{x:.1f}')
-
 
 plt.show()
