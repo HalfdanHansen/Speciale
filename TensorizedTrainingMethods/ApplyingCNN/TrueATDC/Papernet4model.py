@@ -42,10 +42,10 @@ class conv_3D_block(nn.Module):
         x = self.relu(x)
         x = self.after(x)
         return x
-'''
+
 class conv_3D_block_shared_weights(nn.Module):
     def __init__(self, in_channels, out_channels, regul):
-        super(conv_3D_block, self).__init__()
+        super(conv_3D_block_shared_weights, self).__init__()
         
         self.conv1 = nn.Conv2d(in_channels = in_channels, out_channels = out_channels, kernel_size=1,
                           padding=0, bias=False, groups = 1)
@@ -57,8 +57,10 @@ class conv_3D_block_shared_weights(nn.Module):
         del self.conv2.weight
         del self.conv3.weight
         
-        self.p = nn.Parameter(torch.randn(int(np.sqrt(out_channels)),3))
-        self.q = nn.Parameter(torch.randn(int(np.sqrt(out_channels)),3))
+        self.root = int(np.sqrt(out_channels))
+        
+        self.p = nn.Parameter(torch.randn(self.root,3))
+        self.q = nn.Parameter(torch.randn(self.root,3))
         
         self.batch = nn.BatchNorm2d(out_channels, affine=False, track_running_stats=False),
         self.relu = nn.ReLU(inplace=True)
@@ -70,13 +72,17 @@ class conv_3D_block_shared_weights(nn.Module):
     def forward(self, x):
         x = self.conv1(x)
         
-        numlist = torch.linspace(1,int(np.sqrt(out_channels),int(np.sqrt(out_channels)))
-        onelist = torch.ones(int(np.sqrt(out_channels)))
+        numlist = torch.linspace(1,self.root,self.root)
+        onelist = torch.ones(self.root)
         onenums = torch.einsum('i,j -> ij', numlist, onelist)
-        index1 = onenums.flatten()
-        index2 = torch.transpose(onenums,0,1).flatten()
+        index1 = onenums.flatten().int()
+        index2 = torch.transpose(onenums,0,1).flatten().int()
         
-        self.conv2.weight = 
+        for i in range(self.root):
+            for j in range(self.root):
+                self.conv2.weight[i,j] = p[i,:]
+                self.conv3.weight[i,j] = q[j,:]
+        
         
         x = self.conv2(x)
         x = self.conv3(x)
@@ -84,7 +90,7 @@ class conv_3D_block_shared_weights(nn.Module):
         x = self.relu(x)
         x = self.after(x)
         return x
-'''
+
 class Papernet4True(nn.Module):
     def __init__(self, block):
             super(Papernet4True, self).__init__()
@@ -137,3 +143,4 @@ class Papernet4True(nn.Module):
 
 papernet4True = Papernet4True(conv_block)
 papernet4True3D = Papernet4True(conv_3D_block)
+papernet4True3DSharedWeights = Papernet4True(conv_3D_block_shared_weights)
