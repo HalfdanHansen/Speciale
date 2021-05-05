@@ -1,0 +1,10 @@
+Loaded module: cuda/10.2
+Loaded dependency [gcc/8.4.0]: binutils/2.34
+Loaded dependency [python3/3.8.2]: gcc/8.4.0
+Loaded module: python3/3.8.2
+/zhome/ab/6/109248/.lsbatch/1620129824.9614322.shell: line 31: 10753 Killed                  python3 all_methods_on_mnist_conv4.py
+Loaded module: cuda/10.2
+Loaded dependency [gcc/8.4.0]: binutils/2.34
+Loaded dependency [python3/3.8.2]: gcc/8.4.0
+Loaded module: python3/3.8.2
+/zhome/ab/6/109248/.lsbatch/1620132283.9614478.shell: line 31: 14653 Killed                  python3 all_methods_on_mnist_conv4.py
