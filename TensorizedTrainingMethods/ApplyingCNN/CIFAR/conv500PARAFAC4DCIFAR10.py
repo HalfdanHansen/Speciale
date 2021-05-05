@@ -65,4 +65,4 @@ if __name__ == '__main__':
     save_train = pd.DataFrame(train_acc)
     save_test = pd.DataFrame(test_acc)
     save_loss = pd.DataFrame(losses)
-    pd.concat([save_train,save_test,save_loss],axis = 0).to_csv('3004_conv500_PARAFAC4D_CIFAR10.csv',index=False,header=False)
+    pd.concat([save_train,save_test,save_loss],axis = 0).to_csv('0305_conv500PARAFAC4DCIFAR10_rank8.csv',index=False,header=False)

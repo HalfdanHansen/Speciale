@@ -27,7 +27,7 @@ if __name__ == '__main__':
     trainloader, testloader = load_cifar()
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
     
-    alpha = 0.01
+    alpha = 0.1
     epochs = 50
     
     convName = ['conv_1','conv_2','conv_3','conv_4']
@@ -47,10 +47,10 @@ if __name__ == '__main__':
 
     pqtu_convs = []   
 
-    pqtu_convs = initialize_model_weights_from_PARAFAC_rank(convName,net,"net",10)
+    pqtu_convs = initialize_model_weights_from_PARAFAC_rank(convName,net,"net",8)
 
     for epoch in range(epochs):
-        running_loss = train_net_PARAFAC4D_ATDC(losses, net, "net", trainloader, criterion, optimizer, convName, pqtu_convs, alpha, 10, lName)
+        running_loss = train_net_PARAFAC4D_ATDC(losses, net, "net", trainloader, criterion, optimizer, convName, pqtu_convs, alpha, 8, lName)
 
         net.eval()
         train_acc.append(evaluate_cifar(trainloader, net).cpu().item())
@@ -60,4 +60,4 @@ if __name__ == '__main__':
     save_train = pd.DataFrame(train_acc)
     save_test = pd.DataFrame(test_acc)
     save_loss = pd.DataFrame(losses)
-    pd.concat([save_train,save_test,save_loss],axis = 0).to_csv('3004_conv500_ATDC4D_CIFAR10.csv',index=False,header=False)
+    pd.concat([save_train,save_test,save_loss],axis = 0).to_csv('0305_conv500ATCD4DCIFAR10_rank8.csv',index=False,header=False)

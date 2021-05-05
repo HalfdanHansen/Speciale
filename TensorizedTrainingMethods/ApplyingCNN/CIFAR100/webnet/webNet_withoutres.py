@@ -55,8 +55,7 @@ def conv_4D_block(in_channels, out_channels, pool=False, drop1=False, drop2=Fals
     elif drop2: layers.append(nn.Dropout2d(0.5))
     return nn.Sequential(*layers)
 
-def conv_Tucker2_block(in_channels, out_channels, pool=False, drop1=False, drop2=False):
-    rank = [1,1]
+def conv_Tucker2_block(in_channels, out_channels, rank = [1,1], pool=False, drop1=False, drop2=False):
     layers = [
             nn.Conv2d(in_channels = in_channels, out_channels = rank[0], kernel_size=(1,1),
                       padding=0, bias=False),

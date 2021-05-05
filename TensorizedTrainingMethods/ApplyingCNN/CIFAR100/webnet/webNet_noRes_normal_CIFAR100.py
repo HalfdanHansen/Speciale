@@ -34,7 +34,7 @@ if __name__ == '__main__':
     #convName = ['conv_1','conv_2','conv_3','conv_4','conv_5','conv_6','conv_7','conv_8','conv_9','conv_10','conv_11']
     
     net = deepcopy(webNet_noRes)
-    net.to(device)
+    net.cuda()
     
     criterion = nn.CrossEntropyLoss()
     optimizer = optim.Adam(net.parameters(), lr=alpha)
@@ -66,4 +66,4 @@ if __name__ == '__main__':
     save_train = pd.DataFrame(train_acc)
     save_test = pd.DataFrame(test_acc)
     save_loss = pd.DataFrame(losses)
-    pd.concat([save_train,save_test,save_loss],axis = 0).to_csv('2804_webNet_noRes_normal_CIFAR100_withDO0405.csv',index=False,header=False)
+    pd.concat([save_train,save_test,save_loss],axis = 0).to_csv('0305_webNet_noRes_normal_CIFAR100.csv',index=False,header=False)

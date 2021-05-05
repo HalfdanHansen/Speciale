@@ -29,18 +29,14 @@ if __name__ == '__main__':
     
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
     
-<<<<<<< HEAD
     alpha = 0.1
-=======
-    alpha = 0.01
->>>>>>> 23da4ca8f1479e2159c22c29b19c4904bec3433e
-    epochs = 5
+    epochs = 50
     
     convName = ['conv1[0]','conv2[0]','conv3[0]','conv4[0]','conv5[0]','conv6[0]','conv7[0]','conv8[0]','conv9[0]','conv10[0]','conv11[0]']
     lName = ["classifier[2]"]
     
     net = deepcopy(webNet_noRes)
-    net.to(device)
+    net.cuda()
     
     criterion = nn.CrossEntropyLoss()
     optimizer = optim.Adam(net.parameters(), lr=alpha)
@@ -62,4 +58,4 @@ if __name__ == '__main__':
     save_train = pd.DataFrame(train_acc)
     save_test = pd.DataFrame(test_acc)
     save_loss = pd.DataFrame(losses)
-    pd.concat([save_train,save_test,save_loss],axis = 0).to_csv('2904_webNet_noRes_ATDC3D_CIFAR100_uniforminit.csv',index=False,header=False)
+    pd.concat([save_train,save_test,save_loss],axis = 0).to_csv('0305_webNet_noRes_ATCD3D_CIFAR100.csv',index=False,header=False)
