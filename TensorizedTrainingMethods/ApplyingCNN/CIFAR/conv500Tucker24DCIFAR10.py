@@ -1,10 +1,18 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Fri Apr 30 16:04:30 2021
+
+@author: s152576
+"""
+
 if __name__ == '__main__':    
     import os
     import sys
     from copy import deepcopy
     from PackagesAndModels.pack import *
     from PackagesAndModels.method_functions import *
-    from webNet_withoutres import *
+    from PackagesAndModels.CIFAR_MODELS import *
     from PackagesAndModels.train_val_test_CIFAR10 import *
 
     transform = transforms.Compose([
@@ -15,24 +23,16 @@ if __name__ == '__main__':
 
     batchsize = 100
 
-    trainset = torchvision.datasets.CIFAR100(root='./data', train=True,
-                                            download=True, transform=transform)
-    trainloader = torch.utils.data.DataLoader(trainset, batch_size=batchsize,
-                                                shuffle=True, num_workers = 2, pin_memory=True) #numworker =2 and not pin_memory
-
-    testset = torchvision.datasets.CIFAR100(root='./data', train=False,
-                                            download=True, transform=transform)
-    testloader = torch.utils.data.DataLoader(testset, batch_size=batchsize,
-                                            shuffle=False, num_workers =  2, pin_memory=True) #numworker =2 and not pin_memory
-    
+    trainloader, testloader = load_cifar()
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
     
     alpha = 0.001
     epochs = 50
     
-    #convName = ['conv_1','conv_2','conv_3','conv_4','conv_5','conv_6','conv_7','conv_8','conv_9','conv_10','conv_11']
+    convName = ['conv_1','conv_2','conv_3','conv_4']
+    lName = ['l_1']
     
-    net = deepcopy(webNet_noRes3D)
+    net = convNet500_Tucker288
     net.cuda()
     
     criterion = nn.CrossEntropyLoss()
@@ -65,4 +65,4 @@ if __name__ == '__main__':
     save_train = pd.DataFrame(train_acc)
     save_test = pd.DataFrame(test_acc)
     save_loss = pd.DataFrame(losses)
-    pd.concat([save_train,save_test,save_loss],axis = 0).to_csv('0305_webNet_noRes_PARAFAC3D_CIFAR100.csv',index=False,header=False)
+    pd.concat([save_train,save_test,save_loss],axis = 0).to_csv('0305_conv500Tucker2884DCIFAR10.csv',index=False,header=False)

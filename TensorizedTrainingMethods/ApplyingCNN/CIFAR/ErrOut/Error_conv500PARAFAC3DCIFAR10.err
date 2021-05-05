@@ -2,6 +2,10 @@ Loaded module: cuda/10.2
 Loaded dependency [gcc/8.4.0]: binutils/2.34
 Loaded dependency [python3/3.8.2]: gcc/8.4.0
 Loaded module: python3/3.8.2
+Traceback (most recent call last):
+  File "conv500PARAFAC3DCIFAR10.py", line 27, in <module>
+    net = convNet500_3D
+NameError: name 'convNet500_3D' is not defined
 Loaded module: cuda/10.2
 Loaded dependency [gcc/8.4.0]: binutils/2.34
 Loaded dependency [python3/3.8.2]: gcc/8.4.0

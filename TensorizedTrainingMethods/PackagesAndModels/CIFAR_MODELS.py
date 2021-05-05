@@ -529,6 +529,8 @@ class ConvNet500_4D(nn.Module):
 
 convNet500_4D = ConvNet500_4D(1)
 
+convNet500_4D_rank8 = ConvNet500_4D(8)
+
 ## CONV500TUCKER2 ##
 
 def conv_Tucker2_block(in_f, out_f, kernelsize, stride, pad = 1, rank1 = 1, rank2 = 1):
@@ -582,3 +584,4 @@ class ConvNet500_Tucker2(nn.Module):
         return softmax(self.l_1(x), dim=1)         #[x,10,1,1]
 
 convNet500_Tucker211 = ConvNet500_Tucker2(1,1)
+convNet500_Tucker288 = ConvNet500_Tucker2(8,8)
