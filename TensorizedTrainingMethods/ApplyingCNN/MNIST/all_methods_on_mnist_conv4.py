@@ -4,23 +4,27 @@ from copy import deepcopy
 import os 
 print(os.getcwd())
 import sys 
+import time 
 
 #import re
 
-from pathlib import Path
 os.chdir(str(Path(os.getcwd()).parents[1]))
 os.chdir(os.getcwd()+'\PackagesAndModels')
 print(os.getcwd())
 from pack import *
 import time
+#os.chdir(str(Path(os.getcwd()).parents[1]))
+#os.chdir(os.getcwd()+'\PackagesAndModels')
+#print(os.getcwd())
+from PackagesAndModels.pack import *
 
 #import importlib
 #fol = re.sub("/", ".", d)[1:-1]
 #importlib.import_module(fol+".pack")
 
-from method_functions import *
-from MNIST_MODELS import *
-from train_val_test_MNIST import *
+from PackagesAndModels.method_functions import *
+from PackagesAndModels.MNIST_MODELS import *
+from PackagesAndModels.train_val_test_MNIST import *
 
 criterion = nn.CrossEntropyLoss()
 
@@ -73,7 +77,7 @@ train_list.append(train_acc)
 valid_list.append(normalvalid_acc)
 test_list.append(normaltest_acc)
 
-print("Normal:" + str(tmean))
+print("Normal time:" + str(end - start))
 
 """Direct 4D Decompose Method"""
 
@@ -114,7 +118,7 @@ train_list.append(train_acc)
 valid_list.append(D4DDvalid_acc)
 test_list.append(D4DDtest_acc)
 
-print("4D:" + str(tmean))
+print("4D time:" + str(end - start))
 
 """Direct 3D Decompose Method"""
 
@@ -140,13 +144,9 @@ for epoch in range(num_epochs):
     train_acc.append(train_acc_cur)
     valid_acc.append(valid_acc_cur)
     
-t = []
-for i in range(1000):
-    start = time.time()
-    preds, test_acc_full = evaluate_test(x_test, targets_test, net3D)
-    end = time.time()
-    t.append(end-start)
-tmean = np.mean(t)
+start = time.time()
+preds, test_acc_full = evaluate_test(x_test, targets_test, net3D)
+end = time.time()
 D3DDvalid_acc = valid_acc
 D3DDtest_acc = (accuracy_score(list(targets_test), list(preds.data.numpy())))
 #print("\nTest set Acc:  %f" % D3DDtest_acc)
@@ -155,7 +155,7 @@ train_list.append(train_acc)
 valid_list.append(D3DDvalid_acc)
 test_list.append(D3DDtest_acc)
 
-print("3D:" + str(tmean))
+print("3D time:" + str(end - start))
 
 """BAF method 4D"""
 
@@ -194,7 +194,7 @@ train_list.append(train_acc)
 valid_list.append(BAF4Dvalid_acc)
 test_list.append(BAF4Dtest_acc)
 
-print("BAF4D:" + str(tmean))
+print("BAF4D time:" + str(end - start))
 
 """BAF method 3D """
 
@@ -233,7 +233,7 @@ train_list.append(train_acc)
 valid_list.append(BAF3Dvalid_acc)
 test_list.append(BAF3Dtest_acc)
 
-print("BAF3D:" + str(tmean))
+print("BAF3D time:" + str(end - start))
 
 """ATDC Method 3D"""
 
@@ -283,7 +283,7 @@ train_list.append(train_acc)
 valid_list.append(ATDC3Dvalid_acc)
 test_list.append(ATDC3Dtest_acc)
 
-print("ATCD3D:" + str(tmean))
+print("ATDC3D time:" + str(end - start))
 
 """ATDC method 4D"""
 
@@ -330,10 +330,10 @@ train_list.append(train_acc)
 valid_list.append(ATDC4Dvalid_acc)
 test_list.append(ATDC4Dtest_acc)
 
-print("ATCD4D:" + str(tmean))
+print("ATDC4D time:" + str(end - start))
 
 save_train = pd.DataFrame(train_list)
 save_valid = pd.DataFrame(valid_list)
 save_test = pd.DataFrame(test_list)
 
-#pd.concat([save_train,save_valid,save_test], axis = 0).to_csv('MNIST_conv4_7methods.csv',index=False,header=False)
+pd.concat([save_train,save_valid,save_test], axis = 0).to_csv('0405_MNIST_conv4_7methods.csv',index=False,header=False)

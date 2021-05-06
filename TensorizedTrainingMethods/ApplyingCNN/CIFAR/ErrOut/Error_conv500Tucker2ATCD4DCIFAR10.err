@@ -2,42 +2,35 @@ Loaded module: cuda/10.2
 Loaded dependency [gcc/8.4.0]: binutils/2.34
 Loaded dependency [python3/3.8.2]: gcc/8.4.0
 Loaded module: python3/3.8.2
-Traceback (most recent call last):
-  File "conv500Tucker2ATCD4DCIFAR10.py", line 48, in <module>
-    utc_convs = initialize_model_weights_from_Tucker2(convName, net, "net", 1, 1, [3,3,3,3])
-  File "/zhome/d8/b/107547/Documents/Git/Speciale/TensorizedTrainingMethods/ApplyingCNN/CIFAR/PackagesAndModels/method_functions.py", line 451, in initialize_model_weights_from_Tucker2
-    convData[:] = torch.einsum('hq,sw,wqij->hsij',utc[0],utc[1],utc[2])
-RuntimeError: The expanded size of the tensor (4) must match the existing size (3) at non-singleton dimension 3.  Target sizes: [64, 128, 4, 4].  Tensor sizes: [64, 128, 3, 3]
 Loaded module: cuda/10.2
 Loaded dependency [gcc/8.4.0]: binutils/2.34
 Loaded dependency [python3/3.8.2]: gcc/8.4.0
 Loaded module: python3/3.8.2
 Traceback (most recent call last):
-  File "conv500Tucker2ATCD4DCIFAR10.py", line 52, in <module>
-    running_loss = train_net_Tucker2_ATDC(losses, net, "net", trainloader, criterion, optimizer, convName, utc_convs, alpha, 1, 1, lName)
-  File "/zhome/d8/b/107547/Documents/Git/Speciale/TensorizedTrainingMethods/ApplyingCNN/CIFAR/PackagesAndModels/train_val_test_CIFAR10.py", line 42, in train_net_Tucker2_ATDC
-    eval('net.'+name+'.weight.data[:] = torch.sub(net.'+name+'.weight.data,net.'+name+'.weight.grad, alpha = alpha)')
-  File "<string>", line 1
-    net.l_1.weight.data[:] = torch.sub(net.l_1.weight.data,net.l_1.weight.grad, alpha = alpha)
-                           ^
-SyntaxError: invalid syntax
+  File "conv500Tucker2ATCD4DCIFAR10.py", line 13, in <module>
+    from PackagesAndModels.pack import *
+  File "/zhome/d8/b/107547/Documents/Git/Speciale/TensorizedTrainingMethods/ApplyingCNN/CIFAR/PackagesAndModels/pack.py", line 3, in <module>
+    import torch
+  File "/zhome/d8/b/107547/.local/lib/python3.8/site-packages/torch/__init__.py", line 608, in <module>
+    import torch.nn.quantized
+  File "/zhome/d8/b/107547/.local/lib/python3.8/site-packages/torch/nn/quantized/__init__.py", line 1, in <module>
+    from .modules import *
+  File "/zhome/d8/b/107547/.local/lib/python3.8/site-packages/torch/nn/quantized/modules/__init__.py", line 4, in <module>
+    from .activation import ReLU6, Hardswish, ELU, LeakyReLU, Sigmoid
+  File "/zhome/d8/b/107547/.local/lib/python3.8/site-packages/torch/nn/quantized/modules/activation.py", line 2, in <module>
+    import torch.nn.quantized.functional
+  File "/zhome/d8/b/107547/.local/lib/python3.8/site-packages/torch/nn/quantized/functional.py", line 9, in <module>
+    from torch.jit.annotations import BroadcastingList2
+  File "/zhome/d8/b/107547/.local/lib/python3.8/site-packages/torch/jit/__init__.py", line 29, in <module>
+    from torch.jit._trace import (
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 975, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 671, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 779, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 874, in get_code
+  File "<frozen importlib._bootstrap_external>", line 973, in get_data
+KeyboardInterrupt
 Loaded module: cuda/10.2
 Loaded dependency [gcc/8.4.0]: binutils/2.34
 Loaded dependency [python3/3.8.2]: gcc/8.4.0
 Loaded module: python3/3.8.2
-Traceback (most recent call last):
-  File "conv500Tucker2ATCD4DCIFAR10.py", line 48, in <module>
-    utc_convs = initialize_model_weights_from_Tucker2(convName, net, "net", 1, 1, [3,3,4,4])
-  File "/zhome/d8/b/107547/Documents/Git/Speciale/TensorizedTrainingMethods/ApplyingCNN/CIFAR/PackagesAndModels/method_functions.py", line 451, in initialize_model_weights_from_Tucker2
-    convData[:] = torch.einsum('hq,sw,wqij->hsij',utc[0],utc[1],utc[2])
-RuntimeError: The expanded size of the tensor (3) must match the existing size (4) at non-singleton dimension 3.  Target sizes: [128, 64, 3, 3].  Tensor sizes: [128, 64, 4, 4]
-Loaded module: cuda/10.2
-Loaded dependency [gcc/8.4.0]: binutils/2.34
-Loaded dependency [python3/3.8.2]: gcc/8.4.0
-Loaded module: python3/3.8.2
-Traceback (most recent call last):
-  File "conv500Tucker2ATCD4DCIFAR10.py", line 48, in <module>
-    utc_convs = initialize_model_weights_from_Tucker2(convName, net, "net", 1, 1, [3,4,3,4])
-  File "/zhome/d8/b/107547/Documents/Git/Speciale/TensorizedTrainingMethods/ApplyingCNN/CIFAR/PackagesAndModels/method_functions.py", line 451, in initialize_model_weights_from_Tucker2
-    convData[:] = torch.einsum('hq,sw,wqij->hsij',utc[0],utc[1],utc[2])
-RuntimeError: The expanded size of the tensor (3) must match the existing size (4) at non-singleton dimension 3.  Target sizes: [64, 32, 3, 3].  Tensor sizes: [64, 32, 4, 4]

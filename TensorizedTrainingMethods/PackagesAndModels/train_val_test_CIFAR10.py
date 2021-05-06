@@ -39,8 +39,14 @@ def train_net_Tucker2_ATDC(losses, net, netname,trainloader, criterion, optimize
 
     #normal step for linear layer
     for name in lName:
-      eval('net.'+name+'.weight.data[:] = torch.sub(net.'+name+'.weight.data,net.'+name+'.weight.grad, alpha = alpha)')
-      eval('net.'+name+'.bias.data[:] = torch.sub(net.'+name+'.bias.data,net.'+name+'.bias.grad,alpha = alpha)')
+        a = eval('net.'+name+'.weight.data[:]')
+        b = eval('torch.sub(net.'+name+'.weight.data,net.'+name+'.weight.grad, alpha = alpha)')
+        a[:] = b
+        c = eval('net.'+name+'.bias.data[:]')
+        d = eval('torch.sub(net.'+name+'.bias.data,net.'+name+'.bias.grad,alpha = alpha)')
+        c[:] = d
+      #eval('net.'+name+'.weight.data[:] = torch.sub(net.'+name+'.weight.data,net.'+name+'.weight.grad, alpha = alpha)')
+      #eval('net.'+name+'.bias.data[:] = torch.sub(net.'+name+'.bias.data,net.'+name+'.bias.grad,alpha = alpha)')
       
     running_loss += loss.item()
 
