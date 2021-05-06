@@ -46,6 +46,7 @@ if __name__ == '__main__':
         test_acc.append(evaluate_cifar(testloader, net).cpu().item())
         losses.append(running_loss)
 
+    
     save_train = pd.DataFrame(train_acc)
     save_test = pd.DataFrame(test_acc)
     save_loss = pd.DataFrame(losses)
