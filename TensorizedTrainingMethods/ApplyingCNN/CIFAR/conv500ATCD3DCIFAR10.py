@@ -55,6 +55,7 @@ if __name__ == '__main__':
         t.append(end-start)
     tmean = np.mean(t)
 
+    
     save_train = pd.DataFrame(train_acc)
     save_test = pd.DataFrame(test_acc)
     save_loss = pd.DataFrame(losses)

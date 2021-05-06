@@ -8,7 +8,11 @@ import time
 
 #import re
 
-from pathlib import Path
+os.chdir(str(Path(os.getcwd()).parents[1]))
+os.chdir(os.getcwd()+'\PackagesAndModels')
+print(os.getcwd())
+from pack import *
+import time
 #os.chdir(str(Path(os.getcwd()).parents[1]))
 #os.chdir(os.getcwd()+'\PackagesAndModels')
 #print(os.getcwd())
@@ -57,10 +61,14 @@ for epoch in range(num_epochs):
     valid_acc_cur = accuracy_score(val_targs, val_preds)
     train_acc.append(train_acc_cur)
     valid_acc.append(valid_acc_cur)
-    
-start = time.time()
-preds, test_acc_full = evaluate_test(x_test, targets_test, netNormal)
-end = time.time()
+
+t = []
+for i in range(1000):
+    start = time.time()
+    preds, test_acc_full = evaluate_test(x_test, targets_test, netNormal)
+    end = time.time()
+    t.append(end-start)
+tmean = np.mean(t)
 normalvalid_acc = valid_acc
 normaltest_acc = accuracy_score(list(targets_test), list(preds.data.numpy()))
 #print("\nTest set Acc:  %f" % normaltest_acc)
@@ -94,9 +102,14 @@ for epoch in range(num_epochs):
     train_acc.append(train_acc_cur)
     valid_acc.append(valid_acc_cur)
     
-start = time.time()
-preds, test_acc_full = evaluate_test(x_test, targets_test, netD4DD)
-end = time.time()
+
+t = []
+for i in range(1000):
+    start = time.time()
+    preds, test_acc_full = evaluate_test(x_test, targets_test, netD4DD)
+    end = time.time()
+    t.append(end-start)
+tmean = np.mean(t)
 D4DDvalid_acc = valid_acc
 D4DDtest_acc = (accuracy_score(list(targets_test), list(preds.data.numpy())))
 #print("\nTest set Acc:  %f" % D4DDtest_acc)
@@ -166,9 +179,13 @@ for epoch in range(num_epochs):
     valid_acc.append(valid_acc_cur)
 
 #Evaluate test
-start = time.time()
-preds, test_acc_full = evaluate_test(x_test, targets_test, netBAF4D)
-end = time.time()
+t = []
+for i in range(1000):
+    start = time.time()
+    preds, test_acc_full = evaluate_test(x_test, targets_test, netBAF4D)
+    end = time.time()
+    t.append(end-start)
+tmean = np.mean(t)
 BAF4Dvalid_acc = valid_acc
 BAF4Dtest_acc = (accuracy_score(list(targets_test), list(preds.data.numpy())))
 #print("\nTest set Acc:  %f" % BAF4Dtest_acc)
@@ -201,9 +218,13 @@ for epoch in range(num_epochs):
     valid_acc.append(valid_acc_cur)
 
 #Evaluate test
-start = time.time()
-preds, test_acc_full = evaluate_test(x_test, targets_test, netBAF3D)
-end = time.time()
+t = []
+for i in range(1000):
+    start = time.time()
+    preds, test_acc_full = evaluate_test(x_test, targets_test, netBAF3D)
+    end = time.time()
+    t.append(end-start)
+tmean = np.mean(t)
 BAF3Dvalid_acc = valid_acc
 BAF3Dtest_acc = (accuracy_score(list(targets_test), list(preds.data.numpy())))
 #print("\nTest set Acc:  %f" % BAF3Dtest_acc)
@@ -247,9 +268,13 @@ for epoch in range(num_epochs):
     valid_acc.append(valid_acc_cur)
 
 ### Evaluate test set
-start = time.time()
-preds, test_acc_full = evaluate_test(x_test, targets_test, netATDC)
-end = time.time()
+t = []
+for i in range(1000):
+    start = time.time()
+    preds, test_acc_full = evaluate_test(x_test, targets_test, netATDC)
+    end = time.time()
+    t.append(end-start)
+tmean = np.mean(t)
 ATDC3Dvalid_acc = valid_acc
 ATDC3Dtest_acc = (accuracy_score(list(targets_test), list(preds.data.numpy())))
 #print("\nTest set Acc:  %f" % ATDC3Dtest_acc)
@@ -290,9 +315,13 @@ for epoch in range(num_epochs):
     valid_acc.append(valid_acc_cur)
 
 ### Evaluate test set
-start = time.time()
-preds, test_acc_full = evaluate_test(x_test, targets_test, netATDC4D)
-end = time.time()
+t = []
+for i in range(1000):
+    start = time.time()
+    preds, test_acc_full = evaluate_test(x_test, targets_test, netATDC4D)
+    end = time.time()
+    t.append(end-start)
+tmean = np.mean(t)
 ATDC4Dvalid_acc = valid_acc
 ATDC4Dtest_acc = (accuracy_score(list(targets_test), list(preds.data.numpy())))
 #print("\nTest set Acc:  %f" % ATDC4Dtest_acc)
