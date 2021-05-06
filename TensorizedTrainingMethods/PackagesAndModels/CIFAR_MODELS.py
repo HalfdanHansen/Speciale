@@ -528,7 +528,6 @@ class ConvNet500_4D(nn.Module):
         return softmax(self.l_1(x), dim=1)    #[x,10,1,1]
 
 convNet500_4D = ConvNet500_4D(1)
-
 convNet500_4D_rank8 = ConvNet500_4D(8)
 
 ## CONV500TUCKER2 ##
