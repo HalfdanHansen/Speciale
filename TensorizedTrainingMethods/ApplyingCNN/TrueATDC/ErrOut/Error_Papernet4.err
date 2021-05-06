@@ -2,3 +2,31 @@ Loaded module: cuda/10.2
 Loaded dependency [gcc/8.4.0]: binutils/2.34
 Loaded dependency [python3/3.8.2]: gcc/8.4.0
 Loaded module: python3/3.8.2
+Loaded module: cuda/10.2
+Loaded dependency [gcc/8.4.0]: binutils/2.34
+Loaded dependency [python3/3.8.2]: gcc/8.4.0
+Loaded module: python3/3.8.2
+Traceback (most recent call last):
+  File "Papernet4.py", line 54, in <module>
+    outputs = net(inputs)
+  File "/zhome/ab/6/109248/.local/lib/python3.8/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/zhome/ab/6/109248/Desktop/Speciale/Speciale/TensorizedTrainingMethods/ApplyingCNN/TrueATDC/Papernet4model.py", line 135, in forward
+    out = self.conv1(xb)
+  File "/zhome/ab/6/109248/.local/lib/python3.8/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/zhome/ab/6/109248/.local/lib/python3.8/site-packages/torch/nn/modules/container.py", line 119, in forward
+    input = module(input)
+  File "/zhome/ab/6/109248/.local/lib/python3.8/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/zhome/ab/6/109248/Desktop/Speciale/Speciale/TensorizedTrainingMethods/ApplyingCNN/TrueATDC/Papernet4model.py", line 91, in forward
+    x = torch.nn.functional.conv2d(x, a, bias = None, padding = (1,0), groups = self.OUT)
+RuntimeError: Expected object of device type cuda but got device type cpu for argument #2 'weight' in call to _thnn_conv_depthwise2d_forward
+Loaded module: cuda/10.2
+Loaded dependency [gcc/8.4.0]: binutils/2.34
+Loaded dependency [python3/3.8.2]: gcc/8.4.0
+Loaded module: python3/3.8.2
+Loaded module: cuda/10.2
+Loaded dependency [gcc/8.4.0]: binutils/2.34
+Loaded dependency [python3/3.8.2]: gcc/8.4.0
+Loaded module: python3/3.8.2
