@@ -45,11 +45,11 @@ if __name__ == '__main__':
 
     #pqtu_convs = initialize_model_weights_from_PARAFAC_rank(convName, net, "net", 10)
     
-    utc_convs = initialize_model_weights_from_Tucker2(convName, net, "net", 8, 8, [3,3,3,4])
+    utc_convs = initialize_model_weights_from_Tucker2(convName, net, "net", 1, 1, [3,3,3,4])
 
     for epoch in range(epochs):
         #losses, net, netname,trainloader, criterion, optimizer, convName, utc_convs, alpha, rank1, rank2, lName
-        running_loss = train_net_Tucker2_ATDC(losses, net, "net", trainloader, criterion, optimizer, convName, utc_convs, alpha, 8, 8, lName)
+        running_loss = train_net_Tucker2_ATDC(losses, net, "net", trainloader, criterion, optimizer, convName, utc_convs, alpha, 1, 1, lName)
 
         net.eval()
         train_acc.append(evaluate_cifar(trainloader, net).cpu().item())
@@ -59,7 +59,7 @@ if __name__ == '__main__':
     t = []
     for i in range(1000):
         start = time.time()
-        test_acc.append(evaluate_cifar(testloader, net).cpu().item())
+        evaluate_cifar(testloader, net).cpu().item()
         end = time.time()
         t.append(end-start)
     tmean = np.mean(t)
@@ -68,4 +68,4 @@ if __name__ == '__main__':
     save_test = pd.DataFrame(test_acc)
     save_loss = pd.DataFrame(losses)
     print("Time rank 8:" + str(tmean))
-    pd.concat([save_train,save_test,save_loss],axis = 0).to_csv('0605_conv500Tucker2ATCD4DCIFAR10_rank88.csv',index=False,header=False)
+    pd.concat([save_train,save_test,save_loss],axis = 0).to_csv('0605_conv500Tucker2ATCD4DCIFAR10_rank11.csv',index=False,header=False)

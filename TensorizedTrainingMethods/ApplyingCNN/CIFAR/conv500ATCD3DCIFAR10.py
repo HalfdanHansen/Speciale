@@ -50,7 +50,7 @@ if __name__ == '__main__':
     t = []
     for i in range(1000):
         start = time.time()
-        test_acc.append(evaluate_cifar(testloader, net).cpu().item())
+        evaluate_cifar(testloader, net).cpu().item()
         end = time.time()
         t.append(end-start)
     tmean = np.mean(t)
@@ -58,5 +58,5 @@ if __name__ == '__main__':
     save_train = pd.DataFrame(train_acc)
     save_test = pd.DataFrame(test_acc)
     save_loss = pd.DataFrame(losses)
-    print("Time rank 8:" + str(tmean))
-    pd.concat([save_train,save_test,save_loss],axis = 0).to_csv('0505_conv500ATCD3DCIFAR10_rank8.csv',index=False,header=False)
+    print("Time:" + str(tmean))
+    pd.concat([save_train,save_test,save_loss],axis = 0).to_csv('0605_conv500ATCD3DCIFAR10.csv',index=False,header=False)

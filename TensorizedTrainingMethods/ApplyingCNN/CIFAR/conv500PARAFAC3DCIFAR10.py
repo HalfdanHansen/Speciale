@@ -57,7 +57,7 @@ if __name__ == '__main__':
     t = []
     for i in range(1000):
         start = time.time()
-        test_acc.append(evaluate_cifar(testloader, net).cpu().item())
+        evaluate_cifar(testloader, net).cpu().item()
         end = time.time()
         t.append(end-start)
     tmean = np.mean(t)
