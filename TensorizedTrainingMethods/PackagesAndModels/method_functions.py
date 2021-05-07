@@ -1,4 +1,5 @@
-from pack import *
+#from pack import *
+from .pack import *
 
 ## ATDC FUNCTIONS ##
 
