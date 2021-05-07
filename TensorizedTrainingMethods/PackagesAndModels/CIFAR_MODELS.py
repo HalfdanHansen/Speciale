@@ -88,23 +88,30 @@ class PaperNet(nn.Module):
     
     def forward(self, x):                     # x.size() = [batch, channel, height, width]
                     					      # after application becomes:
-        x = relu(self.conv_1(x))              #[x,64,32,32]
+        x = self.conv_1(x)              #[x,64,32,32]
         x = self.bn1(x)
-        x = relu(self.conv_2(x))              #[x,64,32,32]
+        x = relu(x)
+        x = self.conv_2(x)              #[x,64,32,32]
+        x = relu(x)
         x = self.maxpool(x)                   #[x,64,16,16]
         x = self.dropout(x)
-        x = relu(self.conv_3(x))              #[x,144,16,16]
+        x = self.conv_3(x)              #[x,144,16,16]
         x = self.bn2(x)
-        x = relu(self.conv_4(x))              #[x,144,16,16]
+        x = relu(x)
+        x = self.conv_4(x)            #[x,144,16,16]
+        x = relu(x)
         x = self.maxpool(x)                   #[x,144,8,8]
         x = self.dropout(x)
-        x = relu(self.conv_5(x))              #[x,144,8,8]
+        x = self.conv_5(x)             #[x,144,8,8]
         x = self.bn3(x)
-        x = relu(self.conv_6(x))              #[x,256,8,8]
+        x = relu(x)
+        x = self.conv_6(x)              #[x,256,8,8]
+        x = relu(x)
         x = self.maxpool(x)                   #[x,256,4,4]
         x = self.dropout(x)
-        x = relu(self.conv_7(x))              #[x,256,1,1]
+        x = self.conv_7(x)             #[x,256,1,1]
         x = self.bn4(x)
+        x = relu(x)
         x = x.view(-1, 100*4*4)
         return softmax(self.l_1(x), dim=1)    #[x,10,1,1]
 
@@ -179,17 +186,21 @@ class ConvNet4(nn.Module):
     
     def forward(self, x): # x.size() = [batch, channel, height, width]
 					      # after application becomes:
-        x = relu(self.conv_1(x))              #[x,16,32,32]
+        x = self.conv_1(x)              #[x,16,32,32]
         x = self.bn1(x)
+        x = relu(x)
         x = self.maxpool(x)                   #[x,16,16,16]
-        x = relu(self.conv_2(x))              #[x,32,16,16]
+        x = self.conv_2(x)             #[x,32,16,16]
         x = self.bn2(x)
+        x = relu(x)
         x = self.maxpool(x)                   #[x,32,8,8]
-        x = relu(self.conv_3(x))              #[x,64,8,8]
+        x = self.conv_3(x)              #[x,64,8,8]
         x = self.bn3(x)
+        x = relu(x)
         x = self.maxpool(x)		              #[x,64,4,4]
-        x = relu(self.conv_4(x))              #[x,64,1,1]
+        x = self.conv_4(x)              #[x,64,1,1]
         x = self.bn4(x)
+        x = relu(x)
         x = x.view(-1, num_filters_conv[2])
         #x = relu(self.l_1(x))
         return softmax(self.l_1(x), dim=1)    #[x,10,1,1]
@@ -310,17 +321,21 @@ class ConvNet500(nn.Module):
     
     def forward(self, x): # x.size() = [batch, channel, height, width]
 					      # after application becomes:
-        x = relu(self.conv_1(x))              #[x,32,32,32]
+        x = self.conv_1(x)              #[x,32,32,32]
         x = self.bn1(x)
+        x = relu(x)
         x = self.maxpool(x)                   #[x,32,16,16]
-        x = relu(self.conv_2(x))              #[x,64,16,16]
+        x = self.conv_2(x)              #[x,64,16,16]
         x = self.bn2(x)
+        x = relu(x)
         x = self.maxpool(x)                   #[x,64,8,8]
-        x = relu(self.conv_3(x))              #[x,128,8,8]
+        x = self.conv_3(x)              #[x,128,8,8]
         x = self.bn3(x)
+        x = relu(x)
         x = self.maxpool(x)		              #[x,128,4,4]
-        x = relu(self.conv_4(x))              #[x,64,1,1]
+        x = self.conv_4(x)              #[x,64,1,1]
         x = self.bn4(x)
+        x = relu(x)
         x = x.view(-1, depth[3])
         #x = relu(self.l_1(x))
         return softmax(self.l_1(x), dim=1)    #[x,10,1,1]
@@ -382,17 +397,21 @@ class ConvNet500_3D(nn.Module):
                                 stride = 2)
     
     def forward(self, x): # x.size() = [batch, channel, height, width]
-        x = relu(self.conv_1_3D_block(x))     #[x,32,32,32]
+        x = self.conv_1_3D_block(x)     #[x,32,32,32]
         x = self.bn1(x)
+        x = relu(x)
         x = self.maxpool(x)                   #[x,32,16,16]
-        x = relu(self.conv_2_3D_block(x))     #[x,64,16,16]
+        x = self.conv_2_3D_block(x)     #[x,64,16,16]
         x = self.bn2(x)
+        x = relu(x)
         x = self.maxpool(x)                   #[x,64,8,8]
-        x = relu(self.conv_3_3D_block(x))     #[x,128,8,8]
+        x = self.conv_3_3D_block(x)     #[x,128,8,8]
         x = self.bn3(x)
+        x = relu(x)
         x = self.maxpool(x)                   #[x,128,4,4]
-        x = relu(self.conv_4(x))              #[x,64,1,1]
+        x = self.conv_4(x)              #[x,64,1,1]
         x = self.bn4(x)
+        x = relu(x)
         x = x.view(-1, depth[3])   #[x,64,1,1] -> [x,10,1,1]
         return softmax(self.l_1(x), dim=1)    #[x,10,1,1]
 
@@ -513,22 +532,25 @@ class ConvNet500_4D(nn.Module):
                                 stride = 2)
     
     def forward(self, x): # x.size() = [batch, channel, height, width]
-        x = relu(self.conv_1_4D_block(x))     #[x,32,32,32]
+        x = self.conv_1_4D_block(x)     #[x,32,32,32]
         x = self.bn1(x)
+        x = relu(x)
         x = self.maxpool(x)                   #[x,32,16,16]
-        x = relu(self.conv_2_4D_block(x))     #[x,64,16,16]
+        x = self.conv_2_4D_block(x)     #[x,64,16,16]
         x = self.bn2(x)
+        x = relu(x)
         x = self.maxpool(x)                   #[x,64,8,8]
-        x = relu(self.conv_3_4D_block(x))     #[x,128,8,8]
+        x = self.conv_3_4D_block(x)     #[x,128,8,8]
         x = self.bn3(x)
+        x = relu(x)
         x = self.maxpool(x)                   #[x,128,4,4]
-        x = relu(self.conv_4_4D_block(x))     #[x,64,1,1]
+        x = self.conv_4_4D_block(x)     #[x,64,1,1]
         x = self.bn4(x)
+        x = relu(x)
         x = x.view(-1, depth[3])              #[x,64,1,1] -> [x,10,1,1]
         return softmax(self.l_1(x), dim=1)    #[x,10,1,1]
 
 convNet500_4D = ConvNet500_4D(1)
-
 convNet500_4D_rank8 = ConvNet500_4D(8)
 
 ## CONV500TUCKER2 ##
@@ -569,17 +591,21 @@ class ConvNet500_Tucker2(nn.Module):
                                 stride = 2)
     
     def forward(self, x): # x.size() = [batch, channel, height, width]
-        x = relu(self.conv_1_Tucker2_block(x))     #[x,32,32,32]
+        x = self.conv_1_Tucker2_block(x)     #[x,32,32,32]
         x = self.bn1(x)
+        x = relu(x)
         x = self.maxpool(x)                        #[x,32,16,16]
-        x = relu(self.conv_2_Tucker2_block(x))     #[x,64,16,16]
+        x = self.conv_2_Tucker2_block(x)    #[x,64,16,16]
         x = self.bn2(x)
+        x = relu(x)
         x = self.maxpool(x)                        #[x,64,8,8]
-        x = relu(self.conv_3_Tucker2_block(x))     #[x,128,8,8]
+        x = self.conv_3_Tucker2_block(x)     #[x,128,8,8]
         x = self.bn3(x)
+        x = relu(x)
         x = self.maxpool(x)                        #[x,128,4,4]
-        x = relu(self.conv_4_Tucker2_block(x))     #[x,64,1,1]
+        x = self.conv_4_Tucker2_block(x)     #[x,64,1,1]
         x = self.bn4(x)
+        x = relu(x)
         x = x.view(-1, depth[3])                   #[x,64,1,1] -> [x,10,1,1]
         return softmax(self.l_1(x), dim=1)         #[x,10,1,1]
 

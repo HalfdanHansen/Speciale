@@ -1,5 +1,5 @@
-from .pack import *
-from .train_val_test_MNIST import *
+from pack import *
+from train_val_test_MNIST import *
 
 #Conv 2 network
 
@@ -67,10 +67,12 @@ class ConvNet2(nn.Module):
                             bias=False)
     
     def forward(self, x): # x.size() = [batch, channel, height, width]
-        x = relu(self.conv_1(x))
+        x = self.conv_1(x)
         x = self.bn1(x)
-        x = relu(self.conv_2(x))
+        x = relu(x)
+        x = self.conv_2(x)
         x = self.bn2(x)
+        x = relu(x)
         x = x.view(-1, self.l1_in_features)
         x = relu(self.l_1(x))
         return softmax(self.l_out(x), dim=1)
@@ -141,16 +143,20 @@ class ConvNet500(nn.Module):
                                 stride = 2)
     
     def forward(self, x): # x.size() = [batch, channel, height, width]
-        x = relu(self.conv_1(x))              #[x,32,28,28]
+        x = self.conv_1(x)              #[x,32,28,28]
         x = self.bn1(x)
+        x = relu(x)
         x = self.maxpool(x)                   #[x,32,14,14]
-        x = relu(self.conv_2(x))              #[x,64,14,14]
+        x = self.conv_2(x)              #[x,64,14,14]
         x = self.bn2(x)
+        x = relu(x)
         x = self.maxpool(x)                   #[x,64,7,7]
-        x = relu(self.conv_3(x))              #[x,128,7,7]
+        x = self.conv_3(x)              #[x,128,7,7]
         x = self.bn3(x)
-        x = relu(self.conv_4(x))              #[x,64,1,1]
+        x = relu(x)
+        x = self.conv_4(x)              #[x,64,1,1]
         x = self.bn4(x)
+        x = relu(x)
         x = x.view(-1, depth[3])   #[x,64,1,1] -> [x,10,1,1]
         return softmax(self.l_1(x), dim=1)    #[x,10,1,1]
 
@@ -216,16 +222,20 @@ class ConvNet5003D(nn.Module):
                                 stride = 2)
     
     def forward(self, x): # x.size() = [batch, channel, height, width]
-        x = relu(self.conv_1_3D_block(x))     #[x,32,32,32]
+        x = self.conv_1_3D_block(x)     #[x,32,32,32]
         x = self.bn1(x)
+        x = relu(x)
         x = self.maxpool(x)                   #[x,32,16,16]
-        x = relu(self.conv_2_3D_block(x))     #[x,64,16,16]
+        x = self.conv_2_3D_block(x)     #[x,64,16,16]
         x = self.bn2(x)
+        x = relu(x)
         x = self.maxpool(x)                   #[x,64,8,8]
-        x = relu(self.conv_3_3D_block(x))     #[x,128,8,8]
+        x = self.conv_3_3D_block(x)     #[x,128,8,8]
         x = self.bn3(x)
-        x = relu(self.conv_4(x))              #[x,64,4,4]
+        x = relu(x)
+        x = self.conv_4(x)              #[x,64,4,4]
         x = self.bn4(x)
+        x = relu(x)
         x = x.view(-1, depth[3])   #[x,64,1,1] -> [x,10,1,1]
         return softmax(self.l_1(x), dim=1)    #[x,10,1,1]
 
@@ -295,16 +305,20 @@ class ConvNet4(nn.Module):
                                 stride = 2)
     
     def forward(self, x): # x.size() = [batch, channel, height, width]
-        x = relu(self.conv_1(x))              #[x,3,28,28]
+        x = self.conv_1(x)             #[x,3,28,28]
         x = self.bn1(x)
+        x = relu(x)
         x = self.maxpool(x)                   #[x,3,14,14]
-        x = relu(self.conv_2(x))              #[x,6,14,14]
+        x = self.conv_2(x)              #[x,6,14,14]
         x = self.bn2(x)
+        x = relu(x)
         x = self.maxpool(x)                   #[x,6,7,7]
-        x = relu(self.conv_3(x))              #[x,12,7,7]
+        x = self.conv_3(x)              #[x,12,7,7]
         x = self.bn3(x)
-        x = relu(self.conv_4(x))              #[x,3,7,7]
+        x = relu(x)
+        x = self.conv_4(x)              #[x,3,7,7]
         x = self.bn4(x)
+        x = relu(x)
         x = x.view(-1, 7*7*3)   #[x,3*7*7,1,1] -> [x,10,1,1]
         return softmax(self.l_1(x), dim=1)    #[x,10,1,1]
 
@@ -363,16 +377,20 @@ class ConvNet43D(nn.Module):
                                 stride = 2)
     
     def forward(self, x): # x.size() = [batch, channel, height, width]
-        x = relu(self.conv_1_3D_block(x))     #[x,3,28,28]
+        x = self.conv_1_3D_block(x)     #[x,3,28,28]
         x = self.bn1(x)
+        x = relu(x)
         x = self.maxpool(x)                   #[x,3,14,14]
-        x = relu(self.conv_2_3D_block(x))     #[x,6,14,14]
+        x = self.conv_2_3D_block(x)     #[x,6,14,14]
         x = self.bn2(x)
+        x = relu(x)
         x = self.maxpool(x)                   #[x,6,7,7]
-        x = relu(self.conv_3_3D_block(x))     #[x,12,7,7]
+        x = self.conv_3_3D_block(x)     #[x,12,7,7]
         x = self.bn3(x)
-        x = relu(self.conv_4_3D_block(x))     #[x,3,7,7]
+        x = relu(x)
+        x = self.conv_4_3D_block(x)     #[x,3,7,7]
         x = self.bn4(x)
+        x = relu(x)
         x = x.view(-1, 7*7*3)   #[x,3*7*7,1,1] -> [x,10,1,1]
         return softmax(self.l_1(x), dim=1)    #[x,10,1,1]
 
@@ -433,16 +451,20 @@ class ConvNet5004D(nn.Module):
                                 stride = 2)
     
     def forward(self, x): # x.size() = [batch, channel, height, width]
-        x = relu(self.conv_1_4D_block(x))     #[x,32,28,28]
+        x = self.conv_1_4D_block(x)     #[x,32,28,28]
         x = self.bn1(x)
+        x = relu(x)
         x = self.maxpool(x)                   #[x,32,14,14]
-        x = relu(self.conv_2_4D_block(x))     #[x,64,14,14]
+        x = self.conv_2_4D_block(x)     #[x,64,14,14]
         x = self.bn2(x)
+        x = relu(x)
         x = self.maxpool(x)                   #[x,64,7,7]
-        x = relu(self.conv_3_4D_block(x))     #[x,128,7,7]
+        x = self.conv_3_4D_block(x)     #[x,128,7,7]
         x = self.bn3(x)
-        x = relu(self.conv_4_4D_block(x))     #[x,64,1,1]
+        x = relu(x)
+        x = self.conv_4_4D_block(x)     #[x,64,1,1]
         x = self.bn4(x)
+        x = relu(x)
         x = x.view(-1, depth[3])   #[x,64,1,1] -> [x,10,1,1]
         return softmax(self.l_1(x), dim=1)    #[x,10,1,1]
 
@@ -504,16 +526,20 @@ class ConvNet44D(nn.Module):
                                 stride = 2)
     
     def forward(self, x): # x.size() = [batch, channel, height, width]
-        x = relu(self.conv_1_4D_block(x))     #[x,3,28,28]
+        x = self.conv_1_4D_block(x)     #[x,3,28,28]
         x = self.bn1(x)
+        x = relu(x)
         x = self.maxpool(x)                   #[x,3,14,14]
-        x = relu(self.conv_2_4D_block(x))     #[x,6,14,14]
+        x = self.conv_2_4D_block(x)     #[x,6,14,14]
         x = self.bn2(x)
+        x = relu(x)
         x = self.maxpool(x)                   #[x,6,7,7]
-        x = relu(self.conv_3_4D_block(x))     #[x,12,7,7]
+        x = self.conv_3_4D_block(x)     #[x,12,7,7]
         x = self.bn3(x)
-        x = relu(self.conv_4_4D_block(x))     #[x,3,7,7]
+        x = relu(x)
+        x = self.conv_4_4D_block(x)     #[x,3,7,7]
         x = self.bn4(x)
+        x = relu(x)
         x = x.contiguous().view(-1, 7*7*3)   #[x,3*7*7,1,1] -> [x,10,1,1]
         return softmax(self.l_1(x), dim=1)    #[x,10,1,1]
 

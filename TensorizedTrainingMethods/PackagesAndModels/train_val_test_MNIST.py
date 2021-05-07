@@ -1,5 +1,5 @@
-from .pack import *
-from .method_functions import *
+from pack import *
+from method_functions import *
 
 from pathlib import Path 
 import os

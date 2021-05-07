@@ -54,8 +54,17 @@ if __name__ == '__main__':
       train_acc.append(evaluate_cifar(trainloader, net).cpu().item())
       test_acc.append(evaluate_cifar(testloader, net).cpu().item())
       losses.append(running_loss)
+      
+    t = []
+    for i in range(1000):
+        start = time.time()
+        evaluate_cifar(testloader, net).cpu().item()
+        end = time.time()
+        t.append(end-start)
+    tmean = np.mean(t)
 
     save_train = pd.DataFrame(train_acc)
     save_test = pd.DataFrame(test_acc)
     save_loss = pd.DataFrame(losses)
-    pd.concat([save_train,save_test,save_loss],axis = 0).to_csv('0305_conv500normalCIFAR10.csv',index=False,header=False)
+    print("Time:" + str(tmean))
+    pd.concat([save_train,save_test,save_loss],axis = 0).to_csv('0605_conv500normalCIFAR10.csv',index=False,header=False)
