@@ -12,17 +12,17 @@ if __name__ == '__main__':
     transform = transforms.Compose([
         transforms.RandomHorizontalFlip(),
         transforms.ToTensor(),
-        transforms.Normalize((0.5071, 0.4867, 0.4408), (0.2675, 0.2565, 0.2761)),
+        transforms.Normalize((0.5071, 0.4867, 0.4408), (0.2675, 0.2565, 0.2761))
         ])
 
     batchsize = 100
 
-    trainset = torchvision.datasets.CIFAR10(root='./data', train=True,
+    trainset = torchvision.datasets.CIFAR100(root='./data', train=True,
                                             download=True, transform=transform)
     trainloader = torch.utils.data.DataLoader(trainset, batch_size=batchsize,
                                                 shuffle=True, num_workers = 2, pin_memory=True)
 
-    testset = torchvision.datasets.CIFAR10(root='./data', train=False,
+    testset = torchvision.datasets.CIFAR100(root='./data', train=False,
                                             download=True, transform=transform)
     testloader = torch.utils.data.DataLoader(testset, batch_size=batchsize,
                                             shuffle=False, num_workers =  2, pin_memory=True)
@@ -33,7 +33,7 @@ if __name__ == '__main__':
     epochs = 50
     
     # choose network block type to run
-    net = deepcopy(papernet4True3DSharedWeights)
+    net = deepcopy(papernet4True3DSharedWeights)#
     net.to(device)
     
     criterion = nn.CrossEntropyLoss()
@@ -66,7 +66,9 @@ if __name__ == '__main__':
     save_train = pd.DataFrame(train_acc)
     save_test = pd.DataFrame(test_acc)
     save_loss = pd.DataFrame(losses)
-    pd.concat([save_train,save_test,save_loss],axis = 0).to_csv('06_05_Papernet4True3D_shared_weights_CIFAR10.csv',index=False,header=False)
+    pd.concat([save_train,save_test,save_loss],axis = 0).to_csv('07_05_Papernet4True3DSharedWeights_CIFAR100.csv',index=False,header=False)
+    
+    torch.save(net,"Papernet4True3DSharedWeights")
 
     
     
