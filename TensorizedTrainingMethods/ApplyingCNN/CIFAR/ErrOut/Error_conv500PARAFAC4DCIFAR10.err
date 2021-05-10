@@ -1,0 +1,12 @@
+Loaded module: cuda/10.2
+Loaded dependency [gcc/8.4.0]: binutils/2.34
+Loaded dependency [python3/3.8.2]: gcc/8.4.0
+Loaded module: python3/3.8.2
+Traceback (most recent call last):
+  File "conv500PARAFAC4DCIFAR10.py", line 35, in <module>
+    net = convNet500_4D_rank1
+NameError: name 'convNet500_4D_rank1' is not defined
+Loaded module: cuda/10.2
+Loaded dependency [gcc/8.4.0]: binutils/2.34
+Loaded dependency [python3/3.8.2]: gcc/8.4.0
+Loaded module: python3/3.8.2

@@ -4,27 +4,29 @@ from copy import deepcopy
 import os 
 print(os.getcwd())
 import sys 
-import time 
 
-#import re
-
+from pathlib import Path
 os.chdir(str(Path(os.getcwd()).parents[1]))
 os.chdir(os.getcwd()+'\PackagesAndModels')
 print(os.getcwd())
 from pack import *
+from method_functions import *
+from MNIST_MODELS import *
+from train_val_test_MNIST import *
+
 import time
 #os.chdir(str(Path(os.getcwd()).parents[1]))
 #os.chdir(os.getcwd()+'\PackagesAndModels')
 #print(os.getcwd())
-from PackagesAndModels.pack import *
+#from PackagesAndModels.pack import *
 
 #import importlib
 #fol = re.sub("/", ".", d)[1:-1]
 #importlib.import_module(fol+".pack")
 
-from PackagesAndModels.method_functions import *
-from PackagesAndModels.MNIST_MODELS import *
-from PackagesAndModels.train_val_test_MNIST import *
+#from PackagesAndModels.method_functions import *
+#from PackagesAndModels.MNIST_MODELS import *
+#from PackagesAndModels.train_val_test_MNIST import *
 
 criterion = nn.CrossEntropyLoss()
 
@@ -336,4 +338,4 @@ save_train = pd.DataFrame(train_list)
 save_valid = pd.DataFrame(valid_list)
 save_test = pd.DataFrame(test_list)
 
-pd.concat([save_train,save_valid,save_test], axis = 0).to_csv('0405_MNIST_conv4_7methods.csv',index=False,header=False)
+pd.concat([save_train,save_valid,save_test], axis = 0).to_csv('0605_MNIST_conv4_7methods.csv',index=False,header=False)
