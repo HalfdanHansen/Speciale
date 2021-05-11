@@ -33,7 +33,7 @@ if __name__ == '__main__':
     epochs = 50
     
     # choose network block type to run
-    net = deepcopy(papernet4True3DSharedWeights)#
+    net = deepcopy(papernet4True3D)#SharedWeights
     net.to(device)
     
     criterion = nn.CrossEntropyLoss()
@@ -66,9 +66,9 @@ if __name__ == '__main__':
     save_train = pd.DataFrame(train_acc)
     save_test = pd.DataFrame(test_acc)
     save_loss = pd.DataFrame(losses)
-    pd.concat([save_train,save_test,save_loss],axis = 0).to_csv('07_05_Papernet4True3DSharedWeights_CIFAR100.csv',index=False,header=False)
+    pd.concat([save_train,save_test,save_loss],axis = 0).to_csv('07_05_Papernet4True3D_CIFAR100.csv',index=False,header=False)
     
-    torch.save(net,"Papernet4True3DSharedWeights")
+    torch.save(net,"Papernet4True3D")
 
     
     

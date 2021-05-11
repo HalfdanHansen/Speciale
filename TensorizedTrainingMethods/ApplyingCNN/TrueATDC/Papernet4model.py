@@ -126,8 +126,8 @@ class Papernet4True(nn.Module):
                                             nn.BatchNorm1d(512, affine=False, track_running_stats=False),
                                             nn.ReLU(),
                                             nn.Dropout(0.5),
-                                            nn.Linear(512, classes),
-                                            nn.Softmax()
+                                            nn.Linear(512, classes)
+                                            #nn.Softmax()
                                             )
             
     def _make_layer(self, block, in_channels, out_channels, regul):
