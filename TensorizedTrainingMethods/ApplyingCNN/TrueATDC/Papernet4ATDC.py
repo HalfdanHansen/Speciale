@@ -4,11 +4,10 @@ if __name__ == '__main__':
     import sys
     from copy import deepcopy
     
-    
+    '''
     import os 
     print(os.getcwd())
     import sys 
-    
     
     from pathlib import Path
     os.chdir(str(Path(os.getcwd()).parents[1]))
@@ -18,9 +17,11 @@ if __name__ == '__main__':
     os.chdir(str(Path(os.getcwd()).parents[0]))
     os.chdir(os.getcwd()+'\ApplyingCNN\TrueATDC')
     print(os.getcwd())
+    '''
+    
     from Papernet4model import *
 
-    #from PackagesAndModels.pack import *
+    from PackagesAndModels.pack import *
     
     
     def ATDCTRUE_get_grads(gr, p, q, t, pindex, qindex):
