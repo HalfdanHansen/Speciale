@@ -1,0 +1,106 @@
+Loaded module: cuda/10.2
+Loaded dependency [gcc/8.4.0]: binutils/2.34
+Loaded dependency [python3/3.8.2]: gcc/8.4.0
+Loaded module: python3/3.8.2
+Traceback (most recent call last):
+  File "Papernet2.py", line 40, in <module>
+    outputs = net(inputs)
+  File "/zhome/ab/6/109248/.local/lib/python3.8/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/zhome/ab/6/109248/Desktop/Speciale/Speciale/TensorizedTrainingMethods/ApplyingCNN/TrueATDC/Papernet2model.py", line 147, in forward
+    out = self.classifier(out)
+  File "/zhome/ab/6/109248/.local/lib/python3.8/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/zhome/ab/6/109248/.local/lib/python3.8/site-packages/torch/nn/modules/container.py", line 119, in forward
+    input = module(input)
+  File "/zhome/ab/6/109248/.local/lib/python3.8/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/zhome/ab/6/109248/.local/lib/python3.8/site-packages/torch/nn/modules/linear.py", line 94, in forward
+    return F.linear(input, self.weight, self.bias)
+  File "/zhome/ab/6/109248/.local/lib/python3.8/site-packages/torch/nn/functional.py", line 1753, in linear
+    return torch._C._nn.linear(input, weight, bias)
+RuntimeError: mat1 dim 1 must match mat2 dim 0
+Loaded module: cuda/10.2
+Loaded dependency [gcc/8.4.0]: binutils/2.34
+Loaded dependency [python3/3.8.2]: gcc/8.4.0
+Loaded module: python3/3.8.2
+Loaded module: cuda/10.2
+Loaded dependency [gcc/8.4.0]: binutils/2.34
+Loaded dependency [python3/3.8.2]: gcc/8.4.0
+Loaded module: python3/3.8.2
+Traceback (most recent call last):
+  File "Papernet2.py", line 40, in <module>
+    outputs = net(inputs)
+  File "/zhome/ab/6/109248/.local/lib/python3.8/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/zhome/ab/6/109248/Desktop/Speciale/Speciale/TensorizedTrainingMethods/ApplyingCNN/TrueATDC/Papernet2model.py", line 147, in forward
+    out = self.classifier(out)
+  File "/zhome/ab/6/109248/.local/lib/python3.8/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/zhome/ab/6/109248/.local/lib/python3.8/site-packages/torch/nn/modules/container.py", line 119, in forward
+    input = module(input)
+  File "/zhome/ab/6/109248/.local/lib/python3.8/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/zhome/ab/6/109248/.local/lib/python3.8/site-packages/torch/nn/modules/linear.py", line 94, in forward
+    return F.linear(input, self.weight, self.bias)
+  File "/zhome/ab/6/109248/.local/lib/python3.8/site-packages/torch/nn/functional.py", line 1753, in linear
+    return torch._C._nn.linear(input, weight, bias)
+RuntimeError: mat1 dim 1 must match mat2 dim 0
+Traceback (most recent call last):
+  File "Papernet2.py", line 40, in <module>
+    outputs = net(inputs)
+  File "/zhome/ab/6/109248/.local/lib/python3.8/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/zhome/ab/6/109248/Desktop/Speciale/Speciale/TensorizedTrainingMethods/ApplyingCNN/TrueATDC/Papernet2model.py", line 147, in forward
+    out = self.classifier(out)
+  File "/zhome/ab/6/109248/.local/lib/python3.8/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/zhome/ab/6/109248/.local/lib/python3.8/site-packages/torch/nn/modules/container.py", line 119, in forward
+    input = module(input)
+  File "/zhome/ab/6/109248/.local/lib/python3.8/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/zhome/ab/6/109248/.local/lib/python3.8/site-packages/torch/nn/modules/linear.py", line 94, in forward
+    return F.linear(input, self.weight, self.bias)
+  File "/zhome/ab/6/109248/.local/lib/python3.8/site-packages/torch/nn/functional.py", line 1753, in linear
+    return torch._C._nn.linear(input, weight, bias)
+RuntimeError: mat1 dim 1 must match mat2 dim 0
+Loaded module: cuda/10.2
+Loaded dependency [gcc/8.4.0]: binutils/2.34
+Loaded dependency [python3/3.8.2]: gcc/8.4.0
+Loaded module: python3/3.8.2
+Traceback (most recent call last):
+  File "Papernet2.py", line 40, in <module>
+    outputs = net(inputs)
+  File "/zhome/ab/6/109248/.local/lib/python3.8/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/zhome/ab/6/109248/Desktop/Speciale/Speciale/TensorizedTrainingMethods/ApplyingCNN/TrueATDC/Papernet2model.py", line 147, in forward
+    out = self.classifier(out)
+  File "/zhome/ab/6/109248/.local/lib/python3.8/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/zhome/ab/6/109248/.local/lib/python3.8/site-packages/torch/nn/modules/container.py", line 119, in forward
+    input = module(input)
+  File "/zhome/ab/6/109248/.local/lib/python3.8/site-packages/torch/nn/modules/module.py", line 889, in _call_impl
+    result = self.forward(*input, **kwargs)
+  File "/zhome/ab/6/109248/.local/lib/python3.8/site-packages/torch/nn/modules/linear.py", line 94, in forward
+    return F.linear(input, self.weight, self.bias)
+  File "/zhome/ab/6/109248/.local/lib/python3.8/site-packages/torch/nn/functional.py", line 1753, in linear
+    return torch._C._nn.linear(input, weight, bias)
+RuntimeError: mat1 dim 1 must match mat2 dim 0
+Loaded module: cuda/10.2
+Loaded dependency [gcc/8.4.0]: binutils/2.34
+Loaded dependency [python3/3.8.2]: gcc/8.4.0
+Loaded module: python3/3.8.2
+/zhome/ab/6/109248/.local/lib/python3.8/site-packages/torch/nn/modules/container.py:119: UserWarning: Implicit dimension choice for softmax has been deprecated. Change the call to include dim=X as an argument.
+  input = module(input)
+Loaded module: cuda/10.2
+Loaded dependency [gcc/8.4.0]: binutils/2.34
+Loaded dependency [python3/3.8.2]: gcc/8.4.0
+Loaded module: python3/3.8.2
+/zhome/ab/6/109248/.local/lib/python3.8/site-packages/torch/nn/modules/container.py:119: UserWarning: Implicit dimension choice for softmax has been deprecated. Change the call to include dim=X as an argument.
+  input = module(input)
+Loaded module: cuda/10.2
+Loaded dependency [gcc/8.4.0]: binutils/2.34
+Loaded dependency [python3/3.8.2]: gcc/8.4.0
+Loaded module: python3/3.8.2
+/zhome/ab/6/109248/.local/lib/python3.8/site-packages/torch/nn/modules/container.py:119: UserWarning: Implicit dimension choice for softmax has been deprecated. Change the call to include dim=X as an argument.
+  input = module(input)
