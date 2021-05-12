@@ -1,4 +1,4 @@
-from PackagesAndModels.pack import *
+from pack import *
 
 class conv_block(nn.Module):
     def __init__(self, in_channels, out_channels, regul):
