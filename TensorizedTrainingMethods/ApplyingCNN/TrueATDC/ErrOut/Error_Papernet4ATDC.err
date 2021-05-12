@@ -1,0 +1,12 @@
+Loaded module: cuda/10.2
+Loaded dependency [gcc/8.4.0]: binutils/2.34
+Loaded dependency [python3/3.8.2]: gcc/8.4.0
+Loaded module: python3/3.8.2
+Traceback (most recent call last):
+  File "Papernet4ATDC.py", line 160, in <module>
+    running_loss = train_net_PARAFAC3D_ATDCTRUE(losses, net, "net", trainloader, criterion, optimizer, convNames, p, q, t, alpha, 1, lNames)
+  File "Papernet4ATDC.py", line 42, in train_net_PARAFAC3D_ATDCTRUE
+    ATDCTRUE_get_grads(convGrad, p, q, t, pindex, qindex), 
+  File "Papernet4ATDC.py", line 15, in ATDCTRUE_get_grads
+    dLdt = torch.einsum('j,js->s',q[k1].reshape(len(q[k1])),torch.einsum('i,ijs->js',p[k1].reshape(len(p[k1])),gr[:,k1,:,:].permute(2,3,0)))
+RuntimeError: shape '[8]' is invalid for input of size 24

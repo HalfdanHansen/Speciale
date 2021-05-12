@@ -39,10 +39,13 @@ if __name__ == '__main__':
           convData = eval(netname+"."+convName[k1]+".weight.data")
           
           p,q,t = ATDCTRUE_update_step(
-                  ATDCTRUE_get_grads(convGrad, p, q, t), 
+                  ATDCTRUE_get_grads(convGrad, p, q, t, pindex, qindex), 
                   alpha, p, q, t)
-            
-          convData[:] = torch.einsum('h,s,i,j->hsij',p,q,t) # forkert ændre til pqt passer. 
+          
+          root = int(np.sqrt(len(convGrad)))
+          for k2 in range(root):
+              for k3 in range(root):
+                  convData[k2+k3] = torch.einsum('s,i,j->sij',t[k2+k3],p[k2],q[k3])
     
         for name in lName:
             a = eval('net.'+name+'.weight.data[:]')
