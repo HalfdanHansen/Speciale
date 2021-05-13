@@ -116,14 +116,18 @@ class Papernet4True(nn.Module):
             self.classifier = nn.Sequential(nn.Flatten(),
                                             nn.Linear(4*484, 2048),
                                             nn.BatchNorm1d(2048, affine=False, track_running_stats=False),
+                                            nn.ReLU(),
                                             nn.Dropout(0.5),
                                             nn.Linear(2048, 1024),
                                             nn.BatchNorm1d(1024, affine=False, track_running_stats=False),
+                                            nn.ReLU(),
                                             nn.Dropout(0.5),
                                             nn.Linear(1024, 512),
                                             nn.BatchNorm1d(512, affine=False, track_running_stats=False),
+                                            nn.ReLU(),
                                             nn.Dropout(0.5),
                                             nn.Linear(512, classes)
+                                            #nn.Softmax()
                                             )
             
     def _make_layer(self, block, in_channels, out_channels, regul):
@@ -147,6 +151,7 @@ class Papernet4True(nn.Module):
             
             return out
 
+
 papernet4True = Papernet4True(conv_block, 100)
 papernet4True3D = Papernet4True(conv_3D_block, 100)
-papernet4True3DSharedWeights = Papernet4True(conv_3D_block_shared_weights, 10)
+papernet4True3DSharedWeights = Papernet4True(conv_3D_block_shared_weights, 100)

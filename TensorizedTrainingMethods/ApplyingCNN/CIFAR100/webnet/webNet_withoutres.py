@@ -8,7 +8,7 @@ Created on Fri Apr 23 09:34:40 2021
 
 from PackagesAndModels.pack import *
 
-def conv_block(in_channels, out_channels, pool=False, drop1=False, drop2=False, n = 1):
+def conv_block(in_channels, out_channels, pool=False, drop1=False, drop2=False, n = 1, rank  = None):
     layers = []
     for i in range(n):
         layers.append(nn.Conv2d(in_channels, out_channels, kernel_size=3, padding=1, bias = False))
@@ -20,7 +20,7 @@ def conv_block(in_channels, out_channels, pool=False, drop1=False, drop2=False, 
     return nn.Sequential(*layers)
 
 
-def conv_3D_block(in_channels, out_channels, pool=False, drop1=False, drop2=False, n = 1):
+def conv_3D_block(in_channels, out_channels, pool=False, drop1=False, drop2=False, n = 1, rank = None):
     layers = []
     for i in range(n):
         layers.append(nn.Conv2d(in_channels = in_channels, out_channels = out_channels, kernel_size=1,
@@ -36,9 +36,8 @@ def conv_3D_block(in_channels, out_channels, pool=False, drop1=False, drop2=Fals
         elif drop2: layers.append(nn.Dropout2d(0.5))
         
     return nn.Sequential(*layers)
-'''
-def conv_4D_block(in_channels, out_channels, pool=False, drop1=False, drop2=False):
-    rank = 10
+
+def conv_4D_block(in_channels, out_channels, pool=False, drop1=False, drop2=False, n = 1, rank = 1):
     layers = [
               nn.Conv2d(in_channels = in_channels, out_channels = rank, kernel_size=(1,1), 
                         padding=0, bias=False),
@@ -55,7 +54,7 @@ def conv_4D_block(in_channels, out_channels, pool=False, drop1=False, drop2=Fals
     elif drop2: layers.append(nn.Dropout2d(0.5))
     return nn.Sequential(*layers)
 
-def conv_Tucker2_block(in_channels, out_channels, rank = [1,1], pool=False, drop1=False, drop2=False):
+def conv_Tucker2_block(in_channels, out_channels, pool=False, drop1=False, drop2=False, n = 1, rank = [1,1]):
     layers = [
             nn.Conv2d(in_channels = in_channels, out_channels = rank[0], kernel_size=(1,1),
                       padding=0, bias=False),
@@ -69,9 +68,9 @@ def conv_Tucker2_block(in_channels, out_channels, rank = [1,1], pool=False, drop
     elif drop1: layers.append(nn.Dropout2d(0.4))
     elif drop2: layers.append(nn.Dropout2d(0.5))
     return nn.Sequential(*layers)
-'''
+
 class WebNet_noRes(nn.Module):
-    def __init__(self, block, in_channels, num_classes, n):
+    def __init__(self, block, in_channels, num_classes, n, rank):
             super().__init__()
             
             self.conv1 = block(in_channels, 64, drop2=True, n = 1)
@@ -107,8 +106,10 @@ class WebNet_noRes(nn.Module):
 webNet_noRes = WebNet_noRes(conv_block, 3, 100, 1)
 
 webNet_noRes3D = WebNet_noRes(conv_3D_block, 3, 100, 1)
-'''
-webNet_noRes4D = WebNet_noRes(conv_4D_block, 3, 100)
 
-webNet_noResTucker2 = WebNet_noRes(conv_Tucker2_block, 3, 100)
-'''
+webNet_noRes4D_rank1 = WebNet_noRes(conv_4D_block, 3, 100, 1, 1)
+webNet_noRes4D_rank8 = WebNet_noRes(conv_4D_block, 3, 100, 1, 8)
+
+webNet_noResTucker2_rank11 = WebNet_noRes(conv_Tucker2_block, 3, 100, 1, 1)
+webNet_noResTucker2_rank88 = WebNet_noRes(conv_Tucker2_block, 3, 100, 1, 8)
+
