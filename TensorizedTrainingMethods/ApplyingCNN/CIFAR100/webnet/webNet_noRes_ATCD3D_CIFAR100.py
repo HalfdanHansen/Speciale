@@ -58,4 +58,7 @@ if __name__ == '__main__':
     save_train = pd.DataFrame(train_acc)
     save_test = pd.DataFrame(test_acc)
     save_loss = pd.DataFrame(losses)
-    pd.concat([save_train,save_test,save_loss],axis = 0).to_csv('0305_webNet_noRes_ATCD3D_CIFAR100.csv',index=False,header=False)
+    pd.concat([save_train,save_test,save_loss],axis = 0).to_csv('0905_webNetATCD3DCIFAR100.csv',index=False,header=False)
+
+     #Save model
+    torch.save(net, "0905_webNetATCD3DCIFAR100")
