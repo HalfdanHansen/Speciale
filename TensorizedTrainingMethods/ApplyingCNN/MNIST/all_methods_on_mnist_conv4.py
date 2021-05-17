@@ -73,7 +73,7 @@ valid_list.append(normalvalid_acc)
 test_list.append(normaltest_acc)
 
 #Save model
-torch.save(netNormal, "0905_conv4normalMNIST")
+#torch.save(netNormal, "0905_conv4normalMNIST")
 
 """Direct 4D Decompose Method"""
 
@@ -110,7 +110,7 @@ valid_list.append(D4DDvalid_acc)
 test_list.append(D4DDtest_acc)
 
 #Save model
-torch.save(netD4DD, "0905_conv4D4DDMNIST")
+#torch.save(netD4DD, "0905_conv4D4DDMNIST")
 
 """Direct 3D Decompose Method"""
 
@@ -146,7 +146,7 @@ valid_list.append(D3DDvalid_acc)
 test_list.append(D3DDtest_acc)
 
 #Save model
-torch.save(net3D, "0905_conv43DMNIST")
+#torch.save(net3D, "0905_conv43DMNIST")
 
 """BAF method 4D"""
 
@@ -180,7 +180,7 @@ valid_list.append(BAF4Dvalid_acc)
 test_list.append(BAF4Dtest_acc)
 
 #Save model
-torch.save(netBAF4D, "0905_conv4BAF4DMNIST")
+#torch.save(netBAF4D, "0905_conv4BAF4DMNIST")
 
 """BAF method 3D """
 
@@ -214,7 +214,7 @@ valid_list.append(BAF3Dvalid_acc)
 test_list.append(BAF3Dtest_acc)
 
 #Save model
-torch.save(netBAF3D, "0905_conv4BAF3DMNIST")
+#torch.save(netBAF3D, "0905_conv4BAF3DMNIST")
 
 """ATDC Method 3D"""
 
@@ -259,7 +259,7 @@ valid_list.append(ATDC3Dvalid_acc)
 test_list.append(ATDC3Dtest_acc)
 
 #Save model
-torch.save(netATDC, "0905_conv4ATDC3DMNIST")
+#torch.save(netATDC, "0905_conv4ATDC3DMNIST")
 
 """ATDC method 4D"""
 
@@ -300,7 +300,7 @@ valid_list.append(ATDC4Dvalid_acc)
 test_list.append(ATDC4Dtest_acc)
 
 #Save model
-torch.save(netATDC4D, "0905_conv4ATDC4DMNIST")
+#torch.save(netATDC4D, "0905_conv4ATDC4DMNIST")
 
 save_train = pd.DataFrame(train_list)
 save_valid = pd.DataFrame(valid_list)

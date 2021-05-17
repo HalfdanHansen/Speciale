@@ -4,44 +4,29 @@ import pandas as pd
 #Rank 1: PARAFAC3D, ATCD3D, PARAFAC4D, Tucker24D, ATCD4D, Tucker2ATCD4D
 #Rank 8:  PARAFAC4D, Tucker24D, ATCD4D, Tucker2ATCD4D
 
-normal = pd.read_csv (r'/zhome/d8/b/107547/Documents/Git/Speciale/TensorizedTrainingMethods/ApplyingCNN/CIFAR/0905_conv500normalCIFAR10.csv',header=None,index_col=None)
-PARAFAC3D_R1 = pd.read_csv (r'/zhome/d8/b/107547/Documents/Git/Speciale/TensorizedTrainingMethods/ApplyingCNN/CIFAR/0905_conv500PARAFAC3DCIFAR10.csv',header=None,index_col=None)
-ATCD3D = pd.read_csv (r'/zhome/d8/b/107547/Documents/Git/Speciale/TensorizedTrainingMethods/ApplyingCNN/CIFAR/0905_conv500ATCD3DCIFAR10.csv',header=None,index_col=None)
-PARAFAC4D_R1 = pd.read_csv (r'/zhome/d8/b/107547/Documents/Git/Speciale/TensorizedTrainingMethods/ApplyingCNN/CIFAR/0905_conv500PARAFAC4DCIFAR10_rank1.csv',header=None,index_col=None)
-PARAFAC4D_R8 = pd.read_csv (r'/zhome/d8/b/107547/Documents/Git/Speciale/TensorizedTrainingMethods/ApplyingCNN/CIFAR/0905_conv500PARAFAC4DCIFAR10_rank8.csv',header=None,index_col=None)
-Tucker24D_R1 = pd.read_csv (r'/zhome/d8/b/107547/Documents/Git/Speciale/TensorizedTrainingMethods/ApplyingCNN/CIFAR/0905_conv500Tucker24DCIFAR10_rank11.csv',header=None,index_col=None)
-Tucker24D_R8 = pd.read_csv (r'/zhome/d8/b/107547/Documents/Git/Speciale/TensorizedTrainingMethods/ApplyingCNN/CIFAR/0905_conv500Tucker24DCIFAR10_rank88.csv',header=None,index_col=None)
-ATCD4D_R1 = pd.read_csv (r'/zhome/d8/b/107547/Documents/Git/Speciale/TensorizedTrainingMethods/ApplyingCNN/CIFAR/0905_conv500ATCD4DCIFAR10_rank1.csv',header=None,index_col=None)
-ATCD4D_R8 = pd.read_csv (r'/zhome/d8/b/107547/Documents/Git/Speciale/TensorizedTrainingMethods/ApplyingCNN/CIFAR/0905_conv500ATCD4DCIFAR10_rank8.csv',header=None,index_col=None)
-Tucker2ATCD4D_R1 = pd.read_csv (r'/zhome/d8/b/107547/Documents/Git/Speciale/TensorizedTrainingMethods/ApplyingCNN/CIFAR/0905_conv500Tucker2ATCD4DCIFAR10_rank11.csv',header=None,index_col=None)
-Tucker2ATCD4D_R8 = pd.read_csv (r'/zhome/d8/b/107547/Documents/Git/Speciale/TensorizedTrainingMethods/ApplyingCNN/CIFAR/0905_conv500Tucker2ATCD4DCIFAR10_rank88.csv',header=None,index_col=None)
+#normal = pd.read_csv (r'/zhome/d8/b/107547/Documents/Git/Speciale/TensorizedTrainingMethods/ApplyingCNN/CIFAR/0905_conv500normalCIFAR10.csv',header=None,index_col=None)
+#PARAFAC3D_R1 = pd.read_csv (r'/zhome/d8/b/107547/Documents/Git/Speciale/TensorizedTrainingMethods/ApplyingCNN/CIFAR/0905_conv500PARAFAC3DCIFAR10.csv',header=None,index_col=None)
+#ATCD3D = pd.read_csv (r'/zhome/d8/b/107547/Documents/Git/Speciale/TensorizedTrainingMethods/ApplyingCNN/CIFAR/0905_conv500ATCD3DCIFAR10.csv',header=None,index_col=None)
+#PARAFAC4D_R1 = pd.read_csv (r'/zhome/d8/b/107547/Documents/Git/Speciale/TensorizedTrainingMethods/ApplyingCNN/CIFAR/0905_conv500PARAFAC4DCIFAR10_rank1.csv',header=None,index_col=None)
+#PARAFAC4D_R8 = pd.read_csv (r'/zhome/d8/b/107547/Documents/Git/Speciale/TensorizedTrainingMethods/ApplyingCNN/CIFAR/0905_conv500PARAFAC4DCIFAR10_rank8.csv',header=None,index_col=None)
+#Tucker24D_R1 = pd.read_csv (r'/zhome/d8/b/107547/Documents/Git/Speciale/TensorizedTrainingMethods/ApplyingCNN/CIFAR/0905_conv500Tucker24DCIFAR10_rank11.csv',header=None,index_col=None)
+#Tucker24D_R8 = pd.read_csv (r'/zhome/d8/b/107547/Documents/Git/Speciale/TensorizedTrainingMethods/ApplyingCNN/CIFAR/0905_conv500Tucker24DCIFAR10_rank88.csv',header=None,index_col=None)
+#ATCD4D_R1 = pd.read_csv (r'/zhome/d8/b/107547/Documents/Git/Speciale/TensorizedTrainingMethods/ApplyingCNN/CIFAR/0905_conv500ATCD4DCIFAR10_rank1.csv',header=None,index_col=None)
+#ATCD4D_R8 = pd.read_csv (r'/zhome/d8/b/107547/Documents/Git/Speciale/TensorizedTrainingMethods/ApplyingCNN/CIFAR/0905_conv500ATCD4DCIFAR10_rank8.csv',header=None,index_col=None)
+#Tucker2ATCD4D_R1 = pd.read_csv (r'/zhome/d8/b/107547/Documents/Git/Speciale/TensorizedTrainingMethods/ApplyingCNN/CIFAR/0905_conv500Tucker2ATCD4DCIFAR10_rank11.csv',header=None,index_col=None)
+#Tucker2ATCD4D_R8 = pd.read_csv (r'/zhome/d8/b/107547/Documents/Git/Speciale/TensorizedTrainingMethods/ApplyingCNN/CIFAR/0905_conv500Tucker2ATCD4DCIFAR10_rank88.csv',header=None,index_col=None)
 
-
-<<<<<<< HEAD
 normal = pd.read_csv (r'0605_conv500normalCIFAR10.csv',header=None,index_col=None)
 PARAFAC3D_R1 = pd.read_csv (r'0605_conv500PARAFAC3DCIFAR10.csv',header=None,index_col=None)
-ATCD3D_R1 = pd.read_csv (r'0605_conv500ATCD3DCIFAR10.csv',header=None,index_col=None)
+ATCD3D_R1 = pd.read_csv (r'0505_conv500ATCD3DCIFAR10_rank1.csv',header=None,index_col=None)
 PARAFAC4D_R1 = pd.read_csv (r'0605_conv500PARAFAC4DCIFAR10_rank1.csv',header=None,index_col=None)
 PARAFAC4D_R8 = pd.read_csv (r'0605_conv500PARAFAC4DCIFAR10_rank8.csv',header=None,index_col=None)
 Tucker24D_R1 = pd.read_csv (r'0605_conv500Tucker24DCIFAR10_rank11.csv',header=None,index_col=None)
 Tucker24D_R8 = pd.read_csv (r'0605_conv500Tucker24DCIFAR10_rank88.csv',header=None,index_col=None)
-ATCD4D_R1 = pd.read_csv (r'0605_conv500ATCD4DCIFAR10_rank1.csv',header=None,index_col=None)
+ATCD4D_R1 = pd.read_csv (r'0505_conv500ATCD4DCIFAR10_rank1.csv',header=None,index_col=None)
 ATCD4D_R8 = pd.read_csv (r'0605_conv500ATCD4DCIFAR10_rank8.csv',header=None,index_col=None)
 Tucker2ATCD4D_R1 = pd.read_csv (r'0605_conv500Tucker2ATCD4DCIFAR10_rank11.csv',header=None,index_col=None)
 Tucker2ATCD4D_R8 = pd.read_csv (r'0605_conv500Tucker2ATCD4DCIFAR10_rank88.csv',header=None,index_col=None)
-=======
-#normal = pd.read_csv (r'0605_conv500normalCIFAR10.csv',header=None,index_col=None)
-#PARAFAC3D_R1 = pd.read_csv (r'0605_conv500PARAFAC3DCIFAR10.csv',header=None,index_col=None)
-#ATCD3D_R1 = pd.read_csv (r'0505_conv500ATCD3DCIFAR10_rank1.csv',header=None,index_col=None)
-#PARAFAC4D_R1 = pd.read_csv (r'0605_conv500PARAFAC4DCIFAR10_rank1.csv',header=None,index_col=None)
-#PARAFAC4D_R8 = pd.read_csv (r'0605_conv500PARAFAC4DCIFAR10_rank8.csv',header=None,index_col=None)
-#Tucker24D_R1 = pd.read_csv (r'0605_conv500Tucker24DCIFAR10_rank11.csv',header=None,index_col=None)
-#Tucker24D_R8 = pd.read_csv (r'0605_conv500Tucker24DCIFAR10_rank88.csv',header=None,index_col=None)
-#ATCD4D_R1 = pd.read_csv (r'0505_conv500ATCD4DCIFAR10_rank1.csv',header=None,index_col=None)
-#ATCD4D_R8 = pd.read_csv (r'0605_conv500ATCD4DCIFAR10_rank8.csv',header=None,index_col=None)
-#Tucker2ATCD4D_R1 = pd.read_csv (r'0605_conv500Tucker2ATCD4DCIFAR10_rank11.csv',header=None,index_col=None)
-#Tucker2ATCD4D_R8 = pd.read_csv (r'0605_conv500Tucker2ATCD4DCIFAR10_rank88.csv',header=None,index_col=None)
->>>>>>> 23fcba0a001bc11091ca5935fcad40242d27613c
 
 
 import matplotlib.pyplot as plt
@@ -104,9 +89,10 @@ fig.tight_layout(pad=2.0)
 fig.legend([l11, l12, l13, l14, l15, l16, l17, l18, l19, l110, l111], 
            labels = line_labels,
            loc = 'center right',
+           fontsize = 16,
            borderaxespad = 0.1)
-plt.subplots_adjust(right=0.87)
+plt.subplots_adjust(right=0.82)
 
-plt.savefig('Plot_all_methods_on_cifar10_conv500.png')
+plt.savefig('1705_Plot_all_methods_on_cifar10_conv500.pgf')
 plt.show()
 
