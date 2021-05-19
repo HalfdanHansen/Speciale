@@ -22,6 +22,7 @@ if __name__ == '__main__':
     from Papernet4model import *
 
     from PackagesAndModels.pack import *
+    from PackagesAndModels.train_val_test_CIFAR10 import *
     
     
     def ATDCTRUE_get_grads(gr, p, q, t, pindex, qindex):
@@ -108,7 +109,7 @@ if __name__ == '__main__':
     
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
     
-    alpha = 0.1
+    alpha = 0.01
     epochs = 50
     
     filternumbers = [64, 64, 144, 144, 256, 256, 256, 484, 484, 484, 484]
@@ -197,7 +198,9 @@ if __name__ == '__main__':
     save_train = pd.DataFrame(train_acc)
     save_test = pd.DataFrame(test_acc)
     save_loss = pd.DataFrame(losses)
-    pd.concat([save_train,save_test,save_loss],axis = 0).to_csv('0305_webNet_noRes_ATCD3D_CIFAR100.csv',index=False,header=False)
+    pd.concat([save_train,save_test,save_loss],axis = 0).to_csv('12_05_Papernet4True3DATCDSharedWeights_CIFAR100.csv',index=False,header=False)
+    
+    torch.save(net,"12_05_Papernet4True3DATCDSharedWeights")
 
     
     
