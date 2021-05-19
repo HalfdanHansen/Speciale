@@ -31,8 +31,9 @@ if __name__ == '__main__':
     epochs = 50
     
     convName = ['conv_1','conv_2','conv_3','conv_4','conv_5','conv_6','conv_7','conv_8','conv_9','conv_10','conv_11']
+    lName = ["classifier[2]"]
     
-    net = deepcopy(webNet_noRes4D)
+    net = deepcopy(webNet_noRes4D_rank1)
     net.cuda()
     
     criterion = nn.CrossEntropyLoss()
@@ -65,4 +66,7 @@ if __name__ == '__main__':
     save_train = pd.DataFrame(train_acc)
     save_test = pd.DataFrame(test_acc)
     save_loss = pd.DataFrame(losses)
-    pd.concat([save_train,save_test,save_loss],axis = 0).to_csv('0305_webNet_noRes_PARAFAC4D_CIFAR100.csv',index=False,header=False)
+    pd.concat([save_train,save_test,save_loss],axis = 0).to_csv('0905_webNetPARAFAC4DCIFAR100_rank1.csv',index=False,header=False)
+
+    #Save model
+    torch.save(net, "0905_webNetPARAFAC4DCIFAR100_rank1")

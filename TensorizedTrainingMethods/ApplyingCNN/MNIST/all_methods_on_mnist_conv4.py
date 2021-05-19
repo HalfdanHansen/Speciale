@@ -4,7 +4,6 @@ from copy import deepcopy
 import os 
 print(os.getcwd())
 import sys 
-
 from pathlib import Path
 os.chdir(str(Path(os.getcwd()).parents[1]))
 os.chdir(os.getcwd()+'\PackagesAndModels')
@@ -64,13 +63,7 @@ for epoch in range(num_epochs):
     train_acc.append(train_acc_cur)
     valid_acc.append(valid_acc_cur)
 
-t = []
-for i in range(1000):
-    start = time.time()
-    preds, test_acc_full = evaluate_test(x_test, targets_test, netNormal)
-    end = time.time()
-    t.append(end-start)
-tmean = np.mean(t)
+preds, test_acc_full = evaluate_test(x_test, targets_test, netNormal)
 normalvalid_acc = valid_acc
 normaltest_acc = accuracy_score(list(targets_test), list(preds.data.numpy()))
 #print("\nTest set Acc:  %f" % normaltest_acc)
@@ -79,7 +72,8 @@ train_list.append(train_acc)
 valid_list.append(normalvalid_acc)
 test_list.append(normaltest_acc)
 
-print("Normal time:" + str(end - start))
+#Save model
+#torch.save(netNormal, "0905_conv4normalMNIST")
 
 """Direct 4D Decompose Method"""
 
@@ -105,13 +99,8 @@ for epoch in range(num_epochs):
     valid_acc.append(valid_acc_cur)
     
 
-t = []
-for i in range(1000):
-    start = time.time()
-    preds, test_acc_full = evaluate_test(x_test, targets_test, netD4DD)
-    end = time.time()
-    t.append(end-start)
-tmean = np.mean(t)
+
+preds, test_acc_full = evaluate_test(x_test, targets_test, netD4DD)
 D4DDvalid_acc = valid_acc
 D4DDtest_acc = (accuracy_score(list(targets_test), list(preds.data.numpy())))
 #print("\nTest set Acc:  %f" % D4DDtest_acc)
@@ -120,7 +109,8 @@ train_list.append(train_acc)
 valid_list.append(D4DDvalid_acc)
 test_list.append(D4DDtest_acc)
 
-print("4D time:" + str(end - start))
+#Save model
+#torch.save(netD4DD, "0905_conv4D4DDMNIST")
 
 """Direct 3D Decompose Method"""
 
@@ -146,9 +136,7 @@ for epoch in range(num_epochs):
     train_acc.append(train_acc_cur)
     valid_acc.append(valid_acc_cur)
     
-start = time.time()
 preds, test_acc_full = evaluate_test(x_test, targets_test, net3D)
-end = time.time()
 D3DDvalid_acc = valid_acc
 D3DDtest_acc = (accuracy_score(list(targets_test), list(preds.data.numpy())))
 #print("\nTest set Acc:  %f" % D3DDtest_acc)
@@ -157,7 +145,8 @@ train_list.append(train_acc)
 valid_list.append(D3DDvalid_acc)
 test_list.append(D3DDtest_acc)
 
-print("3D time:" + str(end - start))
+#Save model
+#torch.save(net3D, "0905_conv43DMNIST")
 
 """BAF method 4D"""
 
@@ -181,13 +170,7 @@ for epoch in range(num_epochs):
     valid_acc.append(valid_acc_cur)
 
 #Evaluate test
-t = []
-for i in range(1000):
-    start = time.time()
-    preds, test_acc_full = evaluate_test(x_test, targets_test, netBAF4D)
-    end = time.time()
-    t.append(end-start)
-tmean = np.mean(t)
+preds, test_acc_full = evaluate_test(x_test, targets_test, netBAF4D)
 BAF4Dvalid_acc = valid_acc
 BAF4Dtest_acc = (accuracy_score(list(targets_test), list(preds.data.numpy())))
 #print("\nTest set Acc:  %f" % BAF4Dtest_acc)
@@ -196,7 +179,8 @@ train_list.append(train_acc)
 valid_list.append(BAF4Dvalid_acc)
 test_list.append(BAF4Dtest_acc)
 
-print("BAF4D time:" + str(end - start))
+#Save model
+#torch.save(netBAF4D, "0905_conv4BAF4DMNIST")
 
 """BAF method 3D """
 
@@ -220,13 +204,7 @@ for epoch in range(num_epochs):
     valid_acc.append(valid_acc_cur)
 
 #Evaluate test
-t = []
-for i in range(1000):
-    start = time.time()
-    preds, test_acc_full = evaluate_test(x_test, targets_test, netBAF3D)
-    end = time.time()
-    t.append(end-start)
-tmean = np.mean(t)
+preds, test_acc_full = evaluate_test(x_test, targets_test, netBAF3D)
 BAF3Dvalid_acc = valid_acc
 BAF3Dtest_acc = (accuracy_score(list(targets_test), list(preds.data.numpy())))
 #print("\nTest set Acc:  %f" % BAF3Dtest_acc)
@@ -235,7 +213,8 @@ train_list.append(train_acc)
 valid_list.append(BAF3Dvalid_acc)
 test_list.append(BAF3Dtest_acc)
 
-print("BAF3D time:" + str(end - start))
+#Save model
+#torch.save(netBAF3D, "0905_conv4BAF3DMNIST")
 
 """ATDC Method 3D"""
 
@@ -270,13 +249,7 @@ for epoch in range(num_epochs):
     valid_acc.append(valid_acc_cur)
 
 ### Evaluate test set
-t = []
-for i in range(1000):
-    start = time.time()
-    preds, test_acc_full = evaluate_test(x_test, targets_test, netATDC)
-    end = time.time()
-    t.append(end-start)
-tmean = np.mean(t)
+preds, test_acc_full = evaluate_test(x_test, targets_test, netATDC)
 ATDC3Dvalid_acc = valid_acc
 ATDC3Dtest_acc = (accuracy_score(list(targets_test), list(preds.data.numpy())))
 #print("\nTest set Acc:  %f" % ATDC3Dtest_acc)
@@ -285,10 +258,10 @@ train_list.append(train_acc)
 valid_list.append(ATDC3Dvalid_acc)
 test_list.append(ATDC3Dtest_acc)
 
-print("ATDC3D time:" + str(end - start))
+#Save model
+#torch.save(netATDC, "0905_conv4ATDC3DMNIST")
 
 """ATDC method 4D"""
-
 
 pqtu_convs = []
 
@@ -317,13 +290,7 @@ for epoch in range(num_epochs):
     valid_acc.append(valid_acc_cur)
 
 ### Evaluate test set
-t = []
-for i in range(1000):
-    start = time.time()
-    preds, test_acc_full = evaluate_test(x_test, targets_test, netATDC4D)
-    end = time.time()
-    t.append(end-start)
-tmean = np.mean(t)
+preds, test_acc_full = evaluate_test(x_test, targets_test, netATDC4D)
 ATDC4Dvalid_acc = valid_acc
 ATDC4Dtest_acc = (accuracy_score(list(targets_test), list(preds.data.numpy())))
 #print("\nTest set Acc:  %f" % ATDC4Dtest_acc)
@@ -332,7 +299,8 @@ train_list.append(train_acc)
 valid_list.append(ATDC4Dvalid_acc)
 test_list.append(ATDC4Dtest_acc)
 
-print("ATDC4D time:" + str(end - start))
+#Save model
+#torch.save(netATDC4D, "0905_conv4ATDC4DMNIST")
 
 save_train = pd.DataFrame(train_list)
 save_valid = pd.DataFrame(valid_list)

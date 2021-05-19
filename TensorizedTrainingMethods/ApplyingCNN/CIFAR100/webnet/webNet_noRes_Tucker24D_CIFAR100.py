@@ -23,7 +23,16 @@ if __name__ == '__main__':
 
     batchsize = 100
 
-    trainloader, testloader = load_cifar()
+    trainset = torchvision.datasets.CIFAR100(root='./data', train=True,
+                                            download=True, transform=transform)
+    trainloader = torch.utils.data.DataLoader(trainset, batch_size=batchsize,
+                                                shuffle=True, num_workers = 2, pin_memory=True) #numworker =2 and not pin_memory
+
+    testset = torchvision.datasets.CIFAR100(root='./data', train=False,
+                                            download=True, transform=transform)
+    testloader = torch.utils.data.DataLoader(testset, batch_size=batchsize,
+                                            shuffle=False, num_workers =  2, pin_memory=True) #numworker =2 and not pin_memory
+    
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
     
     alpha = 0.001
@@ -32,7 +41,7 @@ if __name__ == '__main__':
     convName = ['conv1[0]','conv2[0]','conv3[0]','conv4[0]','conv5[0]','conv6[0]','conv7[0]','conv8[0]','conv9[0]','conv10[0]','conv11[0]']
     lName = ["classifier[2]"]
     
-    net = webNet_noResTucker211
+    net = webNet_noResTucker2_rank11
     net.cuda()
     
     criterion = nn.CrossEntropyLoss()

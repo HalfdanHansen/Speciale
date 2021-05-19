@@ -1,0 +1,10 @@
+Loaded module: cuda/10.2
+Loaded dependency [gcc/8.4.0]: binutils/2.34
+Loaded dependency [python3/3.8.2]: gcc/8.4.0
+Loaded module: python3/3.8.2
+Traceback (most recent call last):
+  File "webNet_noRes_Tucker2ATCD4D_CIFAR100.py", line 7, in <module>
+    from webNet_withoutres import *
+  File "/zhome/d8/b/107547/Documents/Git/Speciale/TensorizedTrainingMethods/ApplyingCNN/CIFAR100/webnet/webNet_withoutres.py", line 106, in <module>
+    webNet_noRes = WebNet_noRes(conv_block, 3, 100, 1)
+TypeError: __init__() missing 1 required positional argument: 'rank'

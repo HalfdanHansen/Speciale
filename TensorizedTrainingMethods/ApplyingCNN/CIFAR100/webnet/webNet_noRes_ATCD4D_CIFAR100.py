@@ -48,8 +48,7 @@ if __name__ == '__main__':
     pqtu_convs = initialize_model_weights_from_PARAFAC_rank(convName, net, "net", rank)
 
     for epoch in range(epochs):
-        running_loss = train_net_PARAFAC4D_ATDC(losses, net, "net", trainloader, criterion, optimizer, convName, pqtu_convs, alpha, 1, lName)
-
+        running_loss = train_net_PARAFAC4D_ATDC(losses, net, "net", trainloader, criterion, optimizer, convName, pqtu_convs, alpha, rank, lName)
 
         net.eval()
         train_acc.append(evaluate_cifar(trainloader, net).cpu().item())
@@ -59,4 +58,7 @@ if __name__ == '__main__':
     save_train = pd.DataFrame(train_acc)
     save_test = pd.DataFrame(test_acc)
     save_loss = pd.DataFrame(losses)
-    pd.concat([save_train,save_test,save_loss],axis = 0).to_csv('0305_webNet_noRes_ATCD4D_CIFAR100.csv',index=False,header=False)
+    pd.concat([save_train,save_test,save_loss],axis = 0).to_csv('0905_webNetATCD4DCIFAR100_rank1.csv',index=False,header=False)
+
+    #Save model
+    torch.save(net, "0905_webNetATCD4DCIFAR100_rank1")
