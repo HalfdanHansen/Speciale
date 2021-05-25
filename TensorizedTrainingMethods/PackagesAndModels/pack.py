@@ -17,7 +17,7 @@ import seaborn as sns
 from sklearn.decomposition import FactorAnalysis, PCA
 import tensorly as tl
 from tensorly import unfold as tl_unfold
-from tensorly.decomposition import parafac
+from tensorly.decomposition import parafac, tucker
 from torch.nn import Linear, Conv2d, BatchNorm2d, MaxPool2d, Dropout2d, BatchNorm1d, Dropout
 import pandas as pd
 import time

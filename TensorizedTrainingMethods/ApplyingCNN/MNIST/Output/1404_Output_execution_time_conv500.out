@@ -1,0 +1,23 @@
+Information on dataset
+x_train (10000, 1, 28, 28)
+targets_train (10000,)
+x_valid (1000, 1, 28, 28)
+targets_valid (1000,)
+x_test (1000, 1, 28, 28)
+targets_test (1000,)
+Information on dataset
+x_train (10000, 1, 28, 28)
+targets_train (10000,)
+x_valid (1000, 1, 28, 28)
+targets_valid (1000,)
+x_test (1000, 1, 28, 28)
+targets_test (1000,)
+Information on dataset
+x_train (10000, 1, 28, 28)
+targets_train (10000,)
+x_valid (1000, 1, 28, 28)
+targets_valid (1000,)
+x_test (1000, 1, 28, 28)
+targets_test (1000,)
+['normal', 'CD 3D', 'ATCD 3D', 'CD 4D', 'ATCD 4D']
+[0.5172778060656972, 0.606417407401104, 0.49994255057869014, 0.10246726287980563, 0.47586201775900555]

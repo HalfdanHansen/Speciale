@@ -6,3 +6,99 @@ Loaded module: cuda/10.2
 Loaded dependency [gcc/8.4.0]: binutils/2.34
 Loaded dependency [python3/3.8.2]: gcc/8.4.0
 Loaded module: python3/3.8.2
+Loaded module: cuda/10.2
+Loaded dependency [gcc/8.4.0]: binutils/2.34
+Loaded dependency [python3/3.8.2]: gcc/8.4.0
+Loaded module: python3/3.8.2
+Loaded module: cuda/10.2
+Loaded dependency [gcc/8.4.0]: binutils/2.34
+Loaded dependency [python3/3.8.2]: gcc/8.4.0
+Loaded module: python3/3.8.2
+Traceback (most recent call last):
+  File "conv500ATCD4DCIFAR10.py", line 67, in <module>
+    pickle.dump(pqtu_convs.cpu().item(), f)
+AttributeError: 'list' object has no attribute 'cpu'
+Loaded module: cuda/10.2
+Loaded dependency [gcc/8.4.0]: binutils/2.34
+Loaded dependency [python3/3.8.2]: gcc/8.4.0
+Loaded module: python3/3.8.2
+Loaded module: cuda/10.2
+Loaded dependency [gcc/8.4.0]: binutils/2.34
+Loaded dependency [python3/3.8.2]: gcc/8.4.0
+Loaded module: python3/3.8.2
+Loaded module: cuda/10.2
+Loaded dependency [gcc/8.4.0]: binutils/2.34
+Loaded dependency [python3/3.8.2]: gcc/8.4.0
+Loaded module: python3/3.8.2
+Traceback (most recent call last):
+  File "conv500ATCD4DCIFAR10.py", line 38, in <module>
+    net.cuda()
+  File "/zhome/d8/b/107547/.local/lib/python3.8/site-packages/torch/nn/modules/module.py", line 491, in cuda
+    return self._apply(lambda t: t.cuda(device))
+  File "/zhome/d8/b/107547/.local/lib/python3.8/site-packages/torch/nn/modules/module.py", line 387, in _apply
+    module._apply(fn)
+  File "/zhome/d8/b/107547/.local/lib/python3.8/site-packages/torch/nn/modules/module.py", line 409, in _apply
+    param_applied = fn(param)
+  File "/zhome/d8/b/107547/.local/lib/python3.8/site-packages/torch/nn/modules/module.py", line 491, in <lambda>
+    return self._apply(lambda t: t.cuda(device))
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "conv500ATCD4DCIFAR10.py", line 66, in <module>
+    pickle.dump(pqtu_convs.cpu().item(), open("2005_conv500ATCD4DCIFAR10_pqtu_rank8.p", "wb"))
+AttributeError: 'list' object has no attribute 'cpu'
+Loaded module: cuda/10.2
+Loaded dependency [gcc/8.4.0]: binutils/2.34
+Loaded dependency [python3/3.8.2]: gcc/8.4.0
+Loaded module: python3/3.8.2
+Traceback (most recent call last):
+  File "conv500ATCD4DCIFAR10.py", line 54, in <module>
+    running_loss, pqtu_convs = train_net_PARAFAC4D_ATDC(losses, net, "net", trainloader, criterion, optimizer, convName, pqtu_convs, alpha, 8, lName)
+  File "/zhome/d8/b/107547/Documents/Git/Speciale/TensorizedTrainingMethods/ApplyingCNN/CIFAR/PackagesAndModels/train_val_test_CIFAR10.py", line 99, in train_net_PARAFAC4D_ATDC
+    pqtu_convs1.append(pqtu_convs[k1].cpu().item())
+AttributeError: 'list' object has no attribute 'cpu'
+Loaded module: cuda/10.2
+Loaded dependency [gcc/8.4.0]: binutils/2.34
+Loaded dependency [python3/3.8.2]: gcc/8.4.0
+Loaded module: python3/3.8.2
+Loaded module: cuda/10.2
+Loaded dependency [gcc/8.4.0]: binutils/2.34
+Loaded dependency [python3/3.8.2]: gcc/8.4.0
+Loaded module: python3/3.8.2
+Traceback (most recent call last):
+  File "conv500ATCD4DCIFAR10.py", line 64, in <module>
+    print(pqtuconvs[0][0].shape)
+NameError: name 'pqtuconvs' is not defined
+Loaded module: cuda/10.2
+Loaded dependency [gcc/8.4.0]: binutils/2.34
+Loaded dependency [python3/3.8.2]: gcc/8.4.0
+Loaded module: python3/3.8.2
+Loaded module: cuda/10.2
+Loaded dependency [gcc/8.4.0]: binutils/2.34
+Loaded dependency [python3/3.8.2]: gcc/8.4.0
+Loaded module: python3/3.8.2
+Traceback (most recent call last):
+  File "conv500ATCD4DCIFAR10.py", line 38, in <module>
+    net.cuda()
+  File "/zhome/d8/b/107547/.local/lib/python3.8/site-packages/torch/nn/modules/module.py", line 491, in cuda
+    return self._apply(lambda t: t.cuda(device))
+  File "/zhome/d8/b/107547/.local/lib/python3.8/site-packages/torch/nn/modules/module.py", line 387, in _apply
+    module._apply(fn)
+  File "/zhome/d8/b/107547/.local/lib/python3.8/site-packages/torch/nn/modules/module.py", line 409, in _apply
+    param_applied = fn(param)
+  File "/zhome/d8/b/107547/.local/lib/python3.8/site-packages/torch/nn/modules/module.py", line 491, in <lambda>
+    return self._apply(lambda t: t.cuda(device))
+KeyboardInterrupt
+Loaded module: cuda/10.2
+Loaded dependency [gcc/8.4.0]: binutils/2.34
+Loaded dependency [python3/3.8.2]: gcc/8.4.0
+Loaded module: python3/3.8.2
+Loaded module: cuda/10.2
+Loaded dependency [gcc/8.4.0]: binutils/2.34
+Loaded dependency [python3/3.8.2]: gcc/8.4.0
+Loaded module: python3/3.8.2
+Traceback (most recent call last):
+  File "conv500ATCD4DCIFAR10.py", line 68, in <module>
+    pqtu_convs1 = decompconvs_to_cpu(pqtu_convs)
+  File "/zhome/d8/b/107547/Documents/Git/Speciale/TensorizedTrainingMethods/ApplyingCNN/CIFAR/PackagesAndModels/train_val_test_CIFAR10.py", line 120, in decompconvs_to_cpu
+    outdecomp.append(conv.cpu().numpy())
+AttributeError: 'list' object has no attribute 'cpu'

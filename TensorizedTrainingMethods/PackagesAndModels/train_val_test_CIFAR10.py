@@ -76,6 +76,7 @@ def load_cifar():
 def train_net_PARAFAC4D_ATDC(losses, net, netname, trainloader, criterion, optimizer, convName, pqtu_convs, alpha, rank, lName):
   running_loss = 0
   net.train()
+  pqtu_convs1 = []
 
   for i, data in enumerate(trainloader, 0):
     inputs, labels = data[0].cuda(), data[1].cuda()
@@ -111,8 +112,14 @@ def train_net_PARAFAC4D_ATDC(losses, net, netname, trainloader, criterion, optim
       #eval('net.'+name+'.bias.data[:] = torch.sub(net.'+name+'.bias.data,net.'+name+'.bias.grad,alpha = alpha)') 
     running_loss += loss.item()
 
-  return running_loss
+  return running_loss, pqtu_convs
 
+def decompconvs_to_cpu(decompconvs):
+    outdecomp = []
+    for conv in decompconvs:
+            outdecomp.append(conv.cpu().numpy())
+            
+    return outdecomp
 
 def train_net_PARAFAC3D_ATDC(losses, net, netname, trainloader, criterion, optimizer, convName, pqt_convs, alpha, rank, lName):
   running_loss = 0

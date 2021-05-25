@@ -15,6 +15,7 @@ if __name__ == '__main__':
     from PackagesAndModels.CIFAR_MODELS import *
     from PackagesAndModels.train_val_test_CIFAR10 import *
     import icecream
+    import pickle
 
     transform = transforms.Compose([
         transforms.RandomHorizontalFlip(),
@@ -48,9 +49,11 @@ if __name__ == '__main__':
     pqtu_convs = []   
 
     pqtu_convs = initialize_model_weights_from_PARAFAC_rank(convName,net,"net",8)
-
+    
+    pqtu_list = []
+    
     for epoch in range(epochs):
-        running_loss = train_net_PARAFAC4D_ATDC(losses, net, "net", trainloader, criterion, optimizer, convName, pqtu_convs, alpha, 8, lName)
+        running_loss, pqtu_convs = train_net_PARAFAC4D_ATDC(losses, net, "net", trainloader, criterion, optimizer, convName, pqtu_convs, alpha, 8, lName)
 
         net.eval()
         train_acc.append(evaluate_cifar(trainloader, net).cpu().item())
@@ -60,7 +63,10 @@ if __name__ == '__main__':
     save_train = pd.DataFrame(train_acc)
     save_test = pd.DataFrame(test_acc)
     save_loss = pd.DataFrame(losses)
-    pd.concat([save_train,save_test,save_loss],axis = 0).to_csv('0905_conv500ATCD4DCIFAR10_rank8.csv',index=False,header=False)
-
-     #Save model
-    torch.save(net, "0905_conv500ATCD4DCIFAR10_rank8")
+    pd.concat([save_train,save_test,save_loss],axis = 0).to_csv('2005_conv500ATCD4DCIFAR10_rank8.csv',index=False,header=False)
+    #Save pqtu
+    pqtu_convs1 = decompconvs_to_cpu(pqtu_convs)
+    pickle.dump(pqtu_convs1, open("2005_conv500ATCD4DCIFAR10_pqtu_rank8.p", "wb"))
+    #pickle.dump(pqtu_list, open("2005_conv500ATCD4DCIFAR10_pqtu_rank8_list.p", "wb"))
+    #Save model
+    torch.save(net, "2005_conv500ATCD4DCIFAR10_rank8")
