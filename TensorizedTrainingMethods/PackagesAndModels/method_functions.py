@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 from .pack import *
 #from .pack import *
+=======
+#from pack import *
+from .pack import *
+>>>>>>> 9f081043499e3427553f1d3bf8e562e3458898fa
 
 ## ATDC FUNCTIONS ##
 
