@@ -1,0 +1,32 @@
+Information on dataset
+x_train (10000, 1, 28, 28)
+targets_train (10000,)
+x_valid (1000, 1, 28, 28)
+targets_valid (1000,)
+x_test (1000, 1, 28, 28)
+targets_test (1000,)
+['normal', 		'CD 3D', 		'BAF 3D', 	'ATCD 3D', 		'CD 4D', 	'BAF 4D', 		'ATCD 4D']
+[0.07604266286340135, 0.16799086703050126, 0.06685444283699908, 0.06637967871779983, 0.11021303326089983, 0.06510263369530003, 0.06560735825080047]
+Information on dataset
+x_train (10000, 1, 28, 28)
+targets_train (10000,)
+x_valid (1000, 1, 28, 28)
+targets_valid (1000,)
+x_test (1000, 1, 28, 28)
+targets_test (1000,)
+Information on dataset
+x_train (10000, 1, 28, 28)
+targets_train (10000,)
+x_valid (1000, 1, 28, 28)
+targets_valid (1000,)
+x_test (1000, 1, 28, 28)
+targets_test (1000,)
+Information on dataset
+x_train (10000, 1, 28, 28)
+targets_train (10000,)
+x_valid (1000, 1, 28, 28)
+targets_valid (1000,)
+x_test (1000, 1, 28, 28)
+targets_test (1000,)
+['normal', 'CD 3D', 'BAF 3D', 'ATCD 3D', 'CD 4D', 'BAF 4D', 'ATCD 4D']
+[0.06520167656550184, 0.13686216707300627, 0.0653126970894984, 0.06399680851310259, 0.10629738622080767, 0.06251431038179435, 0.06276692338989814]

@@ -1,0 +1,30 @@
+Loaded module: cuda/10.2
+Loaded dependency [gcc/8.4.0]: binutils/2.34
+Loaded dependency [python3/3.8.2]: gcc/8.4.0
+Loaded module: python3/3.8.2
+Traceback (most recent call last):
+  File "execution_time_conv500.py", line 35, in <module>
+    et = timeit.timeit(setup = mysetup,
+  File "/appl/python/3.8.2/lib/python3.8/timeit.py", line 232, in timeit
+    return Timer(stmt, setup, timer, globals).timeit(number)
+  File "/appl/python/3.8.2/lib/python3.8/timeit.py", line 176, in timeit
+    timing = self.inner(it, self.timer)
+  File "<timeit-src>", line 22, in inner
+NameError: name 'num_batches_valid' is not defined
+Loaded module: cuda/10.2
+Loaded dependency [gcc/8.4.0]: binutils/2.34
+Loaded dependency [python3/3.8.2]: gcc/8.4.0
+Loaded module: python3/3.8.2
+Traceback (most recent call last):
+  File "execution_time_conv500.py", line 38, in <module>
+    et = timeit.timeit(setup = mysetup,
+  File "/appl/python/3.8.2/lib/python3.8/timeit.py", line 232, in timeit
+    return Timer(stmt, setup, timer, globals).timeit(number)
+  File "/appl/python/3.8.2/lib/python3.8/timeit.py", line 176, in timeit
+    timing = self.inner(it, self.timer)
+  File "<timeit-src>", line 26, in inner
+NameError: name 'accuracy_score' is not defined
+Loaded module: cuda/10.2
+Loaded dependency [gcc/8.4.0]: binutils/2.34
+Loaded dependency [python3/3.8.2]: gcc/8.4.0
+Loaded module: python3/3.8.2
