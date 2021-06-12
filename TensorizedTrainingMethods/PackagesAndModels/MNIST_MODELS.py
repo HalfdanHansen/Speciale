@@ -1,5 +1,5 @@
-from .pack import *
-from .train_val_test_MNIST import *
+from pack import *
+from train_val_test_MNIST import *
 
 #Conv 2 network
 

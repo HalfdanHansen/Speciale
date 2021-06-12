@@ -40,5 +40,5 @@ fig.legend([l11, l12, l13, l14, l15],
            borderaxespad = 0.1)
 plt.subplots_adjust(right=0.87)
 
-plt.savefig('2505_Plot_all_methods_on_mnist_conv500.pgf')
+plt.savefig('2705_Plot_all_methods_on_mnist_conv500.pgf')
 plt.show()
