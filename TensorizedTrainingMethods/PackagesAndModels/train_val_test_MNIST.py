@@ -202,8 +202,109 @@ def train_net_ATDC_4D(losses, num_batches_train, x_train, batch_size, targets_tr
     net.eval()
     return losses
 
+# ATDC 4D
+def train_net_ATDC_4D_rank(losses, num_batches_train, x_train, batch_size, targets_train, net, criterion, optimizer, convName, pqtu_convs, alpha, rank):
+    cur_loss = 0
+    net.train()
+    scope = locals()
+    for i in range(num_batches_train):
+        slce = get_slice(i, batch_size)
+        x_batch = Variable(torch.from_numpy(x_train[slce]))
+        output = net(x_batch)                               # Forward
+        
+        # compute gradients given loss
+        target_batch = Variable(torch.from_numpy(targets_train[slce]).long())
+        batch_loss = criterion(output, target_batch)
 
-  
+        optimizer.zero_grad()
+        batch_loss.backward()                               # Backward
+        #optimizer.step()
+
+        #ATDC step for convolutional layers
+        for k1,pqtu in enumerate(pqtu_convs):
+
+          convGrad = eval("net."+convName[k1]+".weight.grad", scope)
+          convData = eval("net."+convName[k1]+".weight.data", scope)
+
+          pqtu_convs[k1] = ATDC_update_step_one_filter_4D_PARAFAC_rank(
+                       ATDC_get_grads_one_filter_4D_PARAFAC_rank(convGrad, pqtu, rank), alpha, pqtu)  
+    
+          #Magi # its seems like you need a if '__name__' == __main__ guard! #einsum -> winsum
+      
+          convData[:] = torch.einsum('hsijr->hsij',torch.einsum('hr,sr,ir,jr->hsijr',pqtu[0],pqtu[1],pqtu[2],pqtu[3]))
+
+        #steepest descent step for linear layer
+        convGradl1 = net.l_1.weight.grad
+        convDatal1 = net.l_1.weight.data
+
+        convDatal1[:] = convDatal1 - alpha*convGradl1
+
+        cur_loss += batch_loss
+
+    losses.append(cur_loss / batch_size)
+
+    net.eval()
+    return losses, pqtu_convs
+
+def decompconvs_to_cpu(decompconvs):
+    outdecomp = []
+    for conv in decompconvs:
+            outdecomp.append(conv)
+            
+    return outdecomp
+
+# ATDC 4D
+def train_net_ATDC_Tucker2(losses, num_batches_train, x_train, batch_size, targets_train, net, criterion, optimizer, convName, utc_convs, alpha, rank1, rank2):
+    cur_loss = 0
+    net.train()
+    scope = locals()
+    for i in range(num_batches_train):
+        slce = get_slice(i, batch_size)
+        x_batch = Variable(torch.from_numpy(x_train[slce]))
+        output = net(x_batch)                               # Forward
+        
+        # compute gradients given loss
+        target_batch = Variable(torch.from_numpy(targets_train[slce]).long())
+        batch_loss = criterion(output, target_batch)
+
+        optimizer.zero_grad()
+        batch_loss.backward()                               # Backward
+        #optimizer.step()
+
+        #ATDC step for convolutional layers
+        for k1,utc in enumerate(utc_convs):
+
+          convGrad = eval("net."+convName[k1]+".weight.grad", scope)
+          convData = eval("net."+convName[k1]+".weight.data", scope)
+
+          utc_convs[k1] = ATDC_update_step_Tucker2_ATDC(
+                      ATDC_get_grads_Tucker2_ATDC(convGrad, utc, rank1, rank2), alpha, utc)
+          convData[:] = torch.einsum('hq,sw,wqij->hsij',utc[0],utc[1],utc[2])                                     # new update params
+
+        #steepest descent step for linear layer
+        convGradl1 = net.l_1.weight.grad
+        convDatal1 = net.l_1.weight.data
+
+        convDatal1[:] = convDatal1 - alpha*convGradl1
+
+        cur_loss += batch_loss
+
+    losses.append(cur_loss / batch_size)
+
+    net.eval()
+    return losses, utc_convs
+
+def decompconvs_to_cpu_Tucker(decompconvs):
+    outdecomp = []
+    for conv in decompconvs:
+        temp = []
+        for c in conv:
+            temp.append(c.cpu().numpy())
+        outdecomp.append(temp)    
+    return outdecomp
+
+
+"""  
 ## CIFAR10 TRAINING ##
 
 # Normal
@@ -229,7 +330,7 @@ def train_net_cifar10(losses, num_batches_train, x_train, batch_size, targets_tr
 
     net.eval()
     return losses
-
+"""
 ## EVALUATE ##
 
 # Training

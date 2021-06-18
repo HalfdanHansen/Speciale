@@ -38,7 +38,7 @@ for name, i in net3D.named_parameters():
 
 #Load trained full network with method
 netATCD3D = deepcopy(convNet4)
-netATCD3D = torch.load("0905_conv4ATDC3DMNIST", map_location=torch.device("cpu"))
+netATCD3D = torch.load("0905_conv500ATDC3DMNIST", map_location=torch.device("cpu"))
 netATCD3D.to(device)
 netATCD3D.eval()
 
